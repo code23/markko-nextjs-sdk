@@ -36,9 +36,17 @@ export class AuthService {
   }
 
   private isTokenExpired(): boolean {
-    if (!this.tokenData?.expires_at) return true;
-    // Add 30-second buffer before actual expiration
-    return Date.now() >= (this.tokenData.expires_at - 30000);
+    if (!this.tokenData?.expires_at) {
+      // console.log('No token data or expiration');
+      return true;
+    }
+    const isExpired = Date.now() >= (this.tokenData.expires_at - 30000);
+    // console.log('Token expired?', isExpired, {
+    //   now: Date.now(),
+    //   expiresAt: this.tokenData.expires_at,
+    //   timeLeft: (this.tokenData.expires_at - Date.now()) / 1000
+    // });
+    return isExpired;
   }
 
   private async requestNewToken(): Promise<TokenData> {
@@ -90,25 +98,28 @@ export class AuthService {
     try {
       // If we have a valid token, return it
       if (this.tokenData && !this.isTokenExpired()) {
+        // console.log('Using cached token');
         return this.tokenData.access_token;
       }
 
       // If we have an expired token with a refresh token, try to refresh
       if (this.tokenData?.refresh_token) {
         try {
+          // console.log('Attempting to refresh token');
           this.tokenData = await this.refreshToken(this.tokenData.refresh_token);
           return this.tokenData.access_token;
         } catch (error) {
-          // If refresh fails, fall back to requesting a new token
-          console.warn('Token refresh failed, requesting new token');
+          // console.warn('Token refresh failed, requesting new token');
         }
       }
 
       // Request a new token
+      // console.log('Requesting new token');
       this.tokenData = await this.requestNewToken();
+      // console.log('New token received, expires in:', this.tokenData.expires_in);
       return this.tokenData.access_token;
     } catch (error) {
-      console.error('Authentication failed:', error);
+      // console.error('Authentication failed:', error);
       throw error;
     }
   }

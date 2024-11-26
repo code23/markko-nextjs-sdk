@@ -23,78 +23,59 @@ MPE_CLIENT_CREDENTIAL_SECRET=
 
 > You should also set the `NODE_ENV` environment variable to `development` or `production` depending on your environment. In development the SSL certificate is not verified.
 
-## Usage
+## SDK Usage
 
-### Initialize the SDK
+### Important Security Notice ⚠️
 
-```typescript
-import MarkkoSDK from 'markko-nextjs-sdk';
+For Next.js applications, it's recommended to use this SDK in the following ways:
 
-const config = {
-  version: process.env.MPE_VERSION!,
-  origin: process.env.MPE_ORIGIN!,
-  apiBasePath: process.env.MPE_API_BASE_PATH!,
-  passwordKey: process.env.MPE_PASSWORD_KEY!,
-  passwordSecret: process.env.MPE_PASSWORD_SECRET!,
-  clientCredentialKey: process.env.MPE_CLIENT_CREDENTIAL_KEY!,
-  clientCredentialSecret: process.env.MPE_CLIENT_CREDENTIAL_SECRET!,
-  isDevelopment: process.env.NODE_ENV === 'development'
-};
+### Server-Side Usage (Recommended)
+#### App Router (Next.js 13+)
+- In Server Components (recommended)
+- In Route Handlers (`app/api/**/route.ts`)
 
-const sdk = new MarkkoSDK(config);
-```
+#### Pages Router (Legacy)
+- In `getServerSideProps`
+- In API routes (`pages/api/*`)
 
-For client components, you'll need to pass the config through an API route:
+### Client-Side Usage (Use with caution)
+Client-side usage should be limited to non-sensitive operations only. For sensitive operations, always use server-side API routes.
+
+### Example Usage with App Router (Recommended)
 
 ```typescript
-// pages/api/config.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+// app/vendors/page.tsx
+import { MarkkoSDK } from 'markko-nextjs-sdk';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const config = {
-    version: process.env.MPE_VERSION,
-    origin: process.env.MPE_ORIGIN,
-    apiBasePath: process.env.MPE_API_BASE_PATH,
-    passwordKey: process.env.MPE_PASSWORD_KEY,
-    passwordSecret: process.env.MPE_PASSWORD_SECRET,
-    clientCredentialKey: process.env.MPE_CLIENT_CREDENTIAL_KEY,
-    clientCredentialSecret: process.env.MPE_CLIENT_CREDENTIAL_SECRET,
-    isDevelopment: process.env.NODE_ENV === 'development'
-  };
+export default async function VendorsPage() {
+  const sdk = new MarkkoSDK({
+    // config
+  });
   
-  res.status(200).json(config);
+  const vendors = await sdk.vendors.list();
+  
+  return (
+    <div>
+      {/* Your JSX */}
+    </div>
+  );
 }
-
-// In your client component:
-const [sdk, setSdk] = useState<MarkkoSDK | null>(null);
-
-useEffect(() => {
-  async function initSDK() {
-    const response = await fetch('/api/config');
-    const config = await response.json();
-    setSdk(new MarkkoSDK(config));
-  }
-  
-  initSDK();
-}, []);
 ```
 
-### Vendors API
-
-#### List Vendors
+### Example Usage with Route Handlers
 
 ```typescript
-// Get vendors with custom parameters
-const vendors = await sdk.vendors.list({
-    sort: 'created_at,desc',
-    with: 'users,commission_group,currency,commission',
-    paginate: 10,
-    page: 1,
-    is_approved: 1,
-    is_onboarded: 1,
-    is_rejected: 0,
-    condensed: true
-});
+// app/api/vendors/route.ts
+import { MarkkoSDK } from 'markko-nextjs-sdk';
+
+export async function GET() {
+  const sdk = new MarkkoSDK({
+    // config
+  });
+  
+  const data = await sdk.vendors.list();
+  return Response.json(data);
+}
 ```
 
 ## API Documentation

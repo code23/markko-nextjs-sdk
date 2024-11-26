@@ -1,6 +1,6 @@
 {
   "name": "markko-nextjs-sdk",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.9",
   "description": "SDK for Markko API integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,4 +21,4 @@
   "peerDependencies": {
     "next": ">=13.0.0"
   }
-} 
+}

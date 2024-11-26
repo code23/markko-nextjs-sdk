@@ -8,7 +8,7 @@ export class MarkkoSDK {
 
   constructor(config: MarkkoConfig) {
     this.authService = new AuthService(config);
-    this.vendors = new VendorsAPI(config);
+    this.vendors = new VendorsAPI(config, this.authService);
   }
 
   async getAccessToken(): Promise<string> {

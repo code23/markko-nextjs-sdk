@@ -6,11 +6,11 @@ import { AuthService } from '../services/auth';
 export class BaseAPI {
   protected config: MarkkoConfig;
   protected axiosInstance: AxiosInstance;
-  private authService: AuthService;
+  protected authService: AuthService;
 
-  constructor(config: MarkkoConfig) {
+  constructor(config: MarkkoConfig, authService: AuthService) {
     this.config = config;
-    this.authService = new AuthService(config);
+    this.authService = authService;
 
     const axiosConfig: any = {
       headers: {
@@ -25,10 +25,8 @@ export class BaseAPI {
       });
     }
 
-    // Create axios instance with config
     this.axiosInstance = axios.create(axiosConfig);
 
-    // Add request interceptor to handle authentication
     this.axiosInstance.interceptors.request.use(
       async (config) => {
         const token = await this.authService.getAccessToken();
