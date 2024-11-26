@@ -11,4 +11,10 @@ export class VendorsAPI extends BaseAPI {
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
+
+  async get(id: number, params = {}) {
+    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}`;
+    const response = await this.axiosInstance.get(url, { params });
+    return response.data;
+  }
 }

@@ -99,6 +99,14 @@ Example parameters:
 - `is_rejected`: Filter by rejection status
 - `condensed`: Return condensed response
 
+#### `get(id: number, params = {})`
+
+Fetches a single vendor by ID.
+
+- `id`: The numeric ID of the vendor
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
