@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 import { AuthService } from '../services/auth';
 
-export class BlogPostsAPI extends BaseAPI {
+export class BlogsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
     super(config, authService);
   }
