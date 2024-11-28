@@ -107,6 +107,16 @@ Fetches a single vendor by ID.
 - `params`: Optional object containing query parameters
 - Returns: Promise with the API response
 
+#### `save(data: Record<string, any>)`
+
+Registers a new vendor with the provided data.
+
+- `data`: Object containing the vendor registration data
+- Returns: Promise<boolean> - Returns true if successful
+- Throws: APIError if the request fails or returns an error
+
+Example usage:
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
