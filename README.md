@@ -117,6 +117,58 @@ Registers a new vendor with the provided data.
 
 Example usage:
 
+### Blog Posts
+
+#### `listPosts(params = {})`
+
+Fetches a list of blog posts.
+
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `listCategories(params = {})`
+
+Fetches a list of blog categories. By default, returns only active categories.
+
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- Returns: Promise with the API response
+
+#### `listPostsByCategory(categoryId: number, params = {})`
+
+Fetches a list of blog posts for a specific category.
+
+- `categoryId`: The numeric ID of the category
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getPost(id: number, params = {})`
+
+Fetches a single blog post by ID.
+
+- `id`: The numeric ID of the blog post
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getPostBySlug(slug: string, params = {})`
+
+Fetches a single blog post by its slug.
+
+- `slug`: The URL slug of the blog post
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getCategoryBySlug(slug: string, params = {})`
+
+Fetches a blog category by its slug, including associated posts. By default, returns only active categories.
+
+- `slug`: The URL slug of the category
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- Returns: Promise with the API response
+
+### Example Usage with Blog Posts
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
