@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-alpha.15] - 2024-11-29
+
+### Added
+- Additional Vendor API endpoints:
+  - List vendors by postcode
+  - Get vendor by slug
+  - Follow/unfollow vendor
+  - Check store name uniqueness
+
 ## [1.0.0-alpha.12] - 2024-11-28
 
 ### Added

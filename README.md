@@ -99,13 +99,44 @@ Example parameters:
 - `is_rejected`: Filter by rejection status
 - `condensed`: Return condensed response
 
-#### `get(id: number, params = {})`
+#### `listByPostcode(postcode: string, params = {})`
 
-Fetches a single vendor by ID.
+Fetches vendors filtered by postcode.
 
-- `id`: The numeric ID of the vendor
+- `postcode`: The postcode to filter vendors by (spaces are automatically removed)
 - `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
 - Returns: Promise with the API response
+
+#### `getBySlug(slug: string, params = {})`
+
+Fetches a single vendor by their URL slug.
+
+- `slug`: The URL slug of the vendor
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- Returns: Promise with the API response
+
+#### `follow(id: number)`
+
+Follow a vendor.
+
+- `id`: The numeric ID of the vendor to follow
+- Returns: Promise with the API response
+
+#### `unfollow(id: number)`
+
+Unfollow a vendor.
+
+- `id`: The numeric ID of the vendor to unfollow
+- Returns: Promise with the API response
+
+#### `isStoreNameUnique(name: string)`
+
+Check if a vendor (store) name is available.
+
+- `name`: The store name to check
+- Returns: Promise with a boolean indicating if the name is unique
 
 #### `save(data: Record<string, any>)`
 

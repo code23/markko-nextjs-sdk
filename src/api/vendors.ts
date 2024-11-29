@@ -7,15 +7,57 @@ export class VendorsAPI extends BaseAPI {
     super(config, authService);
   }
 
+  /**
+   * Get a list of vendors
+   * @param params - The query parameters to filter the vendors
+   * @returns A list of vendors
+   */
   async list(params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/vendors`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
+  /**
+   * Get a list of vendors by postcode
+   * @param postcode - The postcode to filter the vendors
+   * @param params - The query parameters to filter the vendors
+   * @returns A list of vendors
+   */
+  async listByPostcode(postcode: string, params = {}) {
+    const defaultParams = {
+      is_active: 1
+    };
+    postcode = postcode.replace(/\s+/g, '');
+    const url = `${this.config.apiBasePath}/api/v1/vendors/postcode/${postcode}`;
+    const response = await this.axiosInstance.get(url, { params: { ...defaultParams, ...params } });
+    return response.data;
+  }
+
+  /**
+   * Get a single vendor
+   * @param id - The ID of the vendor
+   * @param params - The query parameters to filter the vendor
+   * @returns A single vendor
+   */
   async get(id: number, params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/vendors/${id}`;
     const response = await this.axiosInstance.get(url, { params });
+    return response.data;
+  }
+
+  /**
+   * Get a single vendor by slug
+   * @param slug - The slug of the vendor
+   * @param params - The query parameters to filter the vendor
+   * @returns A single vendor
+   */
+  async getBySlug(slug: string, params = {}) {
+    const defaultParams = {
+      is_active: 1
+    };
+    const url = `${this.config.apiBasePath}/api/v1/vendors/slug/${slug}`;
+    const response = await this.axiosInstance.get(url, { params: { ...defaultParams, ...params } });
     return response.data;
   }
 
@@ -46,5 +88,38 @@ export class VendorsAPI extends BaseAPI {
         );
       }
     }
+  }
+
+  /**
+   * Follow a vendor
+   * @param id - The ID of the vendor
+   * @returns A single vendor
+   */
+  async follow(id: number) {
+    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/follow`;
+    const response = await this.axiosInstance.patch(url);
+    return response.data;
+  }
+
+  /**
+   * Unfollow a vendor
+   * @param id - The ID of the vendor
+   * @returns A single vendor
+   */
+  async unfollow(id: number) {
+    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/unfollow`;
+    const response = await this.axiosInstance.patch(url);
+    return response.data;
+  }
+
+  /**
+   * Check if a vendor (store) name is unique
+   * @param name - The vendor (store) name to check
+   * @returns A boolean indicating if the vendor (store) name is unique
+   */
+  async isStoreNameUnique(name: string) {
+    const url = `${this.config.apiBasePath}/api/v1/vendors/is-store-name-unique`;
+    const response = await this.axiosInstance.get(url, { params: { store_name: name } });
+    return response.data;
   }
 }
