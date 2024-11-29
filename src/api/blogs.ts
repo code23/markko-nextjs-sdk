@@ -16,7 +16,7 @@ export class BlogsAPI extends BaseAPI {
   // Get a list of blog categories
   async listCategories(params = {}) {
     const defaultParams = {
-      is_active: true
+      is_active: 1
     };
     const url = `${this.config.apiBasePath}/api/v1/blog/categories`;
     const response = await this.axiosInstance.get(url, { params: { ...defaultParams, ...params } });
@@ -47,7 +47,7 @@ export class BlogsAPI extends BaseAPI {
   // Get a blog category by slug with its posts
   async getCategoryBySlug(slug: string, params = {}) {
     const defaultParams = {
-      is_active: true
+      is_active: 1
     };
     const url = `${this.config.apiBasePath}/api/v1/blog/categories/slug/${slug}`;
     const response = await this.axiosInstance.get(url, { params: { ...defaultParams, ...params } });
