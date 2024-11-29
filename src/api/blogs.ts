@@ -6,14 +6,22 @@ export class BlogsAPI extends BaseAPI {
     super(config, authService);
   }
 
-  // Get a list of blog posts
+  /**
+   * Get a list of blog posts
+   * @param params - The query parameters to filter the blog posts
+   * @returns A list of blog posts
+   */
   async listPosts(params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/blog/posts`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
-  // Get a list of blog categories
+  /**
+   * Get a list of blog categories
+   * @param params - The query parameters to filter the blog categories
+   * @returns A list of blog categories
+   */
   async listCategories(params = {}) {
     const defaultParams = {
       is_active: 1
@@ -23,28 +31,48 @@ export class BlogsAPI extends BaseAPI {
     return response.data;
   }
 
-  // Get a list of posts by blog category
+  /**
+   * Get a list of posts by blog category
+   * @param categoryId - The ID of the blog category
+   * @param params - The query parameters to filter the blog posts
+   * @returns A list of blog posts
+   */
   async listPostsByCategory(categoryId: number, params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/blog/categories/${categoryId}`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
-  // Get a single blog post
+  /**
+   * Get a single blog post
+   * @param id - The ID of the blog post
+   * @param params - The query parameters to filter the blog post
+   * @returns A single blog post
+   */
   async getPost(id: number, params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/blog/posts/${id}`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
-  // Get a single blog post by slug
+  /**
+   * Get a single blog post by slug
+   * @param slug - The slug of the blog post
+   * @param params - The query parameters to filter the blog post
+   * @returns A single blog post
+   */
   async getPostBySlug(slug: string, params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/blog/posts/slug/${slug}`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
-  // Get a blog category by slug with its posts
+  /**
+   * Get a blog category by slug with its posts
+   * @param slug - The slug of the blog category
+   * @param params - The query parameters to filter the blog category
+   * @returns A single blog category with its posts
+   */
   async getCategoryBySlug(slug: string, params = {}) {
     const defaultParams = {
       is_active: 1
