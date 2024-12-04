@@ -6,7 +6,6 @@ A TypeScript SDK for integrating Markko API with NextJS applications.
 ```bash
 npm install markko-nextjs-sdk
 ```
-
 ## Setup
 
 Add the following environment variables to your NextJS project's `.env.local` file:
@@ -200,6 +199,57 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 
 ### Example Usage with Blog Posts
 
+### Addresses
+
+#### `create(data: Record<string, any>)`
+
+Creates a new address.
+
+- `data`: Object containing the address data
+- Returns: Promise with the created address
+- Throws: APIError if the request fails
+
+#### `delete(id: string)`
+
+Deletes an address.
+
+- `id`: The ID of the address to delete
+- Returns: Promise with the deleted address data
+
+#### `findByPostcode(postcode: string)`
+
+Looks up addresses by postcode.
+
+- `postcode`: The postcode to search for (spaces are automatically removed)
+- Returns: Promise with a list of matching addresses
+
+#### `getNearbyModel(postcode: string, model: string, radius = 10, limit = 10, relationships = null)`
+
+Gets a list of nearby models by postcode.
+
+- `postcode`: The postcode to search from
+- `model`: The model type to search for
+- `radius`: Search radius in miles (default: 10)
+- `limit`: Maximum number of results (default: 10)
+- `relationships`: Related data to include (optional)
+- Returns: Promise with a list of nearby models
+
+#### `setDefault(id: string)`
+
+Sets an address as the default.
+
+- `id`: The ID of the address to set as default
+- Returns: Promise with the updated address data
+
+#### `update(id: string, data: Record<string, any>)`
+
+Updates an existing address.
+
+- `id`: The ID of the address to update
+- `data`: Object containing the update data
+- Returns: Promise with the updated address
+- Throws: APIError if the request fails
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
@@ -217,3 +267,4 @@ const token = await sdk.getAccessToken();
 ## License
 
 ISC
+

@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-alpha.16] - 2024-11-30
+
+### Added
+- Address API endpoints:
+  - Create new address
+  - Delete address
+  - Find addresses by postcode
+  - Get nearby models by postcode
+  - Set default address
+  - Update existing address
+- Error handling for address-related operations
+
 ## [1.0.0-alpha.15] - 2024-11-29
 
 ### Added
