@@ -4,7 +4,7 @@ A TypeScript SDK for integrating Markko API with NextJS applications.
 
 ## Installation
 ```bash
-npm install markko-nextjs-sdk
+npm install @meetmarkko/markko-nextjs-sdk
 ```
 ## Setup
 
@@ -44,7 +44,7 @@ Client-side usage should be limited to non-sensitive operations only. For sensit
 
 ```typescript
 // app/vendors/page.tsx
-import { MarkkoSDK } from 'markko-nextjs-sdk';
+import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
 
 export default async function VendorsPage() {
   const sdk = new MarkkoSDK({
@@ -65,7 +65,7 @@ export default async function VendorsPage() {
 
 ```typescript
 // app/api/vendors/route.ts
-import { MarkkoSDK } from 'markko-nextjs-sdk';
+import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
 
 export async function GET() {
   const sdk = new MarkkoSDK({

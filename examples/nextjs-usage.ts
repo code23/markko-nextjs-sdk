@@ -1,4 +1,4 @@
-import { MarkkoSDK } from 'markko-nextjs-sdk';
+import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 // App Router Usage (Next.js 13+ Recommended)
