@@ -250,6 +250,22 @@ Updates an existing address.
 - Returns: Promise with the updated address
 - Throws: APIError if the request fails
 
+### Attributes
+
+#### `list(params = {})`
+
+Fetches the active product attributes.
+
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+Example parameters:
+- `sort`: Sort order (e.g., 'created_at,desc')
+- `with`: Include related resources
+- `paginate`: Number of items per page
+- `page`: Page number
+- `is_active`: Filter by active status
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
