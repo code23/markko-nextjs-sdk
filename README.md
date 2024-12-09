@@ -250,6 +250,77 @@ Updates an existing address.
 - Returns: Promise with the updated address
 - Throws: APIError if the request fails
 
+<<<<<<< Updated upstream
+=======
+### Donation
+
+#### `getDonation(Number: string, queryparams = [])`
+
+Fetches a donation based on its number.
+
+- `Number`: The donation number to filter by.
+- `queryparams`: Optional query parameters to filter the result.
+- Returns: A promise with the donation data matching the number.
+
+### `getAllDonations(params = [])`
+
+Fetches a list of all donations.
+
+- `params`: Optional query parameters to filter the list of donations.
+- Returns: A promise with the list of all donations.
+
+### `processDonation(charityId: string, data: Record<string, any>)`
+
+Processes a donation for a specific charity.
+
+- `charityId`: The ID of the charity to donate to.
+- `data`: An object containing the donation details, such as amount, donor information, etc.
+- Returns: A promise with the donation response data, including transaction status and details.
+
+### Charity
+
+### `charitiesList(params = [], oauth = null)`
+
+Fetches a list of all charities.
+
+- `params`: Optional query parameters to filter the list of charities.
+- `oauth`: Optional OAuth token for authorization.
+- Returns: A promise that resolves to the list of charities (e.g., an array of charity objects).
+- Throws : APIError if the API request fails or returns an error message.
+
+### `saveVendor(data: any)`
+
+Saves a new charity/vendor.
+
+- `data`: The data object containing charity/vendor information to be saved.
+- Returns: A promise that resolves to the response data after saving the vendor.
+- Throws: APIError if the API request fails or returns an error.
+
+### `nameIsUnique(name: string)`
+
+Checks if a charity name is unique.
+
+- `name`: The name of the charity to check for uniqueness.
+- Returns: A promise that resolves to a boolean indicating whether the charity name is unique.
+- Throws: APIError if the API request fails or returns an error message.
+
+### `getCharityById(id: string)`
+
+Fetches a charity's details by its ID.
+
+- `id`: The ID of the charity to retrieve
+- Returns: A promise that resolves to the charity's data.
+- Throws: APIError if the API request fails or if the charity with the provided ID is not found.
+
+### `getCharityBySlug(slug: string, params = [])`
+
+Fetchs a charity's details by slug
+
+- `slug`: The slug of the charity to retrieve
+- Returns: A promise that resolves to the charity's data.
+- Throws: APIError if the API request fails or if the charity with the provided slug is not found.
+
+>>>>>>> Stashed changes
 ### Attributes
 
 #### `list(params = {})`
