@@ -250,8 +250,6 @@ Updates an existing address.
 - Returns: Promise with the updated address
 - Throws: APIError if the request fails
 
-<<<<<<< Updated upstream
-=======
 ### Donation
 
 #### `getDonation(Number: string, queryparams = [])`
@@ -320,7 +318,6 @@ Fetchs a charity's details by slug
 - Returns: A promise that resolves to the charity's data.
 - Throws: APIError if the API request fails or if the charity with the provided slug is not found.
 
->>>>>>> Stashed changes
 ### Attributes
 
 #### `list(params = {})`
