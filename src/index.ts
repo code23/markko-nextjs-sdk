@@ -4,6 +4,7 @@ import { AddressesAPI } from './api/addresses';
 import { AttributesAPI } from './api/attributes';
 import { BlogsAPI } from './api/blogs';
 import { VendorsAPI } from './api/vendors';
+import { CharitiesAPI } from './api/charities';
 
 export class MarkkoSDK {
   private authService: AuthService;
@@ -11,6 +12,7 @@ export class MarkkoSDK {
   public attributes: AttributesAPI;
   public blogs: BlogsAPI;
   public vendors: VendorsAPI;
+  public charities : CharitiesAPI;
 
   constructor(config: MarkkoConfig) {
     this.authService = new AuthService(config);
@@ -18,6 +20,7 @@ export class MarkkoSDK {
     this.attributes = new AttributesAPI(config, this.authService);
     this.blogs = new BlogsAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
+    this.charities = new CharitiesAPI(config , this.authService)
   }
 
   async getAccessToken(): Promise<string> {
