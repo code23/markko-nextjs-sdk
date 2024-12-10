@@ -284,3 +284,59 @@ const token = await sdk.getAccessToken();
 
 ISC
 
+### Charities
+
+### `getAllCharities(params = [])`
+
+Fetches a list of all charities.
+- `params`: Optional query parameters to filter the list of charities.- Returns: A promise with the list of all charities.
+
+### `getCharitiesById(id: number, params = {})`
+Fetches the details of a specific charity by its unique ID.
+
+- `id`: (Required) The unique ID of the charity to retrieve.
+- `params` : (Optional) An object containing additional query parameters for filtering or including related data.
+
+#### `saveCharity(data: Record<string, any>)`
+
+Registers a new charity with the provided data.
+
+- `data`: Object containing the charity registration data
+- Returns: Promise<boolean> - Returns true if successful
+- Throws: APIError if the request fails or returns an error
+
+#### `getCharityBySlug(slug: string, params = {})`
+
+Fetches a single charity by their URL slug.
+
+- `slug`: The URL slug of the charity
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- Returns: Promise with the API response
+
+#### `isStoreNameUniqueCharity(name: string)`
+
+Check if a charity (store) name is available.
+
+- `name`: The store name to check
+- Returns: Promise with a boolean indicating if the name is unique
+
+
+
+
+
+The SDK automatically handles OAuth2 authentication using client credentials. It will:
+- Automatically obtain access tokens when needed
+- Cache tokens until they expire
+- Refresh tokens before they expire
+- Add the Bearer token to all API requests
+
+You don't need to handle authentication manually, but you can access the token if needed:
+
+```typescript
+const token = await sdk.getAccessToken();
+```
+
+## License
+
+ISC

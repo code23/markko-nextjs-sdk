@@ -66,6 +66,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TypeScript support
 - Next.js integration examples
 
+### Added
+-Charities API endpoints:
+  -list Charities
+  -Get Charity by id
+  -save Charity
+  -Get Charity by slug
+
 ### Changed
 - N/A
 
