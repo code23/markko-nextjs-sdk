@@ -81,3 +81,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - N/A
 
+
+
+
+
+### Added
+- Specifications api endpoint
+  - list of specifications
+  - specification by code
+
+## [1.0.0-alpha.21] - 2024-12-11

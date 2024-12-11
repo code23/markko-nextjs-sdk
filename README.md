@@ -284,3 +284,34 @@ const token = await sdk.getAccessToken();
 
 ISC
 
+
+
+
+### Specifications
+
+#### `getSpecificationByCode(code:string , params = {})` 
+Fetches the details of a specific specification by its unique code.
+
+- `icoded`: (Required) The unique code of the specification to retrieve.
+- `params` : (Optional) An object containing additional query parameters for filtering or including related data.
+
+#### `getSpecificationByCode(params = {})` 
+Fetches a list of all specifications.
+- `params`: Optional query parameters to filter the list of specifications.- Returns: A promise with the list of all specifications.
+
+The SDK automatically handles OAuth2 authentication using client credentials. It will:
+- Automatically obtain access tokens when needed
+- Cache tokens until they expire
+- Refresh tokens before they expire
+- Add the Bearer token to all API requests
+
+You don't need to handle authentication manually, but you can access the token if needed:
+
+```typescript
+const token = await sdk.getAccessToken();
+```
+
+## License
+
+ISC
+>>>>>>> Stashed changes
