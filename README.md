@@ -322,8 +322,32 @@ Check if a charity (store) name is available.
 - Returns: Promise with a boolean indicating if the name is unique
 
 
+The SDK automatically handles OAuth2 authentication using client credentials. It will:
+- Automatically obtain access tokens when needed
+- Cache tokens until they expire
+- Refresh tokens before they expire
+- Add the Bearer token to all API requests
+
+You don't need to handle authentication manually, but you can access the token if needed:
+
+```typescript
+const token = await sdk.getAccessToken();
+```
+
+## License
+
+ISC
 
 
+
+
+
+
+### Tags
+
+#### `getAllTags(params = {})` 
+Fetches a list of all tags.
+- `params`: Optional query parameters to filter the list of tags.- Returns: A promise with the list of all tags.
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
 - Automatically obtain access tokens when needed
