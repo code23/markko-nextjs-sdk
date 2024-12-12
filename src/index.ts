@@ -1,16 +1,17 @@
-import { AuthService } from './services/auth';
-import { MarkkoConfig } from './types';
-import { AddressesAPI } from './api/addresses';
-import { AttributesAPI } from './api/attributes';
-import { BlogsAPI } from './api/blogs';
-import { VendorsAPI } from './api/vendors';
-
+import { AuthService } from "./services/auth";
+import { MarkkoConfig } from "./types";
+import { AddressesAPI } from "./api/addresses";
+import { AttributesAPI } from "./api/attributes";
+import { BlogsAPI } from "./api/blogs";
+import { VendorsAPI } from "./api/vendors";
+import { SettingServiceAPI } from "./api/setting";
 export class MarkkoSDK {
   private authService: AuthService;
   public addresses: AddressesAPI;
   public attributes: AttributesAPI;
   public blogs: BlogsAPI;
   public vendors: VendorsAPI;
+  public settings: SettingServiceAPI;
 
   constructor(config: MarkkoConfig) {
     this.authService = new AuthService(config);
@@ -18,6 +19,7 @@ export class MarkkoSDK {
     this.attributes = new AttributesAPI(config, this.authService);
     this.blogs = new BlogsAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
+    this.settings = new SettingServiceAPI(config, this.authService);
   }
 
   async getAccessToken(): Promise<string> {
