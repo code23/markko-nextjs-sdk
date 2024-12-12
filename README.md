@@ -3,9 +3,11 @@
 A TypeScript SDK for integrating Markko API with NextJS applications.
 
 ## Installation
+
 ```bash
 npm install @meetmarkko/markko-nextjs-sdk
 ```
+
 ## Setup
 
 Add the following environment variables to your NextJS project's `.env.local` file:
@@ -29,35 +31,35 @@ MPE_CLIENT_CREDENTIAL_SECRET=
 For Next.js applications, it's recommended to use this SDK in the following ways:
 
 ### Server-Side Usage (Recommended)
+
 #### App Router (Next.js 13+)
+
 - In Server Components (recommended)
 - In Route Handlers (`app/api/**/route.ts`)
 
 #### Pages Router (Legacy)
+
 - In `getServerSideProps`
 - In API routes (`pages/api/*`)
 
 ### Client-Side Usage (Use with caution)
+
 Client-side usage should be limited to non-sensitive operations only. For sensitive operations, always use server-side API routes.
 
 ### Example Usage with App Router (Recommended)
 
 ```typescript
 // app/vendors/page.tsx
-import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
+import { MarkkoSDK } from "@meetmarkko/markko-nextjs-sdk";
 
 export default async function VendorsPage() {
   const sdk = new MarkkoSDK({
     // config
   });
-  
+
   const vendors = await sdk.vendors.list();
-  
-  return (
-    <div>
-      {/* Your JSX */}
-    </div>
-  );
+
+  return <div>{/* Your JSX */}</div>;
 }
 ```
 
@@ -65,13 +67,13 @@ export default async function VendorsPage() {
 
 ```typescript
 // app/api/vendors/route.ts
-import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
+import { MarkkoSDK } from "@meetmarkko/markko-nextjs-sdk";
 
 export async function GET() {
   const sdk = new MarkkoSDK({
     // config
   });
-  
+
   const data = await sdk.vendors.list();
   return Response.json(data);
 }
@@ -89,6 +91,7 @@ Fetches a list of vendors based on the provided parameters.
 - Returns: Promise with the API response
 
 Example parameters:
+
 - `sort`: Sort order (e.g., 'created_at,desc')
 - `with`: Include related resources
 - `paginate`: Number of items per page
@@ -260,15 +263,25 @@ Fetches the active product attributes.
 - Returns: Promise with the API response
 
 Example parameters:
+
 - `sort`: Sort order (e.g., 'created_at,desc')
 - `with`: Include related resources
 - `paginate`: Number of items per page
 - `page`: Page number
 - `is_active`: Filter by active status
 
+### Setting Service
+
+### `getSettingService(relationships = null)`
+
+Fetches a list of all Setting Services.
+
+- `relationships`: Related data to include (optional)
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
+
 - Automatically obtain access tokens when needed
 - Cache tokens until they expire
 - Refresh tokens before they expire
@@ -283,4 +296,3 @@ const token = await sdk.getAccessToken();
 ## License
 
 ISC
-
