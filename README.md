@@ -266,6 +266,50 @@ Example parameters:
 - `page`: Page number
 - `is_active`: Filter by active status
 
+### Booking Reviews
+
+### `create(data: { booking_id: string; review: string; rating: number })`
+
+Creates a new booking review.
+
+- `data`: Object containing the following fields:
+  - `booking_id`: The ID of the booking to associate with the review.
+  - `review`: The review text.
+  - `rating`: The rating as a number.
+- Returns: A promise that resolves to the created review.
+- Throws: APIError if the request fails.
+
+### `updatebookingreview(data: { booking_id: string; review: string; rating: number })`
+
+Updates an existing booking review.
+
+- `data`: Object containing the following fields:
+  - `booking_id`: The ID of the booking to update the review for.
+  - `review`: The updated review text.
+  - `rating`: The updated rating as a number.
+- Returns: A promise that resolves to the updated review.
+- Throws: APIError if the request fails.
+
+### `deletebookingreview(id: string)`
+
+Deletes a booking review.
+
+- `id`: The ID of the booking review to delete.
+- Returns: A promise that resolves to the deleted review data.
+- Throws: APIError if the request fails.
+
+### `listReviews({ ids, paginate, page, with: relationships, sort }: ListReviewsParams)`
+
+Fetches a list of booking reviews. By default, it returns all reviews.
+
+- `ids`: Object containing model and ID pairs to filter by (e.g., { booking_id: 1 }).
+- `paginate`: Number of items per page (default: 10, use 0 for no pagination).
+- `page`: The pagination page to retrieve (default: 1).
+- `with`: Related data to include (optional).
+- `sort`: Field to sort results by (optional).
+- Returns: A promise that resolves to an array of booking reviews.
+- Throws: APIError if the request fails.
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
