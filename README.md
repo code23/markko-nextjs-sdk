@@ -3,9 +3,11 @@
 A TypeScript SDK for integrating Markko API with NextJS applications.
 
 ## Installation
+
 ```bash
 npm install @meetmarkko/markko-nextjs-sdk
 ```
+
 ## Setup
 
 Add the following environment variables to your NextJS project's `.env.local` file:
@@ -29,35 +31,35 @@ MPE_CLIENT_CREDENTIAL_SECRET=
 For Next.js applications, it's recommended to use this SDK in the following ways:
 
 ### Server-Side Usage (Recommended)
+
 #### App Router (Next.js 13+)
+
 - In Server Components (recommended)
 - In Route Handlers (`app/api/**/route.ts`)
 
 #### Pages Router (Legacy)
+
 - In `getServerSideProps`
 - In API routes (`pages/api/*`)
 
 ### Client-Side Usage (Use with caution)
+
 Client-side usage should be limited to non-sensitive operations only. For sensitive operations, always use server-side API routes.
 
 ### Example Usage with App Router (Recommended)
 
 ```typescript
 // app/vendors/page.tsx
-import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
+import { MarkkoSDK } from "@meetmarkko/markko-nextjs-sdk";
 
 export default async function VendorsPage() {
   const sdk = new MarkkoSDK({
     // config
   });
-  
+
   const vendors = await sdk.vendors.list();
-  
-  return (
-    <div>
-      {/* Your JSX */}
-    </div>
-  );
+
+  return <div>{/* Your JSX */}</div>;
 }
 ```
 
@@ -65,13 +67,13 @@ export default async function VendorsPage() {
 
 ```typescript
 // app/api/vendors/route.ts
-import { MarkkoSDK } from '@meetmarkko/markko-nextjs-sdk';
+import { MarkkoSDK } from "@meetmarkko/markko-nextjs-sdk";
 
 export async function GET() {
   const sdk = new MarkkoSDK({
     // config
   });
-  
+
   const data = await sdk.vendors.list();
   return Response.json(data);
 }
@@ -89,6 +91,7 @@ Fetches a list of vendors based on the provided parameters.
 - Returns: Promise with the API response
 
 Example parameters:
+
 - `sort`: Sort order (e.g., 'created_at,desc')
 - `with`: Include related resources
 - `paginate`: Number of items per page
@@ -145,8 +148,6 @@ Registers a new vendor with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
-Example usage:
-
 ### Blog Posts
 
 #### `listPosts(params = {})`
@@ -196,8 +197,6 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 - `params`: Optional object containing query parameters
   - Default includes `is_active: true`
 - Returns: Promise with the API response
-
-### Example Usage with Blog Posts
 
 ### Addresses
 
@@ -260,38 +259,21 @@ Fetches the active product attributes.
 - Returns: Promise with the API response
 
 Example parameters:
+
 - `sort`: Sort order (e.g., 'created_at,desc')
 - `with`: Include related resources
 - `paginate`: Number of items per page
 - `page`: Page number
 - `is_active`: Filter by active status
 
-## Authentication
-
-The SDK automatically handles OAuth2 authentication using client credentials. It will:
-- Automatically obtain access tokens when needed
-- Cache tokens until they expire
-- Refresh tokens before they expire
-- Add the Bearer token to all API requests
-
-You don't need to handle authentication manually, but you can access the token if needed:
-
-```typescript
-const token = await sdk.getAccessToken();
-```
-
-## License
-
-ISC
-
 ### Charities
 
-### `getAllCharities(params = [])`
+#### `getAllCharities(params = [])`
 
 Fetches a list of all charities.
 - `params`: Optional query parameters to filter the list of charities.- Returns: A promise with the list of all charities.
 
-### `getCharitiesById(id: number, params = {})`
+#### `getCharitiesById(id: number, params = {})`
 Fetches the details of a specific charity by its unique ID.
 
 - `id`: (Required) The unique ID of the charity to retrieve.
@@ -321,9 +303,45 @@ Check if a charity (store) name is available.
 - `name`: The store name to check
 - Returns: Promise with a boolean indicating if the name is unique
 
+### Donations
 
+#### `getDonation(Number: string, queryparams = [])`
 
+Fetches a donation based on its number.
 
+- `Number`: The donation number to filter by.
+- `queryparams`: Optional query parameters to filter the result.
+- Returns: A promise with the donation data matching the number.
+
+### `getAllDonations(params = [])`
+
+Fetches a list of all donations.
+
+- `params`: Optional query parameters to filter the list of donations.
+- Returns: A promise with the list of all donations.
+
+### `processDonation(charityId: string, data: Record<string, any>)`
+
+Processes a donation for a specific charity.
+
+- `charityId`: The ID of the charity to donate to.
+- `data`: An object containing the donation details, such as amount, donor information, etc.
+- Returns: A promise with the donation response data, including transaction status and details.
+
+## Authentication
+
+The SDK automatically handles OAuth2 authentication using client credentials. It will:
+
+- Automatically obtain access tokens when needed
+- Cache tokens until they expire
+- Refresh tokens before they expire
+- Add the Bearer token to all API requests
+
+You don't need to handle authentication manually, but you can access the token if needed:
+
+```typescript
+const token = await sdk.getAccessToken();
+```
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
 - Automatically obtain access tokens when needed
