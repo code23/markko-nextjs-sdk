@@ -328,6 +328,15 @@ Processes a donation for a specific charity.
 - `data`: An object containing the donation details, such as amount, donor information, etc.
 - Returns: A promise with the donation response data, including transaction status and details.
 
+### Tags
+
+#### `list(params = [])`
+
+Fetches a list of all tags.
+
+- `params`: Optional query parameters to filter the list of tags.
+- Returns: A promise with the list of all tags.
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
