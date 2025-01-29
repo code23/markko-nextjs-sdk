@@ -13,8 +13,7 @@ export class CharitiesAPI extends BaseAPI {
    * @param params - The query parameters to filter the charities
    * @returns A list of charities
    */
-  
-  async getAllCharities(params = {}) {
+  async list(params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/charities`;
     try {
       const response = await this.axiosInstance.get(url, { params });
@@ -25,14 +24,12 @@ export class CharitiesAPI extends BaseAPI {
   }
 
   /**
- * Fetches the details of a charity by its ID.
- *
- * @param  id - The unique ID of the charity to fetch.
- * @param  params - Optional query parameters for additional filtering or data inclusion.
- * @returns - A promise that resolves to the details of the specified charity.
- *
- */
-  async getCharitiesById(id: number, params = {}) {
+   * Fetches the details of a charity by its ID.
+   * @param  id - The unique ID of the charity to fetch.
+   * @param  params - Optional query parameters for additional filtering or data inclusion.
+   * @returns - A promise that resolves to the details of the specified charity.
+   */
+  async get(id: number, params = {}) {
     const url = `${this.config.apiBasePath}/api/v1/charities/${id}`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
@@ -44,8 +41,7 @@ export class CharitiesAPI extends BaseAPI {
    * @throws {APIError} If the API request fails or returns an error
    * @returns Promise<boolean> Returns true if successful
    */
-
-   async saveCharity(data: Record<string, any>): Promise<boolean> {
+   async save(data: Record<string, any>): Promise<boolean> {
     try {
       const url = `${this.config.apiBasePath}/api/v1/charities/register`;
       const response = await this.axiosInstance.post(url, data);
@@ -72,7 +68,7 @@ export class CharitiesAPI extends BaseAPI {
    * @param params - The query parameters to filter the charity
    * @returns A single charity
    */
-  async getCharityBySlug(slug: string, params = {}) {
+  async getBySlug(slug: string, params = {}) {
     const defaultParams = {
       is_active: 1
     };
@@ -86,10 +82,9 @@ export class CharitiesAPI extends BaseAPI {
    * @param name - The charity (store) name to check
    * @returns A boolean indicating if the charity (store) name is unique
    */
-  async isStoreNameUniqueCharity(name: string) {
+  async nameIsUnique(name: string) {
     const url = `${this.config.apiBasePath}/api/v1/charities/is-name-unique`;
     const response = await this.axiosInstance.get(url, { params: { store_name: name } });
     return response.data;
   }
-
 }
