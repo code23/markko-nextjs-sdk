@@ -148,8 +148,6 @@ Registers a new vendor with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
-Example usage:
-
 ### Blog Posts
 
 #### `listPosts(params = {})`
@@ -199,8 +197,6 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 - `params`: Optional object containing query parameters
   - Default includes `is_active: true`
 - Returns: Promise with the API response
-
-### Example Usage with Blog Posts
 
 ### Addresses
 
@@ -253,7 +249,61 @@ Updates an existing address.
 - Returns: Promise with the updated address
 - Throws: APIError if the request fails
 
-### Donation
+### Attributes
+
+#### `list(params = {})`
+
+Fetches the active product attributes.
+
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+Example parameters:
+
+- `sort`: Sort order (e.g., 'created_at,desc')
+- `with`: Include related resources
+- `paginate`: Number of items per page
+- `page`: Page number
+- `is_active`: Filter by active status
+
+### Charities
+
+#### `getAllCharities(params = [])`
+
+Fetches a list of all charities.
+- `params`: Optional query parameters to filter the list of charities.- Returns: A promise with the list of all charities.
+
+#### `getCharitiesById(id: number, params = {})`
+Fetches the details of a specific charity by its unique ID.
+
+- `id`: (Required) The unique ID of the charity to retrieve.
+- `params` : (Optional) An object containing additional query parameters for filtering or including related data.
+
+#### `saveCharity(data: Record<string, any>)`
+
+Registers a new charity with the provided data.
+
+- `data`: Object containing the charity registration data
+- Returns: Promise<boolean> - Returns true if successful
+- Throws: APIError if the request fails or returns an error
+
+#### `getCharityBySlug(slug: string, params = {})`
+
+Fetches a single charity by their URL slug.
+
+- `slug`: The URL slug of the charity
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- Returns: Promise with the API response
+
+#### `isStoreNameUniqueCharity(name: string)`
+
+Check if a charity (store) name is available.
+
+- `name`: The store name to check
+- Returns: Promise with a boolean indicating if the name is unique
+
+### Donations
 
 #### `getDonation(Number: string, queryparams = [])`
 
@@ -278,27 +328,22 @@ Processes a donation for a specific charity.
 - `data`: An object containing the donation details, such as amount, donor information, etc.
 - Returns: A promise with the donation response data, including transaction status and details.
 
-### Attributes
-
-#### `list(params = {})`
-
-Fetches the active product attributes.
-
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-Example parameters:
-
-- `sort`: Sort order (e.g., 'created_at,desc')
-- `with`: Include related resources
-- `paginate`: Number of items per page
-- `page`: Page number
-- `is_active`: Filter by active status
-
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
 
+- Automatically obtain access tokens when needed
+- Cache tokens until they expire
+- Refresh tokens before they expire
+- Add the Bearer token to all API requests
+
+You don't need to handle authentication manually, but you can access the token if needed:
+
+```typescript
+const token = await sdk.getAccessToken();
+```
+
+The SDK automatically handles OAuth2 authentication using client credentials. It will:
 - Automatically obtain access tokens when needed
 - Cache tokens until they expire
 - Refresh tokens before they expire

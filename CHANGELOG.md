@@ -5,14 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-alpha.20]-2024-12-10
+
+### Added
+
+- Charities API endpoints:
+  - List charities
+  - Get charity by id
+  - Update charity
+  - Get charity by slug
+
 ## [1.0.0-alpha.19]-2024-12-09
 
 ### Added
 
-- Donation API endpoints:
-  - List Donations
-  - List Donations by numbers
-  - Get Donation by slug with Number
+- Donations API endpoints:
+  - List donations
+  - List donations by numbers
+  - Get donation by slug with Number
   - Process donation for charity
 
 ## [1.0.0-alpha.18] - 2024-12-05
@@ -71,7 +81,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - APIError class for better error handling
 
 ## [1.0.0-alpha.10] - 2024-11-26
-
 
 ### Added
 
