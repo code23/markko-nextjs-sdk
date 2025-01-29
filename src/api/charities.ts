@@ -84,7 +84,7 @@ export class CharitiesAPI extends BaseAPI {
    */
   async nameIsUnique(name: string) {
     const url = `${this.config.apiBasePath}/api/v1/charities/is-name-unique`;
-    const response = await this.axiosInstance.get(url, { params: { store_name: name } });
+    const response = await this.axiosInstance.get(url, { params: { name: name } });
     return response.data;
   }
 }
