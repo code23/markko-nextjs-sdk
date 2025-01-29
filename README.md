@@ -268,18 +268,18 @@ Example parameters:
 
 ### Charities
 
-#### `getAllCharities(params = [])`
+#### `list(params = [])`
 
 Fetches a list of all charities.
 - `params`: Optional query parameters to filter the list of charities.- Returns: A promise with the list of all charities.
 
-#### `getCharitiesById(id: number, params = {})`
+#### `get(id: number, params = {})`
 Fetches the details of a specific charity by its unique ID.
 
 - `id`: (Required) The unique ID of the charity to retrieve.
 - `params` : (Optional) An object containing additional query parameters for filtering or including related data.
 
-#### `saveCharity(data: Record<string, any>)`
+#### `save(data: Record<string, any>)`
 
 Registers a new charity with the provided data.
 
@@ -287,7 +287,7 @@ Registers a new charity with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
-#### `getCharityBySlug(slug: string, params = {})`
+#### `getBySlug(slug: string, params = {})`
 
 Fetches a single charity by their URL slug.
 
@@ -296,7 +296,7 @@ Fetches a single charity by their URL slug.
   - Default includes `is_active: 1`
 - Returns: Promise with the API response
 
-#### `isStoreNameUniqueCharity(name: string)`
+#### `nameIsUnique(name: string)`
 
 Check if a charity (store) name is available.
 
@@ -305,26 +305,26 @@ Check if a charity (store) name is available.
 
 ### Donations
 
-#### `getDonation(Number: string, queryparams = [])`
+#### `getByNumber(number: string, params = [])`
 
 Fetches a donation based on its number.
 
-- `Number`: The donation number to filter by.
-- `queryparams`: Optional query parameters to filter the result.
+- `number`: The donation number to filter by.
+- `params`: Optional query parameters to filter the result.
 - Returns: A promise with the donation data matching the number.
 
-### `getAllDonations(params = [])`
+### `list(params = [])`
 
 Fetches a list of all donations.
 
 - `params`: Optional query parameters to filter the list of donations.
 - Returns: A promise with the list of all donations.
 
-### `processDonation(charityId: string, data: Record<string, any>)`
+### `save(id: string, data: Record<string, any>)`
 
 Processes a donation for a specific charity.
 
-- `charityId`: The ID of the charity to donate to.
+- `id`: The ID of the charity to donate to.
 - `data`: An object containing the donation details, such as amount, donor information, etc.
 - Returns: A promise with the donation response data, including transaction status and details.
 

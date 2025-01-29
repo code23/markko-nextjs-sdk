@@ -8,33 +8,34 @@ export class DonationsAPI extends BaseAPI {
 
   /**
    * Get a donation by numbers
-   * @param params - The query parameters to filter the Donation by numbers
-   * @returns A list of Donation by numbers
+   * @param number - The donation number to filter by
+   * @param params - The query parameters to filter the donation by number
+   * @returns A donation
    */
-  async getDonation(Number: string, queryparams = []) {
-    const url = `${this.config.apiBasePath}/api/v1/donations/number/${Number}`;
-    const response = await this.axiosInstance.get(url, { params: queryparams });
+  async getByNumber(number: string, params = []) {
+    const url = `${this.config.apiBasePath}/api/v1/donations/number/${number}`;
+    const response = await this.axiosInstance.get(url, { params: params });
     return response.data;
   }
 
   /**
-   * @param params - The query parameters to filter the Donation by numbers
+   * @param params - The query parameters to filter the donation
    * @returns A list of Donations
    */
-  async getAllDonations(params = []) {
+  async list(params = []) {
     const url = `${this.config.apiBasePath}/api/v1/donations`;
     const response = await this.axiosInstance.get(url, { params });
     return response.data;
   }
 
   /**
-   * Process a donation for a specific charity
-   * @param charityId - The ID of the charity to donate to
-   * @param data - The donation details to be sent in the request body
+   * Process a payment for a specific charity
+   * @param id - The ID of the charity to donate to
+   * @param data - An object containing the donation details, such as amount, donor information, etc.
    * @returns A Promise that resolves to the donation response data
    */
-  async processDonation(charityId: string, data: Record<string, any>) {
-    const url = `${this.config.apiBasePath}/api/v1/charities/${charityId}/donate`;
+  async save(id: string, data: Record<string, any>) {
+    const url = `${this.config.apiBasePath}/api/v1/charities/${id}/donate`;
     const response = await this.axiosInstance.post(url, data);
     const responseData = response.data;
     return responseData.data || {};

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Charities API endpoints:
   - List charities
   - Get charity by id
-  - Update charity
+  - Save charity
   - Get charity by slug
 
 ## [1.0.0-alpha.19]-2024-12-09
