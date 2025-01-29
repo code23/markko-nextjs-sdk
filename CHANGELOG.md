@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Donation API endpoints:
-  - List Donations
-  - List Donations by numbers
-  - Get Donation by slug with Number
+- Donations API endpoints:
+  - List donations
+  - List donations by numbers
+  - Get donation by slug with Number
   - Process donation for charity
 
 ## [1.0.0-alpha.18] - 2024-12-05

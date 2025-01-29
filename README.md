@@ -253,7 +253,7 @@ Updates an existing address.
 - Returns: Promise with the updated address
 - Throws: APIError if the request fails
 
-### Donation
+### Donations
 
 #### `getDonation(Number: string, queryparams = [])`
 
