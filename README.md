@@ -81,123 +81,6 @@ export async function GET() {
 
 ## API Documentation
 
-### Vendors
-
-#### `list(params = {})`
-
-Fetches a list of vendors based on the provided parameters.
-
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-Example parameters:
-
-- `sort`: Sort order (e.g., 'created_at,desc')
-- `with`: Include related resources
-- `paginate`: Number of items per page
-- `page`: Page number
-- `is_approved`: Filter by approval status
-- `is_onboarded`: Filter by onboarding status
-- `is_rejected`: Filter by rejection status
-- `condensed`: Return condensed response
-
-#### `listByPostcode(postcode: string, params = {})`
-
-Fetches vendors filtered by postcode.
-
-- `postcode`: The postcode to filter vendors by (spaces are automatically removed)
-- `params`: Optional object containing query parameters
-  - Default includes `is_active: 1`
-- Returns: Promise with the API response
-
-#### `getBySlug(slug: string, params = {})`
-
-Fetches a single vendor by their URL slug.
-
-- `slug`: The URL slug of the vendor
-- `params`: Optional object containing query parameters
-  - Default includes `is_active: 1`
-- Returns: Promise with the API response
-
-#### `follow(id: number)`
-
-Follow a vendor.
-
-- `id`: The numeric ID of the vendor to follow
-- Returns: Promise with the API response
-
-#### `unfollow(id: number)`
-
-Unfollow a vendor.
-
-- `id`: The numeric ID of the vendor to unfollow
-- Returns: Promise with the API response
-
-#### `isStoreNameUnique(name: string)`
-
-Check if a vendor (store) name is available.
-
-- `name`: The store name to check
-- Returns: Promise with a boolean indicating if the name is unique
-
-#### `save(data: Record<string, any>)`
-
-Registers a new vendor with the provided data.
-
-- `data`: Object containing the vendor registration data
-- Returns: Promise<boolean> - Returns true if successful
-- Throws: APIError if the request fails or returns an error
-
-### Blog Posts
-
-#### `listPosts(params = {})`
-
-Fetches a list of blog posts.
-
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-#### `listCategories(params = {})`
-
-Fetches a list of blog categories. By default, returns only active categories.
-
-- `params`: Optional object containing query parameters
-  - Default includes `is_active: true`
-- Returns: Promise with the API response
-
-#### `listPostsByCategory(categoryId: number, params = {})`
-
-Fetches a list of blog posts for a specific category.
-
-- `categoryId`: The numeric ID of the category
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-#### `getPost(id: number, params = {})`
-
-Fetches a single blog post by ID.
-
-- `id`: The numeric ID of the blog post
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-#### `getPostBySlug(slug: string, params = {})`
-
-Fetches a single blog post by its slug.
-
-- `slug`: The URL slug of the blog post
-- `params`: Optional object containing query parameters
-- Returns: Promise with the API response
-
-#### `getCategoryBySlug(slug: string, params = {})`
-
-Fetches a blog category by its slug, including associated posts. By default, returns only active categories.
-
-- `slug`: The URL slug of the category
-- `params`: Optional object containing query parameters
-  - Default includes `is_active: true`
-- Returns: Promise with the API response
-
 ### Addresses
 
 #### `create(data: Record<string, any>)`
@@ -266,6 +149,56 @@ Example parameters:
 - `page`: Page number
 - `is_active`: Filter by active status
 
+### Blog Posts
+
+#### `listPosts(params = {})`
+
+Fetches a list of blog posts.
+
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `listCategories(params = {})`
+
+Fetches a list of blog categories. By default, returns only active categories.
+
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- Returns: Promise with the API response
+
+#### `listPostsByCategory(categoryId: number, params = {})`
+
+Fetches a list of blog posts for a specific category.
+
+- `categoryId`: The numeric ID of the category
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getPost(id: number, params = {})`
+
+Fetches a single blog post by ID.
+
+- `id`: The numeric ID of the blog post
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getPostBySlug(slug: string, params = {})`
+
+Fetches a single blog post by its slug.
+
+- `slug`: The URL slug of the blog post
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+#### `getCategoryBySlug(slug: string, params = {})`
+
+Fetches a blog category by its slug, including associated posts. By default, returns only active categories.
+
+- `slug`: The URL slug of the category
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- Returns: Promise with the API response
+
 ### Charities
 
 #### `list(params = [])`
@@ -313,14 +246,14 @@ Fetches a donation based on its number.
 - `params`: Optional query parameters to filter the result.
 - Returns: A promise with the donation data matching the number.
 
-### `list(params = [])`
+#### `list(params = [])`
 
 Fetches a list of all donations.
 
 - `params`: Optional query parameters to filter the list of donations.
 - Returns: A promise with the list of all donations.
 
-### `save(id: string, data: Record<string, any>)`
+#### `save(id: string, data: Record<string, any>)`
 
 Processes a donation for a specific charity.
 
@@ -337,22 +270,77 @@ Fetches a list of all tags.
 - `params`: Optional query parameters to filter the list of tags.
 - Returns: A promise with the list of all tags.
 
+### Vendors
+
+#### `list(params = {})`
+
+Fetches a list of vendors based on the provided parameters.
+
+- `params`: Optional object containing query parameters
+- Returns: Promise with the API response
+
+Example parameters:
+
+- `sort`: Sort order (e.g., 'created_at,desc')
+- `with`: Include related resources
+- `paginate`: Number of items per page
+- `page`: Page number
+- `is_approved`: Filter by approval status
+- `is_onboarded`: Filter by onboarding status
+- `is_rejected`: Filter by rejection status
+- `condensed`: Return condensed response
+
+#### `listByPostcode(postcode: string, params = {})`
+
+Fetches vendors filtered by postcode.
+
+- `postcode`: The postcode to filter vendors by (spaces are automatically removed)
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- Returns: Promise with the API response
+
+#### `getBySlug(slug: string, params = {})`
+
+Fetches a single vendor by their URL slug.
+
+- `slug`: The URL slug of the vendor
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- Returns: Promise with the API response
+
+#### `follow(id: number)`
+
+Follow a vendor.
+
+- `id`: The numeric ID of the vendor to follow
+- Returns: Promise with the API response
+
+#### `unfollow(id: number)`
+
+Unfollow a vendor.
+
+- `id`: The numeric ID of the vendor to unfollow
+- Returns: Promise with the API response
+
+#### `isStoreNameUnique(name: string)`
+
+Check if a vendor (store) name is available.
+
+- `name`: The store name to check
+- Returns: Promise with a boolean indicating if the name is unique
+
+#### `save(data: Record<string, any>)`
+
+Registers a new vendor with the provided data.
+
+- `data`: Object containing the vendor registration data
+- Returns: Promise<boolean> - Returns true if successful
+- Throws: APIError if the request fails or returns an error
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
 
-- Automatically obtain access tokens when needed
-- Cache tokens until they expire
-- Refresh tokens before they expire
-- Add the Bearer token to all API requests
-
-You don't need to handle authentication manually, but you can access the token if needed:
-
-```typescript
-const token = await sdk.getAccessToken();
-```
-
-The SDK automatically handles OAuth2 authentication using client credentials. It will:
 - Automatically obtain access tokens when needed
 - Cache tokens until they expire
 - Refresh tokens before they expire
