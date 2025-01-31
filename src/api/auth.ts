@@ -6,6 +6,11 @@ export class AuthAPI extends BaseAPI {
     super(config, authService);
   }
 
+  /**
+   * Logs in a user.
+   * @param data - Object containing the login data
+   * @returns Promise with the API response
+   */
   async login(data: Record<string, any>) {
     const payload = {
       grant_type: 'password',

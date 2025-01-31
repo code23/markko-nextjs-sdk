@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-alpha.24]-2025-01-31
+
+### Added
+
+- Updated README.md and CHANGELOG.md
+
+## [1.0.0-alpha.23]-2025-01-31
+
+### Added
+
+- Events API endpoints:
+  - Get event by id
+  - Save event
+  - Cancel event
+
+## [1.0.0-alpha.22]-2025-01-31
+
+### Added
+
+- Handle OAuth token
+- Updated APIs to handle OAuth token
+- Auth API endpoints:
+  - Login
+- Events API endpoints:
+  - List events
+
 ## [1.0.0-alpha.21]-2025-01-29
 
 ### Added
