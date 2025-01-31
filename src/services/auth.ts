@@ -35,18 +35,11 @@ export class AuthService {
     this.axiosInstance = axios.create(axiosConfig);
   }
 
-  private isTokenExpired(): boolean {
-    if (!this.tokenData?.expires_at) {
-      // console.log('No token data or expiration');
+  private isTokenExpired(tokenData?: TokenData | null): boolean {
+    if (!tokenData?.expires_at) {
       return true;
     }
-    const isExpired = Date.now() >= (this.tokenData.expires_at - 30000);
-    // console.log('Token expired?', isExpired, {
-    //   now: Date.now(),
-    //   expiresAt: this.tokenData.expires_at,
-    //   timeLeft: (this.tokenData.expires_at - Date.now()) / 1000
-    // });
-    return isExpired;
+    return Date.now() >= (tokenData.expires_at - 30000);
   }
 
   private async requestNewToken(): Promise<TokenData> {
@@ -94,23 +87,32 @@ export class AuthService {
     };
   }
 
-  async getAccessToken(): Promise<string> {
+  async getAccessToken(externalTokenData: TokenData | null = null): Promise<string> {
     try {
-      // If we have a valid token, return it
-      if (this.tokenData && !this.isTokenExpired()) {
-        // console.log('Using cached token');
-        return this.tokenData.access_token;
+      // If external token data is provided, use it
+      if (externalTokenData) {
+        const expiresAt = externalTokenData.expires_at || Date.now() + (externalTokenData.expires_in * 1000);
+        const tokenWithExpiry = { ...externalTokenData, expires_at: expiresAt };
+
+        // If the external token is not expired, use it
+        if (!this.isTokenExpired(tokenWithExpiry)) {
+          return externalTokenData.access_token;
+        }
+
+        // If external token is expired but has refresh token, try to refresh
+        if (externalTokenData.refresh_token) {
+          try {
+            this.tokenData = await this.refreshToken(externalTokenData.refresh_token);
+            return this.tokenData.access_token;
+          } catch (error) {
+            // Fall through to requesting new token if refresh fails
+          }
+        }
       }
 
-      // If we have an expired token with a refresh token, try to refresh
-      if (this.tokenData?.refresh_token) {
-        try {
-          // console.log('Attempting to refresh token');
-          this.tokenData = await this.refreshToken(this.tokenData.refresh_token);
-          return this.tokenData.access_token;
-        } catch (error) {
-          // console.warn('Token refresh failed, requesting new token');
-        }
+      // Use existing token flow
+      if (this.tokenData && !this.isTokenExpired(this.tokenData)) {
+        return this.tokenData.access_token;
       }
 
       // Request a new token
