@@ -1,5 +1,5 @@
 import { BaseAPI } from './base';
-import { AuthService } from '../services/auth';
+import { AuthService, TokenData } from '../services/auth';
 import { APIError } from '../types';
 
 export class AddressesAPI extends BaseAPI {
@@ -10,12 +10,21 @@ export class AddressesAPI extends BaseAPI {
   /**
    * Create a new address
    * @param data - The data to create the address with
+   * @param oauth - The OAuth token data
    * @returns The created address
    */
-  async create(data: Record<string, any>) {
+  async create(data: Record<string, any>, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/address`;
-      const response = await this.axiosInstance.post(url, data);
+      const config: any = { data };
+
+      if (oauth) {
+        config.headers = {
+          'X-OAuth-Token': JSON.stringify(oauth)
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, data, config);
 
       // Check if the response contains an error
       if (response.data?.error) {
@@ -38,23 +47,41 @@ export class AddressesAPI extends BaseAPI {
   /**
    * Delete an address
    * @param id - The ID of the address to delete
+   * @param oauth - The OAuth token data
    * @returns The deleted address
    */
-  async delete(id: string) {
+  async delete(id: string, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/address/${id}`;
-    const response = await this.axiosInstance.delete(url);
+    const config: any = {};
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.delete(url, config);
     return response.data;
   }
 
   /**
    * Look up addresses by postcode
    * @param postcode - The postcode to search for
+   * @param oauth - The OAuth token data
    * @returns A list of addresses matching the postcode
    */
-  async findByPostcode(postcode: string) {
+  async findByPostcode(postcode: string, oauth: TokenData | null = null) {
     postcode = postcode.replace(/\s+/g, '');
     const url = `${this.config.apiBasePath}/api/v1/postcode/lookup`;
-    const response = await this.axiosInstance.get(url, { params: { postcode } });
+    const config: any = { params: { postcode } };
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
 
@@ -65,11 +92,12 @@ export class AddressesAPI extends BaseAPI {
    * @param radius - The radius to search within
    * @param limit - The maximum number of results to return
    * @param relationships - Relationships to load (with)
+   * @param oauth - The OAuth token data
    * @returns A list of nearby models
    */
-  async getNearbyModel(postcode: string, model: string, radius = 10, limit = 10, relationships = null) {
+  async getNearbyModel(postcode: string, model: string, radius = 10, limit = 10, relationships = null, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/postcode/nearby`;
-    const response = await this.axiosInstance.get(url, {
+    const config: any = {
       params: {
         postcode,
         model,
@@ -77,7 +105,15 @@ export class AddressesAPI extends BaseAPI {
         limit,
         with: relationships
       }
-    });
+    };
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
 
@@ -85,11 +121,20 @@ export class AddressesAPI extends BaseAPI {
   /**
    * Set an address as the default
    * @param id - The ID of the address to set as default
+   * @param oauth - The OAuth token data
    * @returns The updated address
    */
-  async setDefault(id: string) {
+  async setDefault(id: string, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/address/${id}/make-default`;
-    const response = await this.axiosInstance.patch(url);
+    const config: any = {};
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.patch(url, config);
     return response.data;
   }
 
@@ -97,12 +142,21 @@ export class AddressesAPI extends BaseAPI {
    * Update an address
    * @param id - The ID of the address to update
    * @param data - The data to update the address with
+   * @param oauth - The OAuth token data
    * @returns The updated address
    */
-  async update(id: string, data: Record<string, any>) {
+  async update(id: string, data: Record<string, any>, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/address/${id}`;
-      const response = await this.axiosInstance.patch(url, data);
+      const config: any = { data };
+
+      if (oauth) {
+        config.headers = {
+          'X-OAuth-Token': JSON.stringify(oauth)
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, data, config);
 
       // Check if the response contains an error
       if (response.data?.error) {
