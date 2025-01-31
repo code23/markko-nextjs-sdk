@@ -1,4 +1,5 @@
 import { AuthService } from './services/auth';
+import { AuthAPI } from './api/auth';
 import { MarkkoConfig } from './types';
 import { AddressesAPI } from './api/addresses';
 import { AttributesAPI } from './api/attributes';
@@ -10,6 +11,7 @@ import { VendorsAPI } from './api/vendors';
 
 export class MarkkoSDK {
   private authService: AuthService;
+  public auth: AuthAPI;
   public addresses: AddressesAPI;
   public attributes: AttributesAPI;
   public blogs: BlogsAPI;
@@ -20,6 +22,7 @@ export class MarkkoSDK {
 
   constructor(config: MarkkoConfig) {
     this.authService = new AuthService(config);
+    this.auth = new AuthAPI(config, this.authService);
     this.addresses = new AddressesAPI(config, this.authService);
     this.attributes = new AttributesAPI(config, this.authService);
     this.blogs = new BlogsAPI(config, this.authService);
