@@ -149,6 +149,15 @@ Example parameters:
 - `page`: Page number
 - `is_active`: Filter by active status
 
+### Auth
+
+#### `login(data: Record<string, any>)`
+
+Logs in a user.
+
+- `data`: Object containing the login data
+- Returns: Promise with the API response
+
 ### Blog Posts
 
 #### `listPosts(params = {})`
@@ -260,6 +269,39 @@ Processes a donation for a specific charity.
 - `id`: The ID of the charity to donate to.
 - `data`: An object containing the donation details, such as amount, donor information, etc.
 - Returns: A promise with the donation response data, including transaction status and details.
+
+### Events
+
+#### `list(params = [])`
+
+Fetches a list of all events.
+
+- `params`: Optional query parameters to filter the list of events.
+- Returns: A promise with the list of all events.
+
+#### `get(id: number, params = {})`
+
+Fetches a single event by its unique ID.
+
+- `id`: The unique ID of the event to retrieve.
+- `params`: Optional query parameters to filter the event details.
+- Returns: A promise with the event data.
+
+#### `save(id: string, data: Record<string, any>)`
+
+Saves an event with the provided data.
+
+- `id`: The ID of the event to update.
+- `data`: An object containing the event data to be saved.
+- Returns: A promise with the saved event data.
+
+#### `cancel(id: number, data: Record<string, any>)`
+
+Cancels an event.
+
+- `id`: The ID of the event to cancel.
+- `data`: An object containing the event data to be saved.
+- Returns: A promise with the saved event data.
 
 ### Tags
 
