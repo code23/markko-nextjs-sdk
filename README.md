@@ -221,6 +221,42 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
+### Categories
+
+#### `list(params = {})`
+
+Fetches a list of all categories.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `listNested(params = {})`
+
+Fetches a nested list of all categories.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `get(id: number, params = {})`
+
+Fetches a single category by its ID.
+
+- `id`: The numeric ID of the category
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getBySlug(slug: string, params = {})`
+
+Fetches a single category by its slug.
+
+- `slug`: The URL slug of the category
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Charities
 
 #### `list(params = [])`
