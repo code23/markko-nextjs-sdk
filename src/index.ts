@@ -4,6 +4,7 @@ import { MarkkoConfig } from './types';
 import { AddressesAPI } from './api/addresses';
 import { AttributesAPI } from './api/attributes';
 import { BlogsAPI } from './api/blogs';
+import { CategoriesAPI } from './api/categories';
 import { CharitiesAPI } from './api/charities';
 import { DonationsAPI } from './api/donations';
 import { EventsAPI } from './api/events';
@@ -16,6 +17,7 @@ export class MarkkoSDK {
   public addresses: AddressesAPI;
   public attributes: AttributesAPI;
   public blogs: BlogsAPI;
+  public categories: CategoriesAPI;
   public charities : CharitiesAPI;
   public donations: DonationsAPI;
   public events: EventsAPI;
@@ -28,7 +30,8 @@ export class MarkkoSDK {
     this.addresses = new AddressesAPI(config, this.authService);
     this.attributes = new AttributesAPI(config, this.authService);
     this.blogs = new BlogsAPI(config, this.authService);
-    this.charities = new CharitiesAPI(config , this.authService)
+    this.categories = new CategoriesAPI(config, this.authService);
+    this.charities = new CharitiesAPI(config , this.authService);
     this.donations = new DonationsAPI(config, this.authService);
     this.events = new EventsAPI(config, this.authService);
     this.tags = new TagsAPI(config, this.authService);

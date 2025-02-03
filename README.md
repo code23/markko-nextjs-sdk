@@ -81,6 +81,301 @@ export async function GET() {
 
 ## API Documentation
 
+### Addresses
+
+#### `create(data: Record<string, any>)`
+
+Creates a new address.
+
+- `data`: Object containing the address data
+- `oauth`: The OAuth token data
+- Returns: Promise with the created address
+- Throws: APIError if the request fails
+
+#### `delete(id: string)`
+
+Deletes an address.
+
+- `id`: The ID of the address to delete
+- `oauth`: The OAuth token data
+- Returns: Promise with the deleted address data
+
+#### `findByPostcode(postcode: string)`
+
+Looks up addresses by postcode.
+
+- `postcode`: The postcode to search for (spaces are automatically removed)
+- `oauth`: The OAuth token data
+- Returns: Promise with a list of matching addresses
+
+#### `getNearbyModel(postcode: string, model: string, radius = 10, limit = 10, relationships = null)`
+
+Gets a list of nearby models by postcode.
+
+- `postcode`: The postcode to search from
+- `model`: The model type to search for
+- `radius`: Search radius in miles (default: 10)
+- `limit`: Maximum number of results (default: 10)
+- `relationships`: Related data to include (optional)
+- `oauth`: The OAuth token data
+- Returns: Promise with a list of nearby models
+
+#### `setDefault(id: string)`
+
+Sets an address as the default.
+
+- `id`: The ID of the address to set as default
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated address data
+
+#### `update(id: string, data: Record<string, any>)`
+
+Updates an existing address.
+
+- `id`: The ID of the address to update
+- `data`: Object containing the update data
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated address
+- Throws: APIError if the request fails
+
+### Attributes
+
+#### `list(params = {})`
+
+Fetches the active product attributes.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+Example parameters:
+
+- `sort`: Sort order (e.g., 'created_at,desc')
+- `with`: Include related resources
+- `paginate`: Number of items per page
+- `page`: Page number
+- `is_active`: Filter by active status
+
+### Auth
+
+#### `login(data: Record<string, any>)`
+
+Logs in a user.
+
+- `data`: Object containing the login data
+- Returns: Promise with the API response
+
+### Blog Posts
+
+#### `listPosts(params = {})`
+
+Fetches a list of blog posts.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `listCategories(params = {})`
+
+Fetches a list of blog categories. By default, returns only active categories.
+
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `listPostsByCategory(categoryId: number, params = {})`
+
+Fetches a list of blog posts for a specific category.
+
+- `categoryId`: The numeric ID of the category
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getPost(id: number, params = {})`
+
+Fetches a single blog post by ID.
+
+- `id`: The numeric ID of the blog post
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getPostBySlug(slug: string, params = {})`
+
+Fetches a single blog post by its slug.
+
+- `slug`: The URL slug of the blog post
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getCategoryBySlug(slug: string, params = {})`
+
+Fetches a blog category by its slug, including associated posts. By default, returns only active categories.
+
+- `slug`: The URL slug of the category
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: true`
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+### Categories
+
+#### `list(params = {})`
+
+Fetches a list of all categories.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `listNested(params = {})`
+
+Fetches a nested list of all categories.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `get(id: number, params = {})`
+
+Fetches a single category by its ID.
+
+- `id`: The numeric ID of the category
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getBySlug(slug: string, params = {})`
+
+Fetches a single category by its slug.
+
+- `slug`: The URL slug of the category
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+### Charities
+
+#### `list(params = [])`
+
+Fetches a list of all charities.
+- `params`: Optional query parameters to filter the list of charities.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all charities.
+
+#### `get(id: number, params = {})`
+Fetches the details of a specific charity by its unique ID.
+
+- `id`: (Required) The unique ID of the charity to retrieve.
+- `params` : (Optional) An object containing additional query parameters for filtering or including related data.
+- `oauth`: The OAuth token data
+- Returns: A promise with the charity data.
+
+#### `save(data: Record<string, any>)`
+
+Registers a new charity with the provided data.
+
+- `data`: Object containing the charity registration data
+- `oauth`: The OAuth token data
+- Returns: Promise<boolean> - Returns true if successful
+- Throws: APIError if the request fails or returns an error
+
+#### `getBySlug(slug: string, params = {})`
+
+Fetches a single charity by their URL slug.
+
+- `slug`: The URL slug of the charity
+- `params`: Optional object containing query parameters
+  - Default includes `is_active: 1`
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `nameIsUnique(name: string)`
+
+Check if a charity (store) name is available.
+
+- `name`: The store name to check
+- `oauth`: The OAuth token data
+- Returns: Promise with a boolean indicating if the name is unique
+
+### Donations
+
+#### `getByNumber(number: string, params = [])`
+
+Fetches a donation based on its number.
+
+- `number`: The donation number to filter by.
+- `params`: Optional query parameters to filter the result.
+- `oauth`: The OAuth token data
+- Returns: A promise with the donation data matching the number.
+
+#### `list(params = [])`
+
+Fetches a list of all donations.
+
+- `params`: Optional query parameters to filter the list of donations.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all donations.
+
+#### `save(id: string, data: Record<string, any>)`
+
+Processes a donation for a specific charity.
+
+- `id`: The ID of the charity to donate to.
+- `data`: An object containing the donation details, such as amount, donor information, etc.
+- `oauth`: The OAuth token data
+- Returns: A promise with the donation response data, including transaction status and details.
+
+### Events
+
+#### `list(params = [])`
+
+Fetches a list of all events.
+
+- `params`: Optional query parameters to filter the list of events.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all events.
+
+#### `get(id: number, params = {})`
+
+Fetches a single event by its unique ID.
+
+- `id`: The unique ID of the event to retrieve.
+- `params`: Optional query parameters to filter the event details.
+- `oauth`: The OAuth token data
+- Returns: A promise with the event data.
+
+#### `save(id: string, data: Record<string, any>)`
+
+Saves an event with the provided data.
+
+- `id`: The ID of the event to update.
+- `data`: An object containing the event data to be saved.
+- `oauth`: The OAuth token data
+- Returns: A promise with the saved event data.
+
+#### `cancel(id: number, data: Record<string, any>)`
+
+Cancels an event.
+
+- `id`: The ID of the event to cancel.
+- `data`: An object containing the event data to be saved.
+- `oauth`: The OAuth token data
+- Returns: A promise with the saved event data.
+
+### Tags
+
+#### `list(params = [])`
+
+Fetches a list of all tags.
+
+- `params`: Optional query parameters to filter the list of tags.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all tags.
+
 ### Vendors
 
 #### `list(params = {})`
