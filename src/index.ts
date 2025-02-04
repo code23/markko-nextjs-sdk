@@ -8,9 +8,9 @@ import { CategoriesAPI } from './api/categories';
 import { CharitiesAPI } from './api/charities';
 import { DonationsAPI } from './api/donations';
 import { EventsAPI } from './api/events';
+import { ProductsAPI } from './api/products';
 import { TagsAPI } from './api/tags';
 import { VendorsAPI } from './api/vendors';
-import { ProductsAPI } from './api/products';
 
 export class MarkkoSDK {
   private authService: AuthService;
