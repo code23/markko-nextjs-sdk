@@ -25,7 +25,7 @@ export class ProductsAPI extends BaseAPI {
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
-    
+
   /**
    * Get a filtered list of products with advanced filtering options
    * @param params - The filter parameters for the products query
@@ -38,8 +38,8 @@ export class ProductsAPI extends BaseAPI {
       delete params.paginate;
     }
     const url = `${this.config.apiBasePath}/api/v1/products/filter`;
-    const config: any = {params};  
-    
+    const config: any = {params};
+
     if (oauth) {
       config.headers = {
         "X-OAuth-Token": JSON.stringify(oauth),
@@ -60,8 +60,8 @@ export class ProductsAPI extends BaseAPI {
    * @returns A single product's data
    */
   async get(
-    vendorSlug: string, 
-    productSlug: string, 
+    vendorSlug: string,
+    productSlug: string,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
@@ -150,13 +150,13 @@ export class ProductsAPI extends BaseAPI {
    */
   async latest(count: number = 3, params = {} , oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/products`;
-    const config: any = { 
+    const config: any = {
       params: {
         sort: 'created_at,desc',
         paginate: count,
         page: 1,
-        ...params  
-      } 
+        ...params
+      }
     };
     if (oauth) {
       config.headers = {
@@ -166,6 +166,4 @@ export class ProductsAPI extends BaseAPI {
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
-
-
 }
