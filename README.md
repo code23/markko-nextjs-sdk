@@ -366,6 +366,72 @@ Cancels an event.
 - `oauth`: The OAuth token data
 - Returns: A promise with the saved event data.
 
+### Products
+
+#### `list(params = {}, oauth = null)`
+
+Fetches a list of all products.
+
+- `params`: Optional query parameters to filter the list of products.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all products.
+
+#### `listWithFilters(params = {}, oauth = null)`
+
+Fetches a filtered list of products with advanced filtering options.
+
+- `params`: The filter parameters for the products query (includes pagination support).
+- `oauth`: The OAuth token data
+- Returns: A promise with the filtered list of products.
+
+#### `get(vendorSlug: string, productSlug: string, params = {}, oauth = null)`
+
+Fetches a single product by vendor and product slug.
+
+- `vendorSlug`: The slug of the vendor
+- `productSlug`: The slug of the product
+- `params`: Optional API parameters
+- `oauth`: The OAuth token data
+- Returns: A promise with the product data.
+
+#### `getById(id: number, params = {}, oauth = null)`
+
+Fetches a single product by its unique ID.
+
+- `id`: The unique ID of the product to retrieve
+- `params`: Optional API parameters
+- `oauth`: The OAuth token data
+- Returns: A promise with the product data.
+
+#### `getBySlug(slug: string, params = {}, oauth = null)`
+
+Fetches a single product by its slug.
+
+- `slug`: The slug of the product to retrieve
+- `params`: Optional API parameters
+- `oauth`: The OAuth token data
+- Returns: A promise with the product data.
+
+#### `latest(count = 3, params = {}, oauth = null)`
+
+Fetches the most recently added products.
+
+- `count`: The number of products to retrieve (default = 3)
+- `params`: Optional API parameters
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of latest products.
+
+#### `variantLookup(id: number, code: string, oauth = null)`
+
+Looks up a product variant by code.
+
+- `id`: Product ID
+- `code`: Variant code (e.g., '1.4-2.12-6.7')
+- `oauth`: The OAuth token data
+- Returns: A promise with the product variant data.
+
+
+
 ### Tags
 
 #### `list(params = [])`
