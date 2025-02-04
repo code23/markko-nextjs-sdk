@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.0.0-alpha.xx]-2025-02-04
+
+### Added
+
+- Products API endpoints:
+  - List products
+  - List products with filters
+  - Get product by vendor and product slug
+  - Get product by ID
+  - Get product by slug
+  - Get latest products
+  - Get product variant lookup
+
+
 ## [1.0.0-alpha.25]-2025-02-03
 
 ### Added

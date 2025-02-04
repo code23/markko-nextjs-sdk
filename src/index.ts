@@ -10,6 +10,7 @@ import { DonationsAPI } from './api/donations';
 import { EventsAPI } from './api/events';
 import { TagsAPI } from './api/tags';
 import { VendorsAPI } from './api/vendors';
+import { ProductsAPI } from './api/products';
 
 export class MarkkoSDK {
   private authService: AuthService;
@@ -21,6 +22,7 @@ export class MarkkoSDK {
   public charities : CharitiesAPI;
   public donations: DonationsAPI;
   public events: EventsAPI;
+  public products: ProductsAPI;
   public tags: TagsAPI;
   public vendors: VendorsAPI;
 
@@ -34,6 +36,7 @@ export class MarkkoSDK {
     this.charities = new CharitiesAPI(config , this.authService);
     this.donations = new DonationsAPI(config, this.authService);
     this.events = new EventsAPI(config, this.authService);
+    this.products = new ProductsAPI(config, this.authService);
     this.tags = new TagsAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
   }
