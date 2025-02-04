@@ -430,7 +430,39 @@ Looks up a product variant by code.
 - `oauth`: The OAuth token data
 - Returns: A promise with the product variant data.
 
+### Reviews
 
+#### `list(params = {}, oauth = null)`
+
+Fetches a list of all reviews.
+
+- `params`: Optional query parameters to filter the list of reviews.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all reviews.
+
+#### `create(data: Record<string, any>, oauth = null)`
+
+Creates a new review.
+
+- `data`: Object containing the review data
+- `oauth`: The OAuth token data
+- Returns: A promise with the created review data.
+
+#### `update(data: Record<string, any>, oauth = null)`
+
+Updates an existing review.
+
+- `data`: Object containing the updated review data
+- `oauth`: The OAuth token data
+- Returns: A promise with the updated review data.
+
+#### `delete(id: number, oauth = null)`
+
+Deletes an existing review.
+
+- `id`: The ID of the review to delete
+- `oauth`: The OAuth token data
+- Returns: A promise with the deleted review data.
 
 ### Tags
 
