@@ -9,6 +9,7 @@ import { CharitiesAPI } from './api/charities';
 import { DonationsAPI } from './api/donations';
 import { EventsAPI } from './api/events';
 import { ProductsAPI } from './api/products';
+import { ReviewsAPI } from './api/reviews';
 import { TagsAPI } from './api/tags';
 import { VendorsAPI } from './api/vendors';
 
@@ -23,6 +24,7 @@ export class MarkkoSDK {
   public donations: DonationsAPI;
   public events: EventsAPI;
   public products: ProductsAPI;
+  public reviews: ReviewsAPI;
   public tags: TagsAPI;
   public vendors: VendorsAPI;
 
@@ -37,6 +39,7 @@ export class MarkkoSDK {
     this.donations = new DonationsAPI(config, this.authService);
     this.events = new EventsAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
+    this.reviews = new ReviewsAPI(config, this.authService);
     this.tags = new TagsAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
   }
