@@ -95,7 +95,7 @@ export class MessagesAPI extends BaseAPI {
 
   /**
    * Send a message
-   * @param params - The parameters for the message
+   * @param params - The parameters for the message (should include channel_name)
    * @param oauth - The OAuth token data
    * @returns The message data
    */
