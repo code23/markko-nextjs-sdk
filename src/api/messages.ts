@@ -5,6 +5,7 @@ export class MessagesAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
     super(config, authService);
   }
+
   /**
    * Get a list of channels
    * @param params - The query parameters to filter the channels
@@ -26,6 +27,7 @@ export class MessagesAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }

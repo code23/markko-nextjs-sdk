@@ -6,7 +6,7 @@ export class ProductsAPI extends BaseAPI {
     super(config, authService);
   }
 
-    /**
+  /**
    * Get a list of products
    * @param params - The query parameters to filter the products
    * @param oauth - The OAuth token data
@@ -73,8 +73,9 @@ export class ProductsAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
-      const response = await this.axiosInstance.get(url, config);
-      return response.data;
+
+    const response = await this.axiosInstance.get(url, config);
+    return response.data;
   }
 
   /**
@@ -93,10 +94,10 @@ export class ProductsAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
-      const response = await this.axiosInstance.get(url, config);
-      return response.data;
-}
 
+    const response = await this.axiosInstance.get(url, config);
+    return response.data;
+}
 
   /**
    * Get a single product by ID
@@ -118,7 +119,6 @@ export class ProductsAPI extends BaseAPI {
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
-
 
   /**
    * Get a single product by slug
@@ -158,11 +158,13 @@ export class ProductsAPI extends BaseAPI {
         ...params
       }
     };
+
     if (oauth) {
       config.headers = {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }

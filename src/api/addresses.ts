@@ -117,7 +117,6 @@ export class AddressesAPI extends BaseAPI {
     return response.data;
   }
 
-
   /**
    * Set an address as the default
    * @param id - The ID of the address to set as default
