@@ -262,11 +262,13 @@ Fetches a single category by its slug.
 #### `list(params = [])`
 
 Fetches a list of all charities.
+
 - `params`: Optional query parameters to filter the list of charities.
 - `oauth`: The OAuth token data
 - Returns: A promise with the list of all charities.
 
 #### `get(id: number, params = {})`
+
 Fetches the details of a specific charity by its unique ID.
 
 - `id`: (Required) The unique ID of the charity to retrieve.
@@ -365,6 +367,54 @@ Cancels an event.
 - `data`: An object containing the event data to be saved.
 - `oauth`: The OAuth token data
 - Returns: A promise with the saved event data.
+
+### Messages
+
+#### `getAllChannels(params = {}, oauth = null)`
+
+Fetches a list of all messaging channels.
+
+- `params`: Optional query parameters to filter the list of channels.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all channels.
+
+#### `getChannel(channelId: string, params = {}, oauth = null)`
+
+Fetches a single channel by its unique ID.
+
+- `channelId`: The unique ID of the channel to retrieve.
+- `params`: Optional query parameters (includes pagination settings).
+- `oauth`: The OAuth token data
+- Returns: A promise with the channel data and messages.
+
+#### `loadMoreMessages(channelId: string, params = {}, oauth = null)`
+
+Loads more messages for a specific channel.
+
+- `channelId`: The ID of the channel to load messages from.
+- `params`: Pagination parameters (page, paginate).
+- `oauth`: The OAuth token data
+- Returns: A promise with the messages data.
+
+#### `sendMessage(params = {}, oauth = null)`
+
+Sends a new message.
+
+- `params`: Object containing message data:
+  - `order_id`: Optional order ID reference
+  - `event_id`: Optional event ID reference
+  - `is_update`: Boolean flag for update messages
+  - Additional message parameters as needed
+- `oauth`: The OAuth token data
+- Returns: A promise with the sent message data.
+
+#### `closeChannel(channelId: string, oauth = null)`
+
+Closes a messaging channel.
+
+- `channelId`: The ID of the channel to close.
+- `oauth`: The OAuth token data
+- Returns: A promise with the response data from closing the channel.
 
 ### Products
 
