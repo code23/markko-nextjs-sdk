@@ -7,13 +7,11 @@ export class UsersAPI extends BaseAPI {
   }
 
   /**
-   * Retrieve user by ID
-   * @param id Optional user ID
-   * @param params Optional query parameters
+   * Retrieve the currently authenticated user
    * @param oauth Optional OAuth token data
    * @returns The user data
    */
-  async get(id: string, oauth: TokenData | null = null) {
+  async get(oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/user`;
     const config: any = {
       params: {
@@ -26,6 +24,7 @@ export class UsersAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
@@ -102,8 +101,7 @@ export class UsersAPI extends BaseAPI {
   }
 
   /**
-   * Deletes the user from the system.
-   * This method will also clear the session data upon successful deletion.
+   * Deletes the currently authenticated user.
    * @param oauth - The OAuth token data (optional) for authentication.
    * @returns Promise<any> containing the response data from the deletion operation.
    * @throws Error if the API call fails.
@@ -117,6 +115,7 @@ export class UsersAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.delete(url, config);
     return response.data;
   }
@@ -136,6 +135,7 @@ export class UsersAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
@@ -196,6 +196,7 @@ export class UsersAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.post(url, config);
     return response.data;
   }
@@ -215,6 +216,7 @@ export class UsersAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }

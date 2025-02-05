@@ -532,12 +532,10 @@ The Users API provides endpoints for managing user accounts, including user regi
 
 #### API Methods
 
-##### `get(params = {}, oauth: TokenData | null = null)`
+##### `get(oauth: TokenData | null = null)`
 
-Retrieves user data by ID.
+Retrieves the currently authenticated user.
 
-- `params`: Optional object containing query parameters
-  - `with`: Include related resources (e.g., 'profile')
 - `oauth`: The OAuth token data
 - Returns: Promise with the user data
 
@@ -552,7 +550,7 @@ Creates a new user.
 
 ##### `delete(oauth: TokenData | null = null)`
 
-Deletes the user from the system.
+Deletes the currently authenticated user.
 
 - `oauth`: The OAuth token data (optional) for authentication
 - Returns: Promise with the response data from the deletion operation
