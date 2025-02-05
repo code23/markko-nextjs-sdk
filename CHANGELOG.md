@@ -10,9 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Users API endpoints:
-  - Retrieve user by ID
+  - Retrieve currently authenticated user
   - Create a new user
-  - Delete user from the system
+  - Delete currently authenticated user
   - Check if an email exists in the team
   - Update user profile
   - Send email verification link
