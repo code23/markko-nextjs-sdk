@@ -102,7 +102,6 @@ export class MessagesAPI extends BaseAPI {
       order_id?: string | null;
       event_id?: string | null;
       is_update?: boolean;
-      [key: string]: any;
     } = {},
     oauth: TokenData | null = null
   ) {
