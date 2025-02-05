@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-alpha.xx]-2025-02-05
+
+### Added
+
+- Users API endpoints:
+  - Retrieve currently authenticated user
+  - Create a new user
+  - Delete currently authenticated user
+  - Check if an email exists in the team
+  - Update user profile
+  - Send email verification link
+  - Retrieve user's wishlist
+  - Add product to user's wishlist
+  - Remove product from user's wishlist
+
 ## [1.0.0-alpha.28]-2025-02-05
 
 ### Added

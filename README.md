@@ -524,6 +524,86 @@ Fetches a list of all tags.
 - `oauth`: The OAuth token data
 - Returns: A promise with the list of all tags.
 
+### Users
+
+#### Overview
+
+The Users API provides endpoints for managing user accounts, including user registration, profile management, email verification, and wishlist functionality.
+
+#### API Methods
+
+##### `get(oauth: TokenData | null = null)`
+
+Retrieves the currently authenticated user.
+
+- `oauth`: The OAuth token data
+- Returns: Promise with the user data
+
+##### `create(data: { first_name: string; last_name: string; email: string; password: string; password_confirmation: string; terms: boolean; currency_id: string; phone?: string; }, oauth: TokenData | null = null)`
+
+Creates a new user.
+
+- `data`: Object containing user registration data
+- `oauth`: The OAuth token data
+- Returns: Promise with success or failure message
+- Throws: Error if the API call fails or validation fails
+
+##### `delete(oauth: TokenData | null = null)`
+
+Deletes the currently authenticated user.
+
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the response data from the deletion operation
+- Throws: Error if the API call fails
+
+##### `emailExistsInTeam(email: string, oauth: TokenData | null = null)`
+
+Checks if an email exists in the team.
+
+- `email`: The email address to check
+- `oauth`: The OAuth token data (optional)
+- Returns: Promise with a boolean indicating if the email exists
+
+##### `updateProfile(data: { first_name: string; last_name: string; phone?: string; password?: string; password_confirmation?: string; currency_id: string; }, oauth: TokenData | null = null)`
+
+Updates the user's profile with the provided data.
+
+- `data`: Object containing user profile data to update
+- `oauth`: The OAuth token data (optional)
+- Returns: Promise with the updated user data
+- Throws: Error if the API call fails or if validation fails
+
+##### `sendEmailVerificationLink(oauth: TokenData | null = null)`
+
+Sends an email verification link to the user.
+
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the result of the operation, typically a success message
+- Throws: Error if the API call fails
+
+##### `wishlist(oauth: TokenData | null = null)`
+
+Retrieves the user's wishlist.
+
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the response data containing the user's wishlist items
+
+##### `wishlistAdd(id: number, oauth: TokenData | null = null)`
+
+Adds a product to the authenticated user's wishlist.
+
+- `id`: The ID of the product to add to the wishlist
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the updated wishlist
+
+##### `wishlistRemove(id: number, oauth: TokenData | null = null)`
+
+Removes a product from the authenticated user's wishlist.
+
+- `id`: The ID of the product to remove from the wishlist
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the response data indicating the result of the operation
+
 ### Vendors
 
 #### `list(params = {})`
