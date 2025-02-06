@@ -7,19 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0-alpha.xx]-2025-02-06
 
-### Added
+### Updated
 
-- Messages API endpoints:
-  - Get all channels
-  - Get single channel
-  - Load more messages
-  - Send message
-    - Updated Parameters:
-    - `channel_name` (required if `is_update` is false)
-    - `recipient_id` (required)
-    - `message.body` (required)
-    - Optional: `order_id`, `event_id`, `files`, `meta`
-  - Close channel
+- Send message
+  - Updated Parameters:
+  - `channel_name` (required if `is_update` is false)
+  - `recipient_id` (required)
+  - `message.body` (required)
+  - Optional: `order_id`, `event_id`, `files`, `meta`
 
 ## [1.0.0-alpha.29]-2025-02-05
 
