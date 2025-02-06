@@ -104,6 +104,8 @@ export class MessagesAPI extends BaseAPI {
       order_id?: string | null;
       event_id?: string | null;
       is_update?: boolean;
+      channel_name?: string | null;
+      message?: string | null;
     } = {},
     oauth: TokenData | null = null
   ) {
@@ -113,6 +115,8 @@ export class MessagesAPI extends BaseAPI {
         order_id: null,
         event_id: null,
         is_update: false,
+        channel_name: null,
+        message: null,
         ...params,
       },
     };
