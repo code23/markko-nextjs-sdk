@@ -128,9 +128,11 @@ export class MessagesAPI extends BaseAPI {
     if (!params.recipient_id) {
       throw new Error("recipient_id is required");
     }
+
     if (!params.message || !params.message.body) {
       throw new Error("message.body is required");
     }
+
     const url = `${this.config.apiBasePath}/api/v1/messaging`;
     const config: any = {
       params: {

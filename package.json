@@ -1,6 +1,6 @@
 {
   "name": "@meetmarkko/markko-nextjs-sdk",
-  "version": "1.0.0-alpha.29",
+  "version": "1.0.0-alpha.30",
   "description": "Next.js SDK for Markko API integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
