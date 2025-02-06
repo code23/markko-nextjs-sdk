@@ -103,17 +103,44 @@ export class MessagesAPI extends BaseAPI {
     params: {
       order_id?: string | null;
       event_id?: string | null;
-      is_update?: boolean;
-    } = {},
+      is_update: boolean;
+      channel_name?: string | null;
+      recipient_id: string;
+      message: {
+        body: string;
+        files?: any[] | null;
+      };
+      meta?: any[];
+    } = {
+      is_update: false,
+      message: {
+        body: "",
+        files: null,
+      },
+      recipient_id: "",
+    },
     oauth: TokenData | null = null
   ) {
+    if (!params.is_update && !params.channel_name) {
+      throw new Error("channel_name is required when is_update is false");
+    }
+
+    if (!params.recipient_id) {
+      throw new Error("recipient_id is required");
+    }
+    if (!params.message || !params.message.body) {
+      throw new Error("message.body is required");
+    }
     const url = `${this.config.apiBasePath}/api/v1/messaging`;
     const config: any = {
       params: {
-        order_id: null,
-        event_id: null,
-        is_update: false,
-        ...params,
+        order_id: params.order_id,
+        event_id: params.event_id,
+        is_update: params.is_update,
+        channel_name: params.channel_name,
+        recipient_id: params.recipient_id,
+        message: params.message,
+        meta: params.meta,
       },
     };
 

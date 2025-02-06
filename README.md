@@ -403,8 +403,13 @@ Sends a new message.
 - `params`: Object containing message data:
   - `order_id`: Optional order ID reference
   - `event_id`: Optional event ID reference
-  - `is_update`: Boolean flag for update messages
-  - Additional message parameters as needed
+  - `is_update`: Boolean flag for update messages (required to be false if `channel_name` is not provided)
+  - `channel_name`: Optional name of the channel to send the message to (required if `is_update` is false)
+  - `recipient_id`: The ID of the recipient (required)
+  - `message`: Object containing the message details:
+    - `body`: The content of the message (required)
+    - `files`: Optional array of files to attach
+  - `meta`: Optional metadata related to the message
 - `oauth`: The OAuth token data
 - Returns: A promise with the sent message data.
 
