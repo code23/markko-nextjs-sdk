@@ -30,7 +30,8 @@ export class BaseAPI {
     this.axiosInstance.interceptors.request.use(
       async (config) => {
         // Get the oauth token from config if it exists
-        const oauthToken = config.headers['X-OAuth-Token'];
+        const oauthToken = config.headers?.['X-OAuth-Token'];
+
         if (oauthToken) {
           // Remove the temporary header
           delete config.headers['X-OAuth-Token'];
@@ -42,6 +43,7 @@ export class BaseAPI {
           const token = await this.authService.getAccessToken(null);
           config.headers.Authorization = `Bearer ${token}`;
         }
+
         return config;
       },
       (error) => {
