@@ -544,6 +544,25 @@ Fetches a specific specification by code.
 - `oauth`: The OAuth token data (optional) for authentication
 - Returns: Promise with the data from the response
 
+### Specification Groups
+
+#### `list(params = {}, oauth = null)`
+
+Fetches a list of all specification groups.
+
+- `params`: Optional query parameters to filter the list of specification groups.
+- `oauth`: The OAuth token data
+- Returns: A promise with the list of all specification groups.
+
+#### `get(id: string, params = {}, oauth = null)`
+
+Fetches a specific specification group by ID.
+
+- `id`: The ID of the specification group to retrieve.
+- `params`: Optional query parameters to filter the specification group.
+- `oauth`: The OAuth token data
+- Returns: A promise with the specification group data.
+
 ### Tags
 
 #### `list(params = [])`
