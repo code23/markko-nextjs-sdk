@@ -5,6 +5,7 @@ export class SpecificationGroupsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
     super(config, authService);
   }
+
   /**
    * Get a list of specification groups
    * @param params - The query parameters to filter the specification groups

@@ -5,13 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0-alpha.xx]-2025-02-07
+## [1.0.0-alpha.35]-2025-02-07
 
 ### Added
 
 - Specification Groups API endpoints:
   - Get a list of specification groups
   - Get a specific specification group by ID
+
+## [1.0.0-alpha.34]-2025-02-07
+
+### Fixed
+
+- Fix integrity error
 
 ## [1.0.0-alpha.33]-2025-02-07
 
