@@ -5,6 +5,7 @@ export class SpecificationsAPI extends BaseAPI {
   constructor(config: any, authservice: AuthService) {
     super(config, authservice);
   }
+
   /**
    * Retrieve a list of specifications
    * @param params - The parameters to filter the specifications
@@ -20,9 +21,11 @@ export class SpecificationsAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
+
   /**
    * Retrieve a specification by its code
    * @param code - The code of the specification to retrieve
@@ -38,6 +41,7 @@ export class SpecificationsAPI extends BaseAPI {
         "X-OAuth-Token": JSON.stringify(oauth),
       };
     }
+    
     const response = await this.axiosInstance.get(url, config);
     return response.data;
   }
