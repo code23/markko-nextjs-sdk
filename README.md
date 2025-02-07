@@ -519,6 +519,31 @@ Deletes an existing review.
 - `oauth`: The OAuth token data
 - Returns: A promise with the deleted review data.
 
+### Specifications
+
+#### Overview
+
+The Specifications API provides endpoints for managing specifications, including fetching a list of specifications and retrieving specific specifications by their code.
+
+#### API Methods
+
+##### `list(params: {}, oauth: TokenData | null = null)`
+
+Fetches a list of specifications.
+
+- `params`: The query parameters for the request
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the data from the response
+
+##### `get(code: string, params: {}, oauth: TokenData | null = null)`
+
+Fetches a specific specification by code.
+
+- `code`: The code of the specification to retrieve
+- `params`: The query parameters for the request
+- `oauth`: The OAuth token data (optional) for authentication
+- Returns: Promise with the data from the response
+
 ### Tags
 
 #### `list(params = [])`

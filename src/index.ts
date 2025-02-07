@@ -11,6 +11,7 @@ import { EventsAPI } from "./api/events";
 import { MessagesAPI } from "./api/messages";
 import { ProductsAPI } from "./api/products";
 import { ReviewsAPI } from "./api/reviews";
+import { SpecificationsAPI } from "./api/specifications";
 import { TagsAPI } from "./api/tags";
 import { UsersAPI } from "./api/users";
 import { VendorsAPI } from "./api/vendors";
@@ -28,6 +29,7 @@ export class MarkkoSDK {
   public messages: MessagesAPI;
   public products: ProductsAPI;
   public reviews: ReviewsAPI;
+  public specifications: SpecificationsAPI;
   public tags: TagsAPI;
   public users: UsersAPI;
   public vendors: VendorsAPI;
@@ -45,6 +47,7 @@ export class MarkkoSDK {
     this.messages = new MessagesAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
     this.reviews = new ReviewsAPI(config, this.authService);
+    this.specifications = new SpecificationsAPI(config, this.authService);
     this.tags = new TagsAPI(config, this.authService);
     this.users = new UsersAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
