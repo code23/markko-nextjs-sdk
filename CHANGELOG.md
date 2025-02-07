@@ -13,6 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fetch a list of specifications
   - Fetch a specific specification by code
 
+## [1.0.0-alpha.32]-2025-02-07
+
+### Fixed
+
+- Fixed various API endpoints to handle the oauth token properly at POST, PUT and PATCH requests
+
+## [1.0.0-alpha.31]-2025-02-07
+
+### Fixed
+
+- Fixed the `sendMessage` method in the Messages API to handle the oauth token properly
+- Fixed the `closeChannel` method in the Messages API to handle the oauth token properly
+
 ## [1.0.0-alpha.30]-2025-02-06
 
 ### Updated

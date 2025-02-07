@@ -52,6 +52,30 @@ export class CharitiesAPI extends BaseAPI {
     return response.data;
   }
 
+  /**
+   * Get a single charity by slug
+   * @param slug - The slug of the charity
+   * @param params - The query parameters to filter the charity
+   * @param oauth - The OAuth token data
+   * @returns A single charity
+   */
+  async getBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
+    const defaultParams = {
+      is_active: 1
+    };
+    const url = `${this.config.apiBasePath}/api/v1/charities/slug/${slug}`;
+    const config: any = { params: { ...defaultParams, ...params } };
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.get(url, config);
+    return response.data;
+  }
+
    /**
    * Save a new charity
    * @param data The charity data to be saved
@@ -60,7 +84,7 @@ export class CharitiesAPI extends BaseAPI {
    * @returns Promise<boolean> Returns true if successful
    */
    async save(data: Record<string, any>, oauth: TokenData | null = null): Promise<boolean> {
-    const config: any = { data };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
@@ -86,30 +110,6 @@ export class CharitiesAPI extends BaseAPI {
         );
       }
     }
-  }
-
-  /**
-   * Get a single charity by slug
-   * @param slug - The slug of the charity
-   * @param params - The query parameters to filter the charity
-   * @param oauth - The OAuth token data
-   * @returns A single charity
-   */
-  async getBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
-    const defaultParams = {
-      is_active: 1
-    };
-    const url = `${this.config.apiBasePath}/api/v1/charities/slug/${slug}`;
-    const config: any = { params: { ...defaultParams, ...params } };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
-    }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
    /**

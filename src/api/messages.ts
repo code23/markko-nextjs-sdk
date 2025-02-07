@@ -134,17 +134,7 @@ export class MessagesAPI extends BaseAPI {
     }
 
     const url = `${this.config.apiBasePath}/api/v1/messaging`;
-    const config: any = {
-      params: {
-        order_id: params.order_id,
-        event_id: params.event_id,
-        is_update: params.is_update,
-        channel_name: params.channel_name,
-        recipient_id: params.recipient_id,
-        message: params.message,
-        meta: params.meta,
-      },
-    };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
@@ -152,7 +142,7 @@ export class MessagesAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.post(url, config);
+    const response = await this.axiosInstance.post(url, params, config);
     return response.data;
   }
 
@@ -172,7 +162,7 @@ export class MessagesAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 }

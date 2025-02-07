@@ -16,7 +16,7 @@ export class AddressesAPI extends BaseAPI {
   async create(data: Record<string, any>, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/address`;
-      const config: any = { data };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -133,7 +133,7 @@ export class AddressesAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 
@@ -147,7 +147,7 @@ export class AddressesAPI extends BaseAPI {
   async update(id: string, data: Record<string, any>, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/address/${id}`;
-      const config: any = { data };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {

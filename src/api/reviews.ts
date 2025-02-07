@@ -40,13 +40,15 @@ export class ReviewsAPI extends BaseAPI {
    */
   async create(data: Record<string, any>, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/reviews`;
-    const config: any = { data };
+    const config: any = {};
 
     if (oauth) {
-      config.headers = { 'X-OAuth-Token': JSON.stringify(oauth) };
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
     }
 
-    const response = await this.axiosInstance.post(url, config);
+    const response = await this.axiosInstance.post(url, data, config);
     return response.data;
   }
 
@@ -58,13 +60,15 @@ export class ReviewsAPI extends BaseAPI {
    */
   async update(data: Record<string, any>, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/reviews`;
-    const config: any = { data };
+    const config: any = {};
 
     if (oauth) {
-      config.headers = { 'X-OAuth-Token': JSON.stringify(oauth) };
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, data, config);
     return response.data;
   }
 
@@ -79,7 +83,9 @@ export class ReviewsAPI extends BaseAPI {
     const config: any = {};
 
     if (oauth) {
-      config.headers = { 'X-OAuth-Token': JSON.stringify(oauth) };
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
     }
 
     const response = await this.axiosInstance.delete(url, config);

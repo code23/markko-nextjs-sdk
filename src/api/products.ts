@@ -50,7 +50,6 @@ export class ProductsAPI extends BaseAPI {
     return response.data;
   }
 
-
   /**
    * Get a single product by vendor and product slug
    * @param vendorSlug - The slug of the vendor
@@ -97,7 +96,7 @@ export class ProductsAPI extends BaseAPI {
 
     const response = await this.axiosInstance.get(url, config);
     return response.data;
-}
+  }
 
   /**
    * Get a single product by ID

@@ -7,6 +7,25 @@ export class DonationsAPI extends BaseAPI {
   }
 
   /**
+   * @param params - The query parameters to filter the donation
+   * @param oauth - The OAuth token data
+   * @returns A list of Donations
+   */
+  async list(params = [], oauth: TokenData | null = null) {
+    const url = `${this.config.apiBasePath}/api/v1/donations`;
+    const config: any = { params };
+
+    if (oauth) {
+      config.headers = {
+        'X-OAuth-Token': JSON.stringify(oauth)
+      };
+    }
+
+    const response = await this.axiosInstance.get(url, config);
+    return response.data;
+  }
+
+  /**
    * Get a donation by numbers
    * @param number - The donation number to filter by
    * @param params - The query parameters to filter the donation by number
@@ -28,25 +47,6 @@ export class DonationsAPI extends BaseAPI {
   }
 
   /**
-   * @param params - The query parameters to filter the donation
-   * @param oauth - The OAuth token data
-   * @returns A list of Donations
-   */
-  async list(params = [], oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/donations`;
-    const config: any = { params };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
-    }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
-  }
-
-  /**
    * Process a payment for a specific charity
    * @param id - The ID of the charity to donate to
    * @param data - An object containing the donation details, such as amount, donor information, etc.
@@ -55,7 +55,7 @@ export class DonationsAPI extends BaseAPI {
    */
   async save(id: string, data: Record<string, any>, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/charities/${id}/donate`;
-    const config: any = { data };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
