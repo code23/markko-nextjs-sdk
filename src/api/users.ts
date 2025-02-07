@@ -76,19 +76,18 @@ export class UsersAPI extends BaseAPI {
     }
 
     const url = `${this.config.apiBasePath}/api/v1/customers/register`;
-    const config: any = {
-      params: {
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        phone: data.phone,
-        password: data.password,
-        password_confirmation: data.password_confirmation,
-        terms: data.terms,
-        type: "customer",
-        currency_id: data.currency_id,
-      },
+    const params = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      terms: data.terms,
+      type: "customer",
+      currency_id: data.currency_id,
     };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
@@ -96,7 +95,7 @@ export class UsersAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.post(url, config);
+    const response = await this.axiosInstance.post(url, params, config);
     return response.data;
   }
 
@@ -159,16 +158,15 @@ export class UsersAPI extends BaseAPI {
     oauth: TokenData | null = null
   ) {
     const url = `${this.config.apiBasePath}/api/v1/customers`;
-    const config: any = {
-      params: {
-        first_name: data.first_name,
-        last_name: data.last_name,
-        phone: data.phone,
-        password: data.password,
-        password_confirmation: data.password_confirmation,
-        currency_id: data.currency_id,
-      },
+    const params = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      phone: data.phone,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      currency_id: data.currency_id,
     };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
@@ -176,7 +174,7 @@ export class UsersAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, params, config);
     return response.data.data;
   }
 
@@ -197,7 +195,7 @@ export class UsersAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.post(url, config);
+    const response = await this.axiosInstance.post(url, {}, config);
     return response.data;
   }
 
@@ -238,7 +236,7 @@ export class UsersAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 
@@ -259,7 +257,7 @@ export class UsersAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 }

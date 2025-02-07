@@ -107,7 +107,7 @@ export class VendorsAPI extends BaseAPI {
   async save(data: Record<string, any>, oauth: TokenData | null = null): Promise<boolean> {
     try {
       const url = `${this.config.apiBasePath}/api/v1/vendors/register`;
-      const config: any = { data };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -151,7 +151,7 @@ export class VendorsAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 
@@ -171,7 +171,7 @@ export class VendorsAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.patch(url, config);
+    const response = await this.axiosInstance.patch(url, {}, config);
     return response.data;
   }
 

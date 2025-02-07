@@ -57,7 +57,7 @@ export class EventsAPI extends BaseAPI {
    */
   async save(data: Record<string, any>, oauth: TokenData | null = null): Promise<boolean> {
     const url = `${this.config.apiBasePath}/api/v1/events`;
-    const config: any = { data };
+    const config: any = {};
 
     if (oauth) {
       config.headers = {
@@ -65,7 +65,7 @@ export class EventsAPI extends BaseAPI {
       };
     }
 
-    const response = await this.axiosInstance.post(url, config);
+    const response = await this.axiosInstance.post(url, data, config);
     return response.data;
   }
 
