@@ -303,6 +303,16 @@ Check if a charity (store) name is available.
 - `oauth`: The OAuth token data
 - Returns: Promise with a boolean indicating if the name is unique
 
+### Currencies
+
+#### `list(params = {}, oauth = null)`
+
+Fetches a list of available currencies.
+
+- `params`: Optional object containing query parameters (default: `{ is_enabled: true }`)
+- `oauth`: The OAuth token data (default: `null`)
+- Returns: Promise with the API response containing a list of currencies
+
 ### Donations
 
 #### `getByNumber(number: string, params = [])`
