@@ -12,9 +12,12 @@ export class CurrenciesAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A list of available currencies
    */
-  async list(params = { is_enabled: true }, oauth: TokenData | null = null) {
+  async list(params = {}, oauth: TokenData | null = null) {
+    const defaultParams = {
+      is_enabled: true,
+    };
     const url = `${this.config.apiBasePath}/api/v1/settings/currencies`;
-    const config: any = { params };
+    const config: any = { params: { ...defaultParams, ...params } };
 
     if (oauth) {
       config.headers = {
