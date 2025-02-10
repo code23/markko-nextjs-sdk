@@ -1,7 +1,7 @@
 import { AuthService, TokenData } from "../services/auth";
 import { BaseAPI } from "./base";
 
-export class CurrencyAPI extends BaseAPI {
+export class CurrenciesAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
     super(config, authService);
   }

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Currency API endpoints:
+- Currencies API endpoints:
   - Retrieve available currencies
 
 ## [1.0.0-alpha.35]-2025-02-07
