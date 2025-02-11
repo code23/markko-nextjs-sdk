@@ -309,7 +309,7 @@ Check if a charity (store) name is available.
 
 Fetches a list of available currencies.
 
-- `params`: Optional object containing query parameters (default: `{ is_enabled: true }`)
+- `params`: Optional object containing query parameters (default: `{ is_enabled: 1 }`)
 - `oauth`: The OAuth token data (default: `null`)
 - Returns: Promise with the API response containing a list of currencies
 
