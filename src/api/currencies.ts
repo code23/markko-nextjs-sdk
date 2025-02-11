@@ -14,7 +14,7 @@ export class CurrenciesAPI extends BaseAPI {
    */
   async list(params = {}, oauth: TokenData | null = null) {
     const defaultParams = {
-      is_enabled: true,
+      is_enabled: 1,
     };
     const url = `${this.config.apiBasePath}/api/v1/settings/currencies`;
     const config: any = { params: { ...defaultParams, ...params } };
