@@ -737,6 +737,16 @@ Registers a new vendor with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
+
+### reference values
+
+#### `byCategory(params = {}, oauth = null)`
+Fetches reference values based on the given category.
+
+params: Optional object containing query parameters
+oauth: The OAuth token data (optional)
+Returns: Promise with the API response
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:

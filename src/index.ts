@@ -17,6 +17,7 @@ import { SpecificationGroupsAPI } from "./api/specification-groups";
 import { TagsAPI } from "./api/tags";
 import { UsersAPI } from "./api/users";
 import { VendorsAPI } from "./api/vendors";
+import { ReferenceValuesAPI } from "./api/ReferenceValues";
 
 export class MarkkoSDK {
   private authService: AuthService;
@@ -37,6 +38,7 @@ export class MarkkoSDK {
   public tags: TagsAPI;
   public users: UsersAPI;
   public vendors: VendorsAPI;
+  public referenceValues : ReferenceValuesAPI;
 
   constructor(config: MarkkoConfig) {
     this.authService = new AuthService(config);
@@ -60,6 +62,7 @@ export class MarkkoSDK {
     this.tags = new TagsAPI(config, this.authService);
     this.users = new UsersAPI(config, this.authService);
     this.vendors = new VendorsAPI(config, this.authService);
+    this.referenceValues = new ReferenceValuesAPI(config , this.authService)
   }
 
   async getAccessToken(): Promise<string> {
