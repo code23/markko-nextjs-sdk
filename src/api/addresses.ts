@@ -28,7 +28,11 @@ export class AddressesAPI extends BaseAPI {
 
       // Check if the response contains an error
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
@@ -68,19 +72,26 @@ export class AddressesAPI extends BaseAPI {
       const response = await this.axiosInstance.delete(url, config);
 
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to delete an address.",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+      throw new APIError(
+        "A problem was encountered during the request to delete an address.",
+        422
+      );
     }
   }
 
@@ -105,19 +116,26 @@ export class AddressesAPI extends BaseAPI {
       const response = await this.axiosInstance.get(url, config);
 
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to find an address by postcode",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+      throw new APIError(
+        "A problem was encountered during the request to find an address by postcode",
+        422
+      );
     }
   }
 
@@ -160,19 +178,26 @@ export class AddressesAPI extends BaseAPI {
       const response = await this.axiosInstance.get(url, config);
 
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to find nearby models by postcode",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+      throw new APIError(
+        "A problem was encountered during the request to find nearby models by postcode",
+        422
+      );
     }
   }
 
@@ -196,19 +221,26 @@ export class AddressesAPI extends BaseAPI {
       const response = await this.axiosInstance.patch(url, {}, config);
 
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to set an address to default",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+      throw new APIError(
+        "A problem was encountered during the request to set an address to default",
+        422
+      );
     }
   }
 
@@ -238,19 +270,26 @@ export class AddressesAPI extends BaseAPI {
 
       // Check if the response contains an error
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to update an address.",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+      throw new APIError(
+        "A problem was encountered during the request to update an address.",
+        422
+      );
     }
   }
 }
