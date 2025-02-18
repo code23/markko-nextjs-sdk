@@ -32,15 +32,19 @@ export class AddressesAPI extends BaseAPI {
       }
 
       return response.data;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      if (error.response?.data) {
         throw new APIError(
-          "A problem was encountered during the request to create a new address.",
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+
+      throw new APIError(
+        "A problem was encountered during the request to create a new address.",
+        422
+      );
     }
   }
 
