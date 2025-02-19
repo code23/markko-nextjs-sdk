@@ -18,7 +18,7 @@ export class AuthAPI extends BaseAPI {
       client_secret: this.config.passwordSecret,
       username: data.email,
       password: data.password,
-       scope: ''
+      scope: ''
     };
     const url = `${this.config.apiBasePath}/oauth/token`;
     const response = await this.axiosInstance.post(url, payload);
