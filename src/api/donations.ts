@@ -92,7 +92,7 @@ export class DonationsAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to create a fetch donation by number.",
+        "A problem was encountered during the request to fetch donation by number.",
         422
       );
     }
