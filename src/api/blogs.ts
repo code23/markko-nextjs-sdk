@@ -1,5 +1,5 @@
-import { BaseAPI } from "./base";
-import { AuthService, TokenData } from "../services/auth";
+import { BaseAPI } from './base';
+import { AuthService, TokenData } from '../services/auth';
 
 export class BlogsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
@@ -18,7 +18,7 @@ export class BlogsAPI extends BaseAPI {
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
@@ -34,14 +34,14 @@ export class BlogsAPI extends BaseAPI {
    */
   async listCategories(params = {}, oauth: TokenData | null = null) {
     const defaultParams = {
-      is_active: 1,
+      is_active: 1
     };
     const url = `${this.config.apiBasePath}/api/v1/blog/categories`;
     const config: any = { params: { ...defaultParams, ...params } };
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
@@ -56,17 +56,13 @@ export class BlogsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A list of blog posts
    */
-  async listPostsByCategory(
-    categoryId: number,
-    params = {},
-    oauth: TokenData | null = null
-  ) {
+  async listPostsByCategory(categoryId: number, params = {}, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/blog/categories/${categoryId}`;
     const config: any = { params };
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
@@ -87,7 +83,7 @@ export class BlogsAPI extends BaseAPI {
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
@@ -102,17 +98,13 @@ export class BlogsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A single blog post
    */
-  async getPostBySlug(
-    slug: string,
-    params = {},
-    oauth: TokenData | null = null
-  ) {
+  async getPostBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
     const url = `${this.config.apiBasePath}/api/v1/blog/posts/slug/${slug}`;
     const config: any = { params };
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
@@ -127,20 +119,16 @@ export class BlogsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A single blog category with its posts
    */
-  async getCategoryBySlug(
-    slug: string,
-    params = {},
-    oauth: TokenData | null = null
-  ) {
+  async getCategoryBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
     const defaultParams = {
-      is_active: 1,
+      is_active: 1
     };
     const url = `${this.config.apiBasePath}/api/v1/blog/categories/slug/${slug}`;
     const config: any = { params: { ...defaultParams, ...params } };
 
     if (oauth) {
       config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+        'X-OAuth-Token': JSON.stringify(oauth)
       };
     }
 
