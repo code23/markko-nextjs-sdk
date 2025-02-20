@@ -1,4 +1,5 @@
 import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 import { BaseAPI } from "./base";
 
 export class UsersAPI extends BaseAPI {
@@ -12,21 +13,45 @@ export class UsersAPI extends BaseAPI {
    * @returns The user data
    */
   async get(oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/user`;
-    const config: any = {
-      params: {
-        with: "profile",
-      },
-    };
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/user`;
+      const config: any = {
+        params: {
+          with: "profile",
+        },
       };
-    }
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve users.",
+        422
+      );
+    }
   }
 
   /**
@@ -49,54 +74,77 @@ export class UsersAPI extends BaseAPI {
     },
     oauth: TokenData | null = null
   ) {
-    const rules: Record<keyof typeof data, (value: any) => true | string> = {
-      first_name: (value) => !!value || "First name is required",
-      last_name: (value) => !!value || "Last name is required",
-      email: (value) =>
-        /\S+@\S+\.\S+/.test(value) || "A valid email is required",
-      password: (value) =>
-        /(?=.*[a-z])(?=.*[A-Z])/.test(value) ||
-        "Password must include at least one upper & lowercase letter",
-      password_confirmation: () => true,
-      terms: (value) => value === true || "Terms must be accepted",
-      currency_id: (value) => !!value || "Currency is required",
-      phone: () => true,
-    };
-
-    const errors = (Object.keys(rules) as (keyof typeof data)[])
-      .map((field) =>
-        rules[field](data[field]) === true
-          ? null
-          : { [field]: rules[field](data[field]) }
-      )
-      .filter(Boolean);
-
-    if (errors.length > 0) {
-      return new Error(JSON.stringify(errors));
-    }
-
-    const url = `${this.config.apiBasePath}/api/v1/customers/register`;
-    const params = {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      email: data.email,
-      phone: data.phone,
-      password: data.password,
-      password_confirmation: data.password_confirmation,
-      terms: data.terms,
-      type: "customer",
-      currency_id: data.currency_id,
-    };
-    const config: any = {};
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const rules: Record<keyof typeof data, (value: any) => true | string> = {
+        first_name: (value) => !!value || "First name is required",
+        last_name: (value) => !!value || "Last name is required",
+        email: (value) =>
+          /\S+@\S+\.\S+/.test(value) || "A valid email is required",
+        password: (value) =>
+          /(?=.*[a-z])(?=.*[A-Z])/.test(value) ||
+          "Password must include at least one upper & lowercase letter",
+        password_confirmation: () => true,
+        terms: (value) => value === true || "Terms must be accepted",
+        currency_id: (value) => !!value || "Currency is required",
+        phone: () => true,
       };
-    }
 
-    const response = await this.axiosInstance.post(url, params, config);
-    return response.data;
+      const errors = (Object.keys(rules) as (keyof typeof data)[])
+        .map((field) =>
+          rules[field](data[field]) === true
+            ? null
+            : { [field]: rules[field](data[field]) }
+        )
+        .filter(Boolean);
+
+      if (errors.length > 0) {
+        return new Error(JSON.stringify(errors));
+      }
+
+      const url = `${this.config.apiBasePath}/api/v1/customers/register`;
+      const params = {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+        terms: data.terms,
+        type: "customer",
+        currency_id: data.currency_id,
+      };
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, params, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to create a new user.",
+        422
+      );
+    }
   }
 
   /**
@@ -106,17 +154,40 @@ export class UsersAPI extends BaseAPI {
    * @throws Error if the API call fails.
    */
   async delete(oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/customers`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/customers`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.delete(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to delete user.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.delete(url, config);
-    return response.data;
   }
 
   /**
@@ -126,17 +197,40 @@ export class UsersAPI extends BaseAPI {
    * @returns The response data indicating if the email exists
    */
   async emailExistsInTeam(email: string, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/tenants/has-user-with-email`;
-    const config: any = { params: { email } };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/tenants/has-user-with-email`;
+      const config: any = { params: { email } };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to check if email already exists.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -157,25 +251,47 @@ export class UsersAPI extends BaseAPI {
     },
     oauth: TokenData | null = null
   ) {
-    const url = `${this.config.apiBasePath}/api/v1/customers`;
-    const params = {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      phone: data.phone,
-      password: data.password,
-      password_confirmation: data.password_confirmation,
-      currency_id: data.currency_id,
-    };
-    const config: any = {};
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/customers`;
+      const params = {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone: data.phone,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+        currency_id: data.currency_id,
       };
-    }
+      const config: any = {};
 
-    const response = await this.axiosInstance.patch(url, params, config);
-    return response.data.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, params, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to update the user's profile.",
+        422
+      );
+    }
   }
 
   /**
@@ -186,17 +302,41 @@ export class UsersAPI extends BaseAPI {
    * @throws Error if the API call fails, providing details about the failure.
    */
   async sendEmailVerificationLink(oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/auth/email/verification-notification/`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/auth/email/verification-notification/`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to sends an email verification link.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.post(url, {}, config);
-    return response.data;
   }
 
   /**
@@ -206,17 +346,39 @@ export class UsersAPI extends BaseAPI {
    * @returns The response data containing the user's wishlist items.
    */
   async wishlist(oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/wishlist`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/wishlist`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve user's wishlist.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -227,17 +389,40 @@ export class UsersAPI extends BaseAPI {
    * @returns Promise<Collection> containing the updated wishlist items after the addition.
    */
   async wishlistAdd(id: number, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/wishlist/add/${id}`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/wishlist/add/${id}`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to add product to wishlist.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, {}, config);
-    return response.data;
   }
 
   /**
@@ -248,16 +433,39 @@ export class UsersAPI extends BaseAPI {
    * @returns The response data indicating the result of the operation, typically a success message.
    */
   async wishlistRemove(id: number, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/wishlist/remove/${id}`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/wishlist/remove/${id}`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to remove product from wishlist.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, {}, config);
-    return response.data;
   }
 }
