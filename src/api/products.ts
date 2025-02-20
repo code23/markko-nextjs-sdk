@@ -1,4 +1,5 @@
 import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 import { BaseAPI } from "./base";
 
 export class ProductsAPI extends BaseAPI {
@@ -13,17 +14,41 @@ export class ProductsAPI extends BaseAPI {
    * @returns A list of products
    */
   async list(params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/products`;
-    const config: any = { params };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/products`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of products.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -32,22 +57,49 @@ export class ProductsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A collection of products, either paginated or non-paginated
    */
-  async listWithFilters(params: Record<string, any> = {}, oauth: TokenData | null = null) {
-    if ('paginate' in params) {
-      params.mpe_paginate = params.paginate;
-      delete params.paginate;
-    }
-    const url = `${this.config.apiBasePath}/api/v1/products/filter`;
-    const config: any = {params};
+  async listWithFilters(
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
+    try {
+      if ("paginate" in params) {
+        params.mpe_paginate = params.paginate;
+        delete params.paginate;
+      }
+      const url = `${this.config.apiBasePath}/api/v1/products/filter`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
-    }
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
 
-    const response = await this.axiosInstance.post(url, config);
-    return response.data;
+      const response = await this.axiosInstance.post(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve filtered products list.",
+        422
+      );
+    }
   }
 
   /**
@@ -64,17 +116,40 @@ export class ProductsAPI extends BaseAPI {
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
-    const url = `${this.config.apiBasePath}/api/v1/vendor/${vendorSlug}/product/${productSlug}`;
-    const config: any = { params };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendor/${vendorSlug}/product/${productSlug}`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve single product.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -84,18 +159,46 @@ export class ProductsAPI extends BaseAPI {
    * @returns Product variant data
    * @throws Error if the API call fails or variant is not found
    */
-  async variantLookup(id: number, code: string , oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/product/${id}/variants/lookup/${code}`;
-    const config: any = {};
+  async variantLookup(
+    id: number,
+    code: string,
+    oauth: TokenData | null = null
+  ) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/product/${id}/variants/lookup/${code}`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve product by variant code.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -105,18 +208,41 @@ export class ProductsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A single product's data
    */
-  async getById( id: number , params =  {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/products/${id}`;
-    const config: any = { params };
+  async getById(id: number, params = {}, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/products/${id}`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve single product by id.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -126,18 +252,42 @@ export class ProductsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A single product's data
    */
-  async getBySlug( slug: string,  params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/products/slug/${slug}`;
-    const config: any = { params };
+  async getBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/products/slug/${slug}`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve single product by slug.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -147,24 +297,48 @@ export class ProductsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A list of latest products
    */
-  async latest(count: number = 3, params = {} , oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/products`;
-    const config: any = {
-      params: {
-        sort: 'created_at,desc',
-        paginate: count,
-        page: 1,
-        ...params
-      }
-    };
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+  async latest(count: number = 3, params = {}, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/products`;
+      const config: any = {
+        params: {
+          sort: "created_at,desc",
+          paginate: count,
+          page: 1,
+          ...params,
+        },
       };
-    }
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve latest products.",
+        422
+      );
+    }
   }
 }
