@@ -11,6 +11,7 @@ import { DonationsAPI } from "./api/donations";
 import { EventsAPI } from "./api/events";
 import { MessagesAPI } from "./api/messages";
 import { ProductsAPI } from "./api/products";
+import { ReferenceValuesAPI } from "./api/reference-values";
 import { ReviewsAPI } from "./api/reviews";
 import { SpecificationsAPI } from "./api/specifications";
 import { SpecificationGroupsAPI } from "./api/specification-groups";
@@ -31,6 +32,7 @@ export class MarkkoSDK {
   public events: EventsAPI;
   public messages: MessagesAPI;
   public products: ProductsAPI;
+  public referenceValues: ReferenceValuesAPI;
   public reviews: ReviewsAPI;
   public specifications: SpecificationsAPI;
   public specificationGroups: SpecificationGroupsAPI;
@@ -51,6 +53,7 @@ export class MarkkoSDK {
     this.events = new EventsAPI(config, this.authService);
     this.messages = new MessagesAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
+    this.referenceValues = new ReferenceValuesAPI(config, this.authService);
     this.reviews = new ReviewsAPI(config, this.authService);
     this.specifications = new SpecificationsAPI(config, this.authService);
     this.specificationGroups = new SpecificationGroupsAPI(
