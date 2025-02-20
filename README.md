@@ -495,6 +495,16 @@ Looks up a product variant by code.
 - `oauth`: The OAuth token data
 - Returns: A promise with the product variant data.
 
+### Reference Values
+
+#### `byCategory(params = {}, oauth: TokenData | null = null)`
+
+Lookup a reference value by category.
+
+- `params`: Optional query parameters for filtering the reference values.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise resolving to an array of reference values.
+
 ### Reviews
 
 #### `list(params = {}, oauth = null)`
