@@ -32,7 +32,11 @@ export class MarkkoSDK {
   public events: EventsAPI;
   public messages: MessagesAPI;
   public products: ProductsAPI;
+<<<<<<< HEAD
   public referenceValues: ReferenceValuesAPI;
+=======
+  public referenceValues : ReferenceValuesAPI;
+>>>>>>> 31b32ae8e16b8234561a8927c25043fbb583d0c7
   public reviews: ReviewsAPI;
   public specifications: SpecificationsAPI;
   public specificationGroups: SpecificationGroupsAPI;
@@ -53,7 +57,11 @@ export class MarkkoSDK {
     this.events = new EventsAPI(config, this.authService);
     this.messages = new MessagesAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
+<<<<<<< HEAD
     this.referenceValues = new ReferenceValuesAPI(config, this.authService);
+=======
+    this.referenceValues = new ReferenceValuesAPI(config , this.authService)
+>>>>>>> 31b32ae8e16b8234561a8927c25043fbb583d0c7
     this.reviews = new ReviewsAPI(config, this.authService);
     this.specifications = new SpecificationsAPI(config, this.authService);
     this.specificationGroups = new SpecificationGroupsAPI(
