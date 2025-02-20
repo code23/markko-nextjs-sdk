@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reference Values API endpoint:
   -reference value by category
 
+## [1.0.0-beta.3]-2025-02-20
+
+### Added
+
+- Updated error handling
+
 ## [1.0.0-beta.2]-2025-02-18
 
 ### Added
