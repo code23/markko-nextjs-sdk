@@ -1,5 +1,6 @@
-import { BaseAPI } from './base';
-import { AuthService, TokenData } from '../services/auth';
+import { BaseAPI } from "./base";
+import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 
 export class TagsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
@@ -13,20 +14,40 @@ export class TagsAPI extends BaseAPI {
    * @returns A list of tags
    */
   async list(params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/tags`;
-    const config: any = { params };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
-    }
-
     try {
+      const url = `${this.config.apiBasePath}/api/v1/tags`;
+      const config: any = { params };
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
       const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
       return response.data;
-    } catch (error) {
-      throw new Error("A problem was encountered during the tags retrieval.");
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of tags.",
+        422
+      );
     }
   }
 }
