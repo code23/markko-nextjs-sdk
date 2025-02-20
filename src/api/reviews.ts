@@ -1,5 +1,6 @@
-import { BaseAPI } from './base';
-import { AuthService, TokenData } from '../services/auth';
+import { BaseAPI } from "./base";
+import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 
 export class ReviewsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
@@ -13,23 +14,46 @@ export class ReviewsAPI extends BaseAPI {
    * @returns A list of reviews
    */
   async list(params = {}, oauth: TokenData | null = null) {
-    const defaultParams = {
-      paginate: 0,
-      page: 1,
-      with: 'product.images',
-      sort: null,
-    };
-    const url = `${this.config.apiBasePath}/api/v1/reviews`;
-    const config: any = { params: { ...defaultParams, ...params } };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
+    try {
+      const defaultParams = {
+        paginate: 0,
+        page: 1,
+        with: "product.images",
+        sort: null,
       };
-    }
+      const url = `${this.config.apiBasePath}/api/v1/reviews`;
+      const config: any = { params: { ...defaultParams, ...params } };
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of reviews.",
+        422
+      );
+    }
   }
 
   /**
@@ -39,17 +63,40 @@ export class ReviewsAPI extends BaseAPI {
    * @returns The created review
    */
   async create(data: Record<string, any>, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/reviews`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/reviews`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, data, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to creat a new review.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.post(url, data, config);
-    return response.data;
   }
 
   /**
@@ -59,17 +106,40 @@ export class ReviewsAPI extends BaseAPI {
    * @returns The updated review
    */
   async update(data: Record<string, any>, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/reviews`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/reviews`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, data, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to update an existing review.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, data, config);
-    return response.data;
   }
 
   /**
@@ -79,16 +149,40 @@ export class ReviewsAPI extends BaseAPI {
    * @returns The deleted review
    */
   async delete(id: number, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/reviews/${id}`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/reviews/${id}`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.delete(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to delete an existing review.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.delete(url, config);
-    return response.data;
   }
 }
