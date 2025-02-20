@@ -14,11 +14,13 @@ export interface MarkkoConfig {
  */
 export class APIError extends Error {
   code: number;
+  validationErrors?: Record<string, string[]>;
 
-  constructor(message: string, code: number) {
+  constructor(message: string, code: number, validationErrors?: Record<string, string[]>) {
     super(message);
     this.name = 'APIError';
     this.code = code;
+    this.validationErrors = validationErrors;
 
     // Maintains proper stack trace for where our error was thrown (only available on V8)
     if (Error.captureStackTrace) {

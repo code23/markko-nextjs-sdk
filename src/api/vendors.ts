@@ -119,19 +119,25 @@ export class VendorsAPI extends BaseAPI {
 
       // Check if the response contains an error
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code);
+        throw new APIError(response.data.message, response.data.code, response.data.errors);
       }
 
       return true;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      } else {
+    } catch (error: any) {
+      // If it's an axios error with a response
+      if (error.response?.data) {
         throw new APIError(
-          'A problem was encountered during the request to create a new user & vendor.',
-          422
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
         );
       }
+
+      // For any other type of error
+      throw new APIError(
+        'A problem was encountered during the request to create a new user & vendor.',
+        422
+      );
     }
   }
 

@@ -1,4 +1,5 @@
 import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 import { BaseAPI } from "./base";
 
 export class MessagesAPI extends BaseAPI {
@@ -13,23 +14,47 @@ export class MessagesAPI extends BaseAPI {
    * @returns A list of channels
    */
   async getAllChannels(params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/messaging`;
-    const config: any = {
-      params: {
-        status: "open",
-        type: null,
-        ...params,
-      },
-    };
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/messaging`;
+      const config: any = {
+        params: {
+          status: "open",
+          type: null,
+          ...params,
+        },
       };
-    }
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of channels.",
+        422
+      );
+    }
   }
 
   /**
@@ -44,22 +69,46 @@ export class MessagesAPI extends BaseAPI {
     params = {},
     oauth: TokenData | null = null
   ) {
-    const url = `${this.config.apiBasePath}/api/v1/messaging/view/${channelId}`;
-    const config: any = {
-      params: {
-        paginate: 30,
-        ...params,
-      },
-    };
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/messaging/view/${channelId}`;
+      const config: any = {
+        params: {
+          paginate: 30,
+          ...params,
+        },
       };
-    }
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve channel by id.",
+        422
+      );
+    }
   }
 
   /**
@@ -74,23 +123,46 @@ export class MessagesAPI extends BaseAPI {
     params = {},
     oauth: TokenData | null = null
   ) {
-    const url = `${this.config.apiBasePath}/api/v1/messaging/${channelId}/messages`;
-    const config: any = {
-      params: {
-        page: 1,
-        paginate: 30,
-        ...params,
-      },
-    };
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/messaging/${channelId}/messages`;
+      const config: any = {
+        params: {
+          page: 1,
+          paginate: 30,
+          ...params,
+        },
       };
-    }
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to laod more messages.",
+        422
+      );
+    }
   }
 
   /**
@@ -121,29 +193,53 @@ export class MessagesAPI extends BaseAPI {
     },
     oauth: TokenData | null = null
   ) {
-    if (!params.is_update && !params.channel_name) {
-      throw new Error("channel_name is required when is_update is false");
+    try {
+      if (!params.is_update && !params.channel_name) {
+        throw new Error("channel_name is required when is_update is false");
+      }
+
+      if (!params.recipient_id) {
+        throw new Error("recipient_id is required");
+      }
+
+      if (!params.message || !params.message.body) {
+        throw new Error("message.body is required");
+      }
+
+      const url = `${this.config.apiBasePath}/api/v1/messaging`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, params, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to send a message.",
+        422
+      );
     }
-
-    if (!params.recipient_id) {
-      throw new Error("recipient_id is required");
-    }
-
-    if (!params.message || !params.message.body) {
-      throw new Error("message.body is required");
-    }
-
-    const url = `${this.config.apiBasePath}/api/v1/messaging`;
-    const config: any = {};
-
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
-    }
-
-    const response = await this.axiosInstance.post(url, params, config);
-    return response.data;
   }
 
   /**
@@ -153,16 +249,40 @@ export class MessagesAPI extends BaseAPI {
    * @returns The response data from closing the channel
    */
   async closeChannel(channelId: string, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/messaging/close/${channelId}`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/messaging/close/${channelId}`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        "X-OAuth-Token": JSON.stringify(oauth),
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to close a messaging channel.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, {}, config);
-    return response.data;
   }
 }
