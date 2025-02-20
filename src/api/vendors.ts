@@ -1,6 +1,6 @@
-import { BaseAPI } from './base';
-import { AuthService, TokenData } from '../services/auth';
-import { APIError } from '../types';
+import { BaseAPI } from "./base";
+import { AuthService, TokenData } from "../services/auth";
+import { APIError } from "../types";
 
 export class VendorsAPI extends BaseAPI {
   constructor(config: any, authService: AuthService) {
@@ -14,17 +14,39 @@ export class VendorsAPI extends BaseAPI {
    * @returns A list of vendors
    */
   async list(params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/vendors`;
-    const config: any = { params };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of vendors.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -34,22 +56,49 @@ export class VendorsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A list of vendors
    */
-  async listByPostcode(postcode: string, params = {}, oauth: TokenData | null = null) {
-    const defaultParams = {
-      is_active: 1
-    };
-    postcode = postcode.replace(/\s+/g, '');
-    const url = `${this.config.apiBasePath}/api/v1/vendors/postcode/${postcode}`;
-    const config: any = { params: { ...defaultParams, ...params } };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
+  async listByPostcode(
+    postcode: string,
+    params = {},
+    oauth: TokenData | null = null
+  ) {
+    try {
+      const defaultParams = {
+        is_active: 1,
       };
-    }
+      postcode = postcode.replace(/\s+/g, "");
+      const url = `${this.config.apiBasePath}/api/v1/vendors/postcode/${postcode}`;
+      const config: any = { params: { ...defaultParams, ...params } };
 
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve list of vendors by postcode.",
+        422
+      );
+    }
   }
 
   /**
@@ -60,17 +109,40 @@ export class VendorsAPI extends BaseAPI {
    * @returns A single vendor
    */
   async get(id: number, params = {}, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}`;
-    const config: any = { params };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}`;
+      const config: any = { params };
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve a single vendor.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 
   /**
@@ -81,20 +153,44 @@ export class VendorsAPI extends BaseAPI {
    * @returns A single vendor
    */
   async getBySlug(slug: string, params = {}, oauth: TokenData | null = null) {
-    const defaultParams = {
-      is_active: 1
-    };
-    const config: any = { params: { ...defaultParams, ...params } };
-
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
+    try {
+      const defaultParams = {
+        is_active: 1,
       };
-    }
+      const config: any = { params: { ...defaultParams, ...params } };
 
-    const url = `${this.config.apiBasePath}/api/v1/vendors/slug/${slug}`;
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const url = `${this.config.apiBasePath}/api/v1/vendors/slug/${slug}`;
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to retrieve single vendor by slug.",
+        422
+      );
+    }
   }
 
   /**
@@ -104,14 +200,17 @@ export class VendorsAPI extends BaseAPI {
    * @throws {APIError} If the API request fails or returns an error
    * @returns Promise<boolean> Returns true if successful
    */
-  async save(data: Record<string, any>, oauth: TokenData | null = null): Promise<boolean> {
+  async save(
+    data: Record<string, any>,
+    oauth: TokenData | null = null
+  ): Promise<boolean> {
     try {
       const url = `${this.config.apiBasePath}/api/v1/vendors/register`;
       const config: any = {};
 
       if (oauth) {
         config.headers = {
-          'X-OAuth-Token': JSON.stringify(oauth)
+          "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
 
@@ -119,7 +218,11 @@ export class VendorsAPI extends BaseAPI {
 
       // Check if the response contains an error
       if (response.data?.error) {
-        throw new APIError(response.data.message, response.data.code, response.data.errors);
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
       }
 
       return true;
@@ -135,7 +238,7 @@ export class VendorsAPI extends BaseAPI {
 
       // For any other type of error
       throw new APIError(
-        'A problem was encountered during the request to create a new user & vendor.',
+        "A problem was encountered during the request to create a new user & vendor.",
         422
       );
     }
@@ -148,17 +251,40 @@ export class VendorsAPI extends BaseAPI {
    * @returns A single vendor
    */
   async follow(id: number, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/follow`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/follow`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to follow a vendor.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, {}, config);
-    return response.data;
   }
 
   /**
@@ -168,17 +294,40 @@ export class VendorsAPI extends BaseAPI {
    * @returns A single vendor
    */
   async unfollow(id: number, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/unfollow`;
-    const config: any = {};
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/unfollow`;
+      const config: any = {};
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, {}, config);
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to unfollow a vendor.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.patch(url, {}, config);
-    return response.data;
   }
 
   /**
@@ -188,16 +337,39 @@ export class VendorsAPI extends BaseAPI {
    * @returns A boolean indicating if the vendor (store) name is unique
    */
   async isStoreNameUnique(name: string, oauth: TokenData | null = null) {
-    const url = `${this.config.apiBasePath}/api/v1/vendors/is-store-name-unique`;
-    const config: any = { params: { store_name: name } };
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors/is-store-name-unique`;
+      const config: any = { params: { store_name: name } };
 
-    if (oauth) {
-      config.headers = {
-        'X-OAuth-Token': JSON.stringify(oauth)
-      };
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to check if vendor name is unique.",
+        422
+      );
     }
-
-    const response = await this.axiosInstance.get(url, config);
-    return response.data;
   }
 }
