@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Reference Values API endpoint:
-  -reference value by category
+  - Retrieve reference values by category
 
 ## [1.0.0-beta.3]-2025-02-20
 
