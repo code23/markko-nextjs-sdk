@@ -56,7 +56,9 @@ export class BlogsAPI extends BaseAPI {
    * @param oauth - The OAuth token data
    * @returns A list of blog posts
    */
-  async listPostsByCategory(categoryId: number, params = {}, oauth: TokenData | null = null) {
+  async listPostsByCategory(categoryId: number, params: any = {}, oauth: TokenData | null = null) {
+    params.with = 'blog_posts'; // with: blog_posts is mandatory in params to get the posts
+
     const url = `${this.config.apiBasePath}/api/v1/blog/categories/${categoryId}`;
     const config: any = { params };
 
