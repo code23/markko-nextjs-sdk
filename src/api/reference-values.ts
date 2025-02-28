@@ -8,12 +8,11 @@ export class ReferenceValuesAPI extends BaseAPI {
   }
 
   /**
-   *Fetches reference values based on a given category.
-   *@param  params - Query parameters for filtering the lookup.
-   *@param  oauth - OAuth token data.
-   *@returns  - A promise resolving to a list of reference values.
+   * Fetches reference values based on a given category.
+   * @param params - Query parameters for filtering the lookup.
+   * @param oauth - OAuth token data.
+   * @returns - A promise resolving to a list of reference values.
    */
-
   async byCategory(params = {}, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/reference-values/lookup`;
