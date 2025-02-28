@@ -303,6 +303,32 @@ Check if a charity (store) name is available.
 - `oauth`: The OAuth token data
 - Returns: Promise with a boolean indicating if the name is unique
 
+### Contacts
+
+#### `submit(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Submit a contact form to the tenant.
+
+- `data`: The contact form data
+- `oauth`: The OAuth token data
+- Returns: Promise with the contact form data
+
+#### `submitToVendor(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Submit a contact form to a vendor.
+
+- `data`: The contact form data
+- `oauth`: The OAuth token data
+- Returns: Promise with the contact form data
+
+#### `submitServiceForm(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Submit repairs form.
+
+- `data`: The service form data
+- `oauth`: The OAuth token data
+- Returns: Promise with the service form data
+
 ### Currencies
 
 #### `list(params = {}, oauth = null)`
