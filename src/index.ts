@@ -19,6 +19,7 @@ import { SpecificationGroupsAPI } from "./api/specification-groups";
 import { TagsAPI } from "./api/tags";
 import { UsersAPI } from "./api/users";
 import { VendorsAPI } from "./api/vendors";
+import { CartsAPI } from "./api/carts";
 
 export class MarkkoSDK {
   private authService: AuthService;
@@ -27,6 +28,7 @@ export class MarkkoSDK {
   public attributes: AttributesAPI;
   public blogs: BlogsAPI;
   public categories: CategoriesAPI;
+  public carts: CartsAPI;
   public charities: CharitiesAPI;
   public contacts: ContactsAPI;
   public currencies: CurrenciesAPI;
@@ -49,6 +51,7 @@ export class MarkkoSDK {
     this.attributes = new AttributesAPI(config, this.authService);
     this.blogs = new BlogsAPI(config, this.authService);
     this.categories = new CategoriesAPI(config, this.authService);
+    this.carts = new CartsAPI(config, this.authService);
     this.charities = new CharitiesAPI(config, this.authService);
     this.contacts = new ContactsAPI(config, this.authService);
     this.currencies = new CurrenciesAPI(config, this.authService);
