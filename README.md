@@ -457,6 +457,51 @@ Closes a messaging channel.
 - `oauth`: The OAuth token data
 - Returns: A promise with the response data from closing the channel.
 
+### Orders
+
+#### `bookingOrderslist(params = {}, oauth = null)`
+
+Get a list of authenticated user's booking orders.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `downloadInvoiceById(id: number, params = {}, oauth = null)`
+
+Downloads an invoice related to an order.
+
+- `id`: The ID of the invoice to download.
+- `params`: Optional query parameters.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the invoice data.
+
+#### `get(id: number, params = {}, oauth = null)`
+
+Fetches a single order by its ID.
+
+- `id`: The numeric ID of the order
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getByNumberByCustomer(orderNumber: string, params = {}, oauth = null)`
+
+Get a single Order by order number.
+
+- `id`: The order number
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `list(params = {}, oauth = null)`
+
+Get a list of authenticated user's orders.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Products
 
 #### `list(params = {}, oauth = null)`
