@@ -5,6 +5,7 @@ import { AddressesAPI } from "./api/addresses";
 import { AttributesAPI } from "./api/attributes";
 import { BlogsAPI } from "./api/blogs";
 import { CategoriesAPI } from "./api/categories";
+import { CartsAPI } from "./api/carts";
 import { CharitiesAPI } from "./api/charities";
 import { ContactsAPI } from "./api/contacts";
 import { CurrenciesAPI } from "./api/currencies";
@@ -19,7 +20,6 @@ import { SpecificationGroupsAPI } from "./api/specification-groups";
 import { TagsAPI } from "./api/tags";
 import { UsersAPI } from "./api/users";
 import { VendorsAPI } from "./api/vendors";
-import { CartsAPI } from "./api/carts";
 
 export class MarkkoSDK {
   private authService: AuthService;
