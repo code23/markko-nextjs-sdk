@@ -11,6 +11,7 @@ import { CurrenciesAPI } from "./api/currencies";
 import { DonationsAPI } from "./api/donations";
 import { EventsAPI } from "./api/events";
 import { MessagesAPI } from "./api/messages";
+import { OrdersAPI } from "./api/orders";
 import { ProductsAPI } from "./api/products";
 import { ReferenceValuesAPI } from "./api/reference-values";
 import { ReviewsAPI } from "./api/reviews";
@@ -33,6 +34,7 @@ export class MarkkoSDK {
   public donations: DonationsAPI;
   public events: EventsAPI;
   public messages: MessagesAPI;
+  public orders: OrdersAPI;
   public products: ProductsAPI;
   public referenceValues: ReferenceValuesAPI;
   public reviews: ReviewsAPI;
@@ -55,6 +57,7 @@ export class MarkkoSDK {
     this.donations = new DonationsAPI(config, this.authService);
     this.events = new EventsAPI(config, this.authService);
     this.messages = new MessagesAPI(config, this.authService);
+    this.orders = new OrdersAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
     this.referenceValues = new ReferenceValuesAPI(config, this.authService);
     this.reviews = new ReviewsAPI(config, this.authService);
