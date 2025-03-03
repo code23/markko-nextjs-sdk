@@ -8,13 +8,12 @@ export class CartsAPI extends BaseAPI {
   }
   /**
    * Add a product to the cart
-   * @param productId - The ID of the product to add
    * @param params - Additional parameters such as quantity, variant ID, attributes, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data
    * @throws APIError if the request fails or returns an error
    */
-  async add(productId: number, params: {}, oauth: TokenData | null = null) {
+  async add(params: Record<string, any> = {}, oauth: TokenData | null = null) {
     try {
       const defaultParams = {
         quantity: 1,
@@ -23,8 +22,11 @@ export class CartsAPI extends BaseAPI {
         with: null,
         addonId: null,
       };
-      const url = `${this.config.apiBasePath}/api/v1/cart/add/${productId}`;
-      const config: any = { params: { ...defaultParams, ...params } };
+
+      const requestBody = { ...defaultParams, ...params };
+
+      const url = `${this.config.apiBasePath}/api/v1/cart/add/${params.productId}`;
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -32,7 +34,7 @@ export class CartsAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
 
       if (response.data?.error) {
         throw new APIError(
@@ -45,6 +47,7 @@ export class CartsAPI extends BaseAPI {
       if (response.data?.data?.id) {
         localStorage.setItem("cart_id", response.data.data.id.toString());
       }
+
       return response.data;
     } catch (error: any) {
       if (error.response?.data) {
@@ -63,21 +66,25 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Apply a coupon code to the cart
-   * @param code - The coupon code to apply
    * @param params - Additional parameters such as cart group ID, extra options, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data after applying the coupon
    * @throws APIError if the request fails or returns an error
    */
-  async applyCoupon(code: string, params: {}, oauth: TokenData | null = null) {
+  async applyCoupon(
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         cart_group_id: 0,
         with: null,
       };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/apply-coupon/${code}`;
-      const config: any = { params: { ...defaultParams, ...params } };
+      const requestBody = { ...defaultParams, ...params };
+
+      const url = `${this.config.apiBasePath}/api/v1/cart/apply-coupon/${params.code}`;
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -85,7 +92,7 @@ export class CartsAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
 
       if (response.data?.error) {
         throw new APIError(
@@ -105,7 +112,7 @@ export class CartsAPI extends BaseAPI {
         );
       }
       throw new APIError(
-        "A problem was encountered during the request to apply a cuppon",
+        "A problem was encountered during the request to apply a couppon",
         422
       );
     }
@@ -113,22 +120,26 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Apply a promotion to the cart
-   * @param id - The promotion ID to apply
    * @param params - Additional parameters such as cart group ID, extra options, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data after applying the promotion
    * @throws APIError if the request fails or returns an error
    */
 
-  async applyPromotion(id: string, params: {}, oauth: TokenData | null = null) {
+  async applyPromotion(
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         cart_group_id: 0,
         with: null,
       };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/apply-promotion/${id}`;
-      const config: any = { params: { ...defaultParams, ...params } };
+      const requestBody = { ...defaultParams, ...params };
+
+      const url = `${this.config.apiBasePath}/api/v1/cart/apply-promotion/${params.id}`;
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -136,7 +147,7 @@ export class CartsAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
 
       if (response.data?.error) {
         throw new APIError(
@@ -207,21 +218,21 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Share the cart via email
-   * @param params - An object containing the recipient's email address
+   * @param email - the recipient's email address
    * @param oauth - The OAuth token data (optional)
    * @returns The response data after sharing the cart
    * @throws APIError if the request fails or returns an error
    */
-  async emailshareCode(
-    params: { email: string },
-    oauth: TokenData | null = null
-  ) {
+  async emailshareCode(email: string, oauth: TokenData | null = null) {
     try {
-      const defaultParams = {
-        with: null,
-      };
       const url = `${this.config.apiBasePath}/api/v1/cart/share`;
-      const config: any = { params: { ...defaultParams, ...params } };
+
+      const requestBody = {
+        recipient_email: email,
+        with: "",
+      };
+
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -229,7 +240,7 @@ export class CartsAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -262,14 +273,20 @@ export class CartsAPI extends BaseAPI {
    * @throws APIError if the request fails or returns an error
    */
 
-  async getPromotions(params: {}, oauth: TokenData | null = null) {
+  async getPromotions(
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
+      const now = new Date().toISOString().split("T")[0];
+
       const defaultParams = {
         with: null,
-        valid_from: `${new Date().toISOString()},<=`,
-        expiry: `${new Date().toISOString()},>=`,
+        valid_from: `${now},<=`,
+        expiry: `${now},>=`,
         active: 1,
       };
+
       const url = `${this.config.apiBasePath}/api/v1/promotions`;
 
       const config: any = { params: { ...defaultParams, ...params } };
@@ -312,7 +329,11 @@ export class CartsAPI extends BaseAPI {
    * @returns The cart details associated with the provided share code.
    * @throws APIError if the request fails or returns an error.
    */
-  async getViaCode(code: string, params: {}, oauth: TokenData | null = null) {
+  async getViaCode(
+    code: string,
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         with: null,
@@ -360,23 +381,28 @@ export class CartsAPI extends BaseAPI {
    * @throws APIError if the request fails or returns an error.
    */
 
-  async updateGiftOptions(params: {}, oauth: TokenData | null = null) {
+  async updateGiftOptions(
+    params: Record<string, any>,
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         cart_group_id: 0,
         is_gift: false,
-        gift_message: null,
         with: null,
+        gift_message: null,
       };
+
+      const requestBody = { ...defaultParams, ...params };
       const url = `${this.config.apiBasePath}/api/v1/cart/is-gift/`;
-      const config: any = { params: { ...defaultParams, ...params } };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -403,29 +429,32 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Removes a product from the cart.
-   * @param productId - The ID of the product to be removed.
    * @param params - Additional parameters for the request (e.g., `variant_id`, `with`).
    * @param oauth - The OAuth token data (optional).
    * @returns The updated cart details after removing the product.
    * @throws APIError if the request fails or returns an error.
    */
 
-  async remove(productId: number, params: {}, oauth: TokenData | null = null) {
+  async remove(
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         variant_id: null,
         with: null,
       };
+      const requestBody = { ...defaultParams, ...params };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/remove/${productId}`;
-      const config: any = { params: { ...defaultParams, ...params } };
+      const url = `${this.config.apiBasePath}/api/v1/cart/remove/${params.productId}`;
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -457,7 +486,7 @@ export class CartsAPI extends BaseAPI {
    * @returns The cart details.
    * @throws APIError if the request fails or returns an error.
    */
-  async get(params: {}, oauth: TokenData | null = null) {
+  async get(params: Record<string, any> = {}, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/cart`;
       const config: any = { params };
@@ -501,7 +530,11 @@ export class CartsAPI extends BaseAPI {
    * @returns The cart details.
    * @throws APIError if the request fails or returns an error.
    */
-  async getById(id: number, params: {}, oauth: TokenData | null = null) {
+  async getById(
+    id: number,
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/cart/${id}`;
       const config: any = { params };
@@ -580,15 +613,13 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Updates the quantity of a product in the cart.
-   * @param productId - The ID of the product.
    * @param params - Additional parameters (optional).
    * @param oauth - The OAuth token data (optional).
    * @returns The updated cart data.
    * @throws APIError if the request fails or returns an error.
    */
   async updateQuantity(
-    productId: string,
-    params: {},
+    params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
     try {
@@ -598,15 +629,16 @@ export class CartsAPI extends BaseAPI {
         quantity: 1,
       };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/update-quantity/${productId}`;
-      const config: any = { params: { ...defaultParams, ...params } };
+      const requestBody = { ...defaultParams, ...params };
+      const url = `${this.config.apiBasePath}/api/v1/cart/update-quantity/${params.productId}`;
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
-      const response = await this.axiosInstance.patch(url, {}, config);
+      const response = await this.axiosInstance.patch(url, requestBody, config);
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
