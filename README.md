@@ -483,11 +483,10 @@ Fetches a single order by its ID.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
-#### `getByNumberByCustomer(orderNumber: string, params = {}, oauth = null)`
+#### `getByNumberByCustomer(params = {}, oauth = null)`
 
 Get a single Order by order number.
 
-- `id`: The order number
 - `params`: Optional object containing parameters to filter the response
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response

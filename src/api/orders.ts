@@ -97,17 +97,16 @@ export class OrdersAPI extends BaseAPI {
 
   /**
    * Get a single Order by order number
-   * @param orderNumber - The order number
    * @param params - The query parameters to filter the order data
    * @param oauth - The OAuth token data
    * @returns A single order
    */
-  async getByNumberByCustomer(orderNumber: string, params = {}, oauth: TokenData | null = null) {
+  async getByNumberByCustomer(params: Record<string, any> = {}, oauth: TokenData | null = null) {
     try {
       const defaultParams = {
         with: `currency,transaction,order_groups.vendor,order_groups.files,shipping_address,billing_address,invoice.files,charity`
       };
-      const url = `${this.config.apiBasePath}/api/v1/orders/customer/number/${orderNumber}`;
+      const url = `${this.config.apiBasePath}/api/v1/orders/customer/number/${params.Number}`;
       const config: any = { params: { ...defaultParams, ...params } };
 
       if (oauth) {
