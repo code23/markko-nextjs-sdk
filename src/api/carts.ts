@@ -44,10 +44,6 @@ export class CartsAPI extends BaseAPI {
         );
       }
 
-      if (response.data?.data?.id) {
-        localStorage.setItem("cart_id", response.data.data.id.toString());
-      }
-
       return response.data;
     } catch (error: any) {
       if (error.response?.data) {
