@@ -10,14 +10,13 @@ export class OrdersAPI extends BaseAPI {
   /**
    * Download an invoice relating to an order
    * @param id - The ID of the invoice
-   * @param params - The query parameters to filter the invoice
    * @param oauth - The OAuth token data
    * @returns Downloadable invoice
    */
-  async downloadInvoiceById(id: number, params = {}, oauth: TokenData | null = null) {
+  async downloadInvoiceById(id: number, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/invoices/${id}/download`;
-      const config: any = { params };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
@@ -55,14 +54,13 @@ export class OrdersAPI extends BaseAPI {
   /**
    * Get a order by id
    * @param id - The ID of the order
-   * @param params - The query parameters to filter the order
    * @param oauth - The OAuth token data
    * @returns A single order
    */
-  async get(id: number, params = {}, oauth: TokenData | null = null) {
+  async get(id: number, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/orders/${id}`;
-      const config: any = { params };
+      const config: any = {};
 
       if (oauth) {
         config.headers = {
