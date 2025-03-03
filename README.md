@@ -165,6 +165,20 @@ Logs in a user.
 - `data`: Object containing the login data
 - Returns: Promise with the API response
 
+#### `resetPasswordLinkRequest(email: string)`
+
+Request a password reset link for a user.
+
+- `email`: The email address of the user
+- Returns: Promise with the API response
+
+#### `updatePassword(data: Record<string, any>)`
+
+Update a user's password.
+
+- `data`: Object containing the new password, password confirmation and the reset token (email, password, password_confirmation, token)
+- Returns: Promise with the API response
+
 ### Blog Posts
 
 #### `listPosts(params = {})`

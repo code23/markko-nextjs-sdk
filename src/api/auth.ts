@@ -49,4 +49,74 @@ export class AuthAPI extends BaseAPI {
       );
     }
   }
+
+  /**
+   * Request a password reset link for a user.
+   * @param email - The email address of the user.
+   * @returns Promise with the API response.
+   */
+  async resetPasswordLinkRequest(email: string) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/auth/forgot-password`;
+      const response = await this.axiosInstance.post(url, { email });
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to reset password link request.",
+        422
+      );
+    }
+  }
+
+  /**
+   * Update a user's password.
+   * @param data - Object containing the email, new password, password confirmation and the reset token (email, password, password_confirmation, token).
+   * @returns Promise with the API response.
+   */
+  async updatePassword(data: Record<string, any>) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/auth/reset-password`;
+      const response = await this.axiosInstance.post(url, data);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to update password.",
+        422
+      );
+    }
+  }
 }
