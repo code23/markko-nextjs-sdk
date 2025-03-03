@@ -8,12 +8,12 @@ export class OrdersAPI extends BaseAPI {
   }
 
   /**
-   * Download an invoice relating to an order
+   * Get an invoice by its ID
    * @param id - The ID of the invoice
    * @param oauth - The OAuth token data
-   * @returns Downloadable invoice
+   * @returns Invoice
    */
-  async downloadInvoiceById(id: number, oauth: TokenData | null = null) {
+  async getInvoiceById(id: number, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/invoices/${id}/download`;
       const config: any = {};

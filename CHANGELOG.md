@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0-beta.xx]-2025-03-03
+## [1.0.0-beta.8]-2025-03-03
 
 ### Added
 
 - Orders API endpoints:
-  - Download Invoice
+  - Get invoice by id
   - Get order by id
   - Get order by order number
   - Get list of orders

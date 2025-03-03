@@ -467,9 +467,9 @@ Get a list of authenticated user's booking orders.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
-#### `downloadInvoiceById(id: number, oauth = null)`
+#### `getInvoiceById(id: number, oauth = null)`
 
-Downloads an invoice related to an order.
+Get an invoice by its ID.
 
 - `id`: The ID of the invoice to download.
 - `oauth`: The OAuth token data.
