@@ -24,6 +24,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Share cart via code
   - Update cart product quantity
 
+## [1.0.0-beta.9]-2025-03-03
+
+### Added
+
+- Auth API endpoints:
+  - Request a password reset link
+  - Update a user's password
+
+## [1.0.0-beta.8]-2025-03-03
+
+### Added
+
+- Orders API endpoints:
+  - Get invoice by id
+  - Get order by id
+  - Get order by order number
+  - Get list of orders
+  - Get list of booking orders
+
 ## [1.0.0-beta.7]-2025-02-28
 
 ### Added

@@ -165,6 +165,20 @@ Logs in a user.
 - `data`: Object containing the login data
 - Returns: Promise with the API response
 
+#### `resetPasswordLinkRequest(email: string)`
+
+Request a password reset link for a user.
+
+- `email`: The email address of the user
+- Returns: Promise with the API response
+
+#### `updatePassword(data: Record<string, any>)`
+
+Update a user's password.
+
+- `data`: Object containing the new password, password confirmation and the reset token (email, password, password_confirmation, token)
+- Returns: Promise with the API response
+
 ### Blog Posts
 
 #### `listPosts(params = {})`
@@ -223,26 +237,31 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 
 ### Carts
 
-#### `add(params: Record<string, any> = {}, oauth = null)`
+#### `add(productId: number,params: Record<string, any> = {}, oauth = null)`
 
 Adds a product to the cart.
 
+- `productId`: A Parameter for unique id of product.
 - `params`: Additional parameters such as quantity, variantId, attributes, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart data.
 
-#### `applyCoupon(params: Record<string, any> = {}, oauth = null)`
+#### `applyCoupon(code: string, groupId: string,params: Record<string, any> = {}, oauth = null)`
 
 Applies a coupon code to the cart.
 
+- `code` : A Parameter for unique coupen code for cart.
+- `groupId` : A parameter for cart's groupID .
 - `params`: Additional parameters such as cart_group_id, with, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart data after applying the coupon.
 
-#### `applyPromotion(params: Record<string, any> = {}, oauth = null)`
+#### `applyPromotion(id: number, groupId: string,params: Record<string, any> = {}, oauth = null)`
 
 Applies a promotion to the cart.
 
+- `id` : A parameter for unique id for apply promotion.
+- `groupId` : A paramater for unique groupID of cart.
 - `params`: Additional parameters such as cart_group_id, with, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart data after applying the promotion.
@@ -280,18 +299,21 @@ Retrieves cart details using a shared code.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the cart details associated with the provided share code.
 
-#### `updateGiftOptions(params: Record<string, any> = {}, oauth = null)`
+#### `updateGiftOptions(groupId: string, isGift: string,params: Record<string, any> = {}, oauth = null)`
 
 Updates the gift options for a cart.
 
+- `groupId` : A paramater for unique groupId of cart.
+- `isGift` : A paramater for add gift option.
 - `params`: Additional parameters such as is_gift, gift_message, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart details after applying the gift options.
 
-#### `remove(params: Record<string, any> = {}, oauth = null)`
+#### `remove(productId: number,params: Record<string, any> = {}, oauth = null)`
 
 Removes a product from the cart.
 
+- `productId`: A Parameter for unique id of product.
 - `params`: Additional parameters such as variant_id, with, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart details after removing the product.
@@ -320,10 +342,11 @@ Generates a shareable code for the user's cart.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the shared cart code.
 
-#### `updateQuantity(params: Record<string, any> = {}, oauth = null)`
+#### `updateQuantity(productId: number,params: Record<string, any> = {}, oauth = null)`
 
 Updates the quantity of a product in the cart.
 
+- `productId`: A Parameter for unique id of product.
 - `params`: Additional parameters such as variant_id, quantity, etc.
 - `oauth`: The OAuth token data (optional).
 - Returns: A promise with the updated cart data.
@@ -563,6 +586,48 @@ Closes a messaging channel.
 - `channelId`: The ID of the channel to close.
 - `oauth`: The OAuth token data
 - Returns: A promise with the response data from closing the channel.
+
+### Orders
+
+#### `bookingOrderslist(params = {}, oauth = null)`
+
+Get a list of authenticated user's booking orders.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getInvoiceById(id: number, oauth = null)`
+
+Get an invoice by its ID.
+
+- `id`: The ID of the invoice to download.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the invoice data.
+
+#### `get(id: number, oauth = null)`
+
+Fetches a single order by its ID.
+
+- `id`: The numeric ID of the order
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `getByNumberByCustomer(params = {}, oauth = null)`
+
+Get a single Order by order number.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `list(params = {}, oauth = null)`
+
+Get a list of authenticated user's orders.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
 
 ### Products
 

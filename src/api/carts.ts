@@ -8,12 +8,17 @@ export class CartsAPI extends BaseAPI {
   }
   /**
    * Add a product to the cart
+   * @param productId - A Parameter for unique id of product.
    * @param params - Additional parameters such as quantity, variant ID, attributes, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data
    * @throws APIError if the request fails or returns an error
    */
-  async add(params: Record<string, any> = {}, oauth: TokenData | null = null) {
+  async add(
+    productId: number,
+    params: Record<string, any> = {},
+    oauth: TokenData | null = null
+  ) {
     try {
       const defaultParams = {
         quantity: 1,
@@ -25,7 +30,7 @@ export class CartsAPI extends BaseAPI {
 
       const requestBody = { ...defaultParams, ...params };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/add/${params.productId}`;
+      const url = `${this.config.apiBasePath}/api/v1/cart/add/${productId}`;
       const config: any = {};
 
       if (oauth) {
@@ -62,24 +67,28 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Apply a coupon code to the cart
+   * @param code - A Parameter for unique coupen code for cart .
+   * @param groupId - A parameter for cart's groupID.
    * @param params - Additional parameters such as cart group ID, extra options, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data after applying the coupon
    * @throws APIError if the request fails or returns an error
    */
   async applyCoupon(
+    code: string,
+    groupId: string,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
     try {
       const defaultParams = {
-        cart_group_id: 0,
+        cart_group_id: groupId,
         with: null,
       };
 
       const requestBody = { ...defaultParams, ...params };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/apply-coupon/${params.code}`;
+      const url = `${this.config.apiBasePath}/api/v1/cart/apply-coupon/${code}`;
       const config: any = {};
 
       if (oauth) {
@@ -116,6 +125,8 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Apply a promotion to the cart
+   * @param id - A parameter for unique id for apply promotion.
+   * @param groupId - A paramater for unique groupID of cart.
    * @param params - Additional parameters such as cart group ID, extra options, etc.
    * @param oauth - The OAuth token data (optional)
    * @returns The updated cart data after applying the promotion
@@ -123,18 +134,20 @@ export class CartsAPI extends BaseAPI {
    */
 
   async applyPromotion(
+    id: number,
+    groupId: string,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
     try {
       const defaultParams = {
-        cart_group_id: 0,
+        cart_group_id: groupId,
         with: null,
       };
 
       const requestBody = { ...defaultParams, ...params };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/apply-promotion/${params.id}`;
+      const url = `${this.config.apiBasePath}/api/v1/cart/apply-promotion/${id}`;
       const config: any = {};
 
       if (oauth) {
@@ -371,6 +384,8 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Updates the gift options for a cart.
+   * @param groupId - A paramater for unique groupId of cart.
+   * @param isGift - A paramater for add gift option.
    * @param params - Additional parameters for the request (e.g., `is_gift`, `gift_message`).
    * @param oauth - The OAuth token data (optional).
    * @returns The updated cart details after applying the gift options.
@@ -378,13 +393,15 @@ export class CartsAPI extends BaseAPI {
    */
 
   async updateGiftOptions(
+    groupId: string,
+    isGift: string,
     params: Record<string, any>,
     oauth: TokenData | null = null
   ) {
     try {
       const defaultParams = {
-        cart_group_id: 0,
-        is_gift: false,
+        cart_group_id: groupId,
+        is_gift: isGift,
         with: null,
         gift_message: null,
       };
@@ -425,6 +442,7 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Removes a product from the cart.
+   * @param productId - A paramater for unique product Id.
    * @param params - Additional parameters for the request (e.g., `variant_id`, `with`).
    * @param oauth - The OAuth token data (optional).
    * @returns The updated cart details after removing the product.
@@ -432,6 +450,7 @@ export class CartsAPI extends BaseAPI {
    */
 
   async remove(
+    productId: number,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
@@ -442,7 +461,7 @@ export class CartsAPI extends BaseAPI {
       };
       const requestBody = { ...defaultParams, ...params };
 
-      const url = `${this.config.apiBasePath}/api/v1/cart/remove/${params.productId}`;
+      const url = `${this.config.apiBasePath}/api/v1/cart/remove/${productId}`;
       const config: any = {};
 
       if (oauth) {
@@ -609,12 +628,14 @@ export class CartsAPI extends BaseAPI {
 
   /**
    * Updates the quantity of a product in the cart.
+   * @param productId - A paramater for unique Product Id.
    * @param params - Additional parameters (optional).
    * @param oauth - The OAuth token data (optional).
    * @returns The updated cart data.
    * @throws APIError if the request fails or returns an error.
    */
   async updateQuantity(
+    productId: number,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
@@ -626,7 +647,7 @@ export class CartsAPI extends BaseAPI {
       };
 
       const requestBody = { ...defaultParams, ...params };
-      const url = `${this.config.apiBasePath}/api/v1/cart/update-quantity/${params.productId}`;
+      const url = `${this.config.apiBasePath}/api/v1/cart/update-quantity/${productId}`;
       const config: any = {};
 
       if (oauth) {
