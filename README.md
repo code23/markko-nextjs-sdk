@@ -235,6 +235,122 @@ Fetches a blog category by its slug, including associated posts. By default, ret
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
+### Carts
+
+#### `add(productId: number,params: Record<string, any> = {}, oauth = null)`
+
+Adds a product to the cart.
+
+- `productId`: A Parameter for unique id of product.
+- `params`: Additional parameters such as quantity, variantId, attributes, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart data.
+
+#### `applyCoupon(code: string, groupId: string,params: Record<string, any> = {}, oauth = null)`
+
+Applies a coupon code to the cart.
+
+- `code` : A Parameter for unique coupen code for cart.
+- `groupId` : A parameter for cart's groupID .
+- `params`: Additional parameters such as cart_group_id, with, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart data after applying the coupon.
+
+#### `applyPromotion(id: number, groupId: string,params: Record<string, any> = {}, oauth = null)`
+
+Applies a promotion to the cart.
+
+- `id` : A parameter for unique id for apply promotion.
+- `groupId` : A paramater for unique groupID of cart.
+- `params`: Additional parameters such as cart_group_id, with, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart data after applying the promotion.
+
+#### `delete(oauth = null)`
+
+Deletes the user's cart.
+
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after deleting the cart.
+
+#### `emailshareCode(email: string , oauth = null)`
+
+Shares the cart via email.
+
+- `email`: The recipient's email address.
+- `oauth`: The OAuth token data (optional).
+
+Returns: A promise with the response data after sharing the cart.
+
+#### `getPromotions(params: Record<string, any> = {}, oauth = null)`
+
+Retrieves a list of available promotions.
+
+- `params`: Query parameters to filter promotions.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the list of promotions available on the platform.
+
+#### `getViaCode(code: string, params: Record<string, any> = {}, oauth = null)`
+
+Retrieves cart details using a shared code.
+
+- `code`: The unique share code for the cart.
+- `params`: Additional query parameters for the request.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the cart details associated with the provided share code.
+
+#### `updateGiftOptions(groupId: string, isGift: string,params: Record<string, any> = {}, oauth = null)`
+
+Updates the gift options for a cart.
+
+- `groupId` : A paramater for unique groupId of cart.
+- `isGift` : A paramater for add gift option.
+- `params`: Additional parameters such as is_gift, gift_message, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart details after applying the gift options.
+
+#### `remove(productId: number,params: Record<string, any> = {}, oauth = null)`
+
+Removes a product from the cart.
+
+- `productId`: A Parameter for unique id of product.
+- `params`: Additional parameters such as variant_id, with, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart details after removing the product.
+
+#### `get(params: Record<string, any> = {}, oauth = null)`
+
+Fetches the current user's cart details.
+
+- `params`: Additional parameters for the request.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the cart details.
+
+#### `getById(id: number, params: Record<string, any> = {}, oauth = null)`
+
+Fetches cart details by its ID.
+
+- `id`: The cart ID to fetch.
+- `params`: Additional parameters for the request.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the cart details.
+
+#### `getShareCode(oauth = null)`
+
+Generates a shareable code for the user's cart.
+
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the shared cart code.
+
+#### `updateQuantity(productId: number,params: Record<string, any> = {}, oauth = null)`
+
+Updates the quantity of a product in the cart.
+
+- `productId`: A Parameter for unique id of product.
+- `params`: Additional parameters such as variant_id, quantity, etc.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated cart data.
+
 ### Categories
 
 #### `list(params = {})`

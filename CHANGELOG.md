@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-beta.XX] - 2025-03-04
+
+### Added
+
+- Carts API endpoints:
+  - Add product to cart
+  - Apply coupon code
+  - Apply promotion
+  - Delete entire cart
+  - Share cart via email
+  - Fetch available promotions
+  - Retrieve cart via shareable code
+  - Update gift options
+  - Remove product from cart
+  - Retrieve cart details
+  - Retrieve cart by Id
+  - Share cart via code
+  - Update cart product quantity
+
 ## [1.0.0-beta.9]-2025-03-03
 
 ### Added
