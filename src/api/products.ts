@@ -75,7 +75,7 @@ export class ProductsAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.post(url, config);
+      const response = await this.axiosInstance.get(url, config);
 
       if (response.data?.error) {
         throw new APIError(
