@@ -659,7 +659,6 @@ export class ProductsAPI extends BaseAPI {
     }
   }
 
-  /////////////////////////////////////////
   /**
    * Save or update a product variant.
    * @param productId - The ID of the product.
@@ -706,7 +705,6 @@ export class ProductsAPI extends BaseAPI {
       );
     }
   }
-  //////////////////////////////////////////////
 
   /**
    * Save or update an upsell for a product.
@@ -754,7 +752,6 @@ export class ProductsAPI extends BaseAPI {
       );
     }
   }
-  ////////////////////////////////////////////////
   /**
    * Save or update a cross-sell for a product.
    * @param productId - The ID of the product.
