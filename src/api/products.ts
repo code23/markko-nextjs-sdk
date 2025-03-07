@@ -349,7 +349,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns The total number of products.
    */
 
-  async countProducts(params: {}, oauth: TokenData | null = null) {
+  async count(params: {}, oauth: TokenData | null = null) {
     try {
       const defaultparams = {
         sort: "created_at,desc",
@@ -396,10 +396,7 @@ export class ProductsAPI extends BaseAPI {
    * @param oauth - The OAuth token data for authentication.
    * @returns The created product data.
    */
-  async createProduct(
-    product: Record<string, any>,
-    oauth: TokenData | null = null
-  ) {
+  async create(product: Record<string, any>, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/products`;
       const config: any = {};
