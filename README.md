@@ -693,6 +693,203 @@ Looks up a product variant by code.
 - `oauth`: The OAuth token data
 - Returns: A promise with the product variant data.
 
+#### `countProducts(params = {}, oauth = null)`
+
+Retrieves the count of products.
+
+- `params`: Optional query parameters.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the product count.
+
+#### `createProduct(product, oauth = null)`
+
+Creates a new product.
+
+- `product`: An object containing product details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the created product data.
+
+#### `update(id: number, params, oauth = null)`
+
+Updates an existing product.
+
+- `id`: The unique ID of the product to update.
+- `params`: An object containing updated product details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the updated product data.
+
+#### `delete(id: number, oauth = null)`
+
+Deletes a product by its unique ID.
+
+- `id`: The unique ID of the product to delete.
+- `oauth`: The OAuth token data.
+- Returns: A promise confirming deletion.
+
+#### `deleteProducts(productIds: number[], oauth = null)`
+
+Deletes multiple products by their IDs.
+
+- `productIds`: An array of product IDs to delete.
+- `oauth`: The OAuth token data.
+- Returns: A promise confirming the deletion of multiple products.
+
+#### `listProductVariants(product, oauth = null)`
+
+Retrieves a list of variants for a specific product.
+
+- `product`: The product object containing the product ID.
+- `oauth`: The OAuth token data.
+- Returns: A promise with a list of product variants.
+
+#### `listProductOptions(product: {}, oauth: TokenData | null = null)`
+
+Fetches the list of product options.
+
+- `product`: The product object.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the list of product options.
+
+#### `saveProductVariant(productId: number, variant: any = {}, oauth: TokenData | null = null)`
+
+Saves or updates a product variant.
+
+- `productId`: The ID of the product.
+- `variant`: The variant object containing variant details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the saved variant data.
+
+#### `saveProductUpSells(productId: number, upsell: any = {}, oauth: TokenData | null = null)`
+
+Saves or updates an upsell for a product.
+
+- `productId`: The ID of the product.
+- `upsell`: The upsell object containing upsell details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the saved upsell data.
+
+#### `saveProductCrossSells(productId: number, upsell: any = {}, discount: number, is_percent: string, oauth: TokenData | null = null)`
+
+Saves or updates a cross-sell for a product.
+
+- `productId`: The ID of the product.
+- `upsell`: The upsell object containing cross-sell details.
+- `discount`: The discount amount for the cross-sell.
+- `is_percent`: Whether the discount is in percentage format (`"true"` or `"false"`).
+- `oauth`: The OAuth token data.
+- Returns: A promise with the saved cross-sell data.
+
+#### `approveProduct(id: number, oauth = null)`
+
+Approves a product by its unique ID.
+
+- `id`: The unique ID of the product to approve.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the approval status.
+
+#### `approveAllProducts(params = {}, oauth = null)`
+
+Approves multiple products based on provided parameters.
+
+- `params`: The parameters to filter which products to approve.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the approval status.
+
+#### `rejectProduct(id: number, oauth = null)`
+
+Rejects a product by its unique ID.
+
+- `id`: The unique ID of the product to reject.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the rejection status.
+
+#### `rejectAllProducts(params = {}, oauth = null)`
+
+Rejects multiple products based on provided parameters.
+
+- `params`: The parameters for filtering products to reject.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the rejection status.
+
+#### `enableProductCrossSells(id: number, oauth = null)`
+
+Enables cross-sells for a given product.
+
+- `id`: The unique ID of the product.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated product data.
+
+#### `enableProductUpSells(id: number, oauth = null)`
+
+Enables up-sells for a given product.
+
+- `id`: The unique ID of the product.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the updated product data.
+
+#### `disableProductUpSells(id: number, oauth = null)`
+
+Disables up-sells for a given product.
+
+- `id`: The unique ID of the product.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after disabling up-sells.
+
+#### `disableProductCrossSells(id: number, oauth = null)`
+
+Disables cross-sells for a given product.
+
+- `id`: The unique ID of the product.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after disabling cross-sells.
+
+#### `syncToGoogleMarketplace(oauth = null)`
+
+Syncs product data to Google Marketplace.
+
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after syncing.
+
+#### `deleteProductCrossSell(params = {}, oauth = null)`
+
+Deletes a cross-sell relationship for a product.
+
+- `params`: An object containing:
+  - `productId`: The ID of the product.
+  - `upsell.id`: The ID of the cross-sell item to remove.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after deletion.
+
+#### `deleteProductUpSell(params = {}, oauth = null)`
+
+Deletes an up-sell relationship for a product.
+
+- `params`: An object containing:
+  - `productId`: The ID of the product.
+  - `upsell.id`: The ID of the up-sell item to remove.
+- `oauth`: The OAuth token data (optional).
+- Returns: A promise with the response data after deletion.
+
+#### `reorderProductUpSells(params: { ordered_up_sells: number; productId: number }, oauth = null)`
+
+Reorders the up-sell products for a given product.
+
+- `params`: An object containing:
+  - `ordered_up_sells`: A list of up-sell product IDs.
+  - `productId`: The unique ID of the product.
+- `oauth`: The OAuth token data for authentication (optional).
+- Returns: A promise with the response data after reordering the up-sells.
+
+#### `reorderProductCrossSells(params: { ordered_cross_sells: number; productId: number }, oauth = null)`
+
+Reorders the cross-sell products for a given product.
+
+- `params`: An object containing:
+  - `ordered_cross_sells`: A list of cross-sell product IDs.
+  - `productId`: The unique ID of the product.
+- `oauth`: The OAuth token data for authentication (optional).
+- Returns: A promise with the response data after reordering the cross-sells.
+
 ### Reference Values
 
 #### `byCategory(params = {}, oauth: TokenData | null = null)`
