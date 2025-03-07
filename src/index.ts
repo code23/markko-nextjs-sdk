@@ -11,6 +11,7 @@ import { ContactsAPI } from "./api/contacts";
 import { CurrenciesAPI } from "./api/currencies";
 import { DonationsAPI } from "./api/donations";
 import { EventsAPI } from "./api/events";
+import { ImagesAPI } from "./api/images";
 import { MessagesAPI } from "./api/messages";
 import { OrdersAPI } from "./api/orders";
 import { ProductsAPI } from "./api/products";
@@ -35,6 +36,7 @@ export class MarkkoSDK {
   public currencies: CurrenciesAPI;
   public donations: DonationsAPI;
   public events: EventsAPI;
+  public images: ImagesAPI;
   public messages: MessagesAPI;
   public orders: OrdersAPI;
   public products: ProductsAPI;
@@ -59,6 +61,7 @@ export class MarkkoSDK {
     this.currencies = new CurrenciesAPI(config, this.authService);
     this.donations = new DonationsAPI(config, this.authService);
     this.events = new EventsAPI(config, this.authService);
+    this.images = new ImagesAPI(config, this.authService);
     this.messages = new MessagesAPI(config, this.authService);
     this.orders = new OrdersAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);

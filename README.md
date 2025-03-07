@@ -534,6 +534,39 @@ Cancels an event.
 - `oauth`: The OAuth token data
 - Returns: A promise with the saved event data.
 
+### Images
+
+#### `delete(id: number, oauth = null)`
+
+Delete image by id.
+
+- `id`: Id selector for deleting an image
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `get(id: number, oauth = null)`
+
+Get image by id.
+
+- `id`: Id selector for fetching an image
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `list(oauth = null)`
+
+Get list of images.
+
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `deleteImages(imageIds: number[], oauth = null)`
+
+Delete multiple images by ids.
+
+- `imageIds`: Array of Ids selector for deleting images
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Messages
 
 #### `getAllChannels(params = {}, oauth = null)`
