@@ -726,6 +726,63 @@ Looks up a product variant by code.
 - `oauth`: The OAuth token data
 - Returns: A promise with the product variant data.
 
+#### `count(params = {}, oauth = null)`
+
+Retrieves the count of products.
+
+- `params`: Optional query parameters.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the product count.
+
+#### `create(product, oauth = null)`
+
+Creates a new product.
+
+- `product`: An object containing product details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the created product data.
+
+#### `update(id: number, params, oauth = null)`
+
+Updates an existing product.
+
+- `id`: The unique ID of the product to update.
+- `product`: An object containing updated product details.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the updated product data.
+
+#### `delete(id: number, oauth = null)`
+
+Deletes a product by its unique ID.
+
+- `id`: The unique ID of the product to delete.
+- `oauth`: The OAuth token data.
+- Returns: A promise confirming deletion.
+
+#### `deleteProducts(productIds: number[], oauth = null)`
+
+Deletes multiple products by their IDs.
+
+- `productIds`: An array of product IDs to delete.
+- `oauth`: The OAuth token data.
+- Returns: A promise confirming the deletion of multiple products.
+
+#### `listProductVariants(product, oauth = null)`
+
+Retrieves a list of variants for a specific product.
+
+- `product`: The product object containing the product ID.
+- `oauth`: The OAuth token data.
+- Returns: A promise with a list of product variants.
+
+#### `listProductOptions(product: {}, oauth: TokenData | null = null)`
+
+Fetches the list of product options.
+
+- `product`: The product object.
+- `oauth`: The OAuth token data.
+- Returns: A promise with the list of product options.
+
 ### Reference Values
 
 #### `byCategory(params = {}, oauth: TokenData | null = null)`
