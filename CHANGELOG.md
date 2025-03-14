@@ -18,6 +18,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - List of product variants
   - List of product options
 
+## [1.0.0-beta.12] - 2025-03-14
+
+### Added
+
+- Images API endpoints:
+  - Get list of images
+  - Get image by id
+  - Delete single image
+  - Delete multiple images
+
+### Updated
+
+- Updated axios to version 1.8.3
+
 ## [1.0.0-beta.11] - 2025-03-05
 
 ### Fixed
