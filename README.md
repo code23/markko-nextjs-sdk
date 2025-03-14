@@ -726,7 +726,7 @@ Looks up a product variant by code.
 - `oauth`: The OAuth token data
 - Returns: A promise with the product variant data.
 
-#### `countProducts(params = {}, oauth = null)`
+#### `count(params = {}, oauth = null)`
 
 Retrieves the count of products.
 
@@ -734,7 +734,7 @@ Retrieves the count of products.
 - `oauth`: The OAuth token data.
 - Returns: A promise with the product count.
 
-#### `createProduct(product, oauth = null)`
+#### `create(product, oauth = null)`
 
 Creates a new product.
 
@@ -747,7 +747,7 @@ Creates a new product.
 Updates an existing product.
 
 - `id`: The unique ID of the product to update.
-- `params`: An object containing updated product details.
+- `product`: An object containing updated product details.
 - `oauth`: The OAuth token data.
 - Returns: A promise with the updated product data.
 
