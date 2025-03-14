@@ -536,11 +536,10 @@ Cancels an event.
 
 ### Images
 
-#### `delete(id: number, oauth = null)`
+#### `list(oauth = null)`
 
-Delete image by id.
+Get list of images.
 
-- `id`: Id selector for deleting an image
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
@@ -552,10 +551,11 @@ Get image by id.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
-#### `list(oauth = null)`
+#### `delete(id: number, oauth = null)`
 
-Get list of images.
+Delete image by id.
 
+- `id`: Id selector for deleting an image
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 

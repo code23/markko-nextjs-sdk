@@ -8,14 +8,13 @@ export class ImagesAPI extends BaseAPI {
   }
 
   /**
-   * Delete an image by id
-   * @param id - The ID of the image
+   * Get a list of images
    * @param oauth - The OAuth token data
-   * @returns A delete operation response
+   * @returns A list of images
    */
-  async delete(id: number, oauth: TokenData | null = null) {
+  async list(oauth: TokenData | null = null) {
     try {
-      const url = `${this.config.apiBasePath}/api/v1/images/${id}`;
+      const url = `${this.config.apiBasePath}/api/v1/images`;
       const config: any = {};
 
       if (oauth) {
@@ -24,7 +23,7 @@ export class ImagesAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.delete(url, config);
+      const response = await this.axiosInstance.get(url, config);
 
       if (response.data?.error) {
         throw new APIError(
@@ -33,7 +32,6 @@ export class ImagesAPI extends BaseAPI {
           response.data.errors
         );
       }
-
       return response.data;
     } catch (error: any) {
       if (error.response?.data) {
@@ -45,7 +43,7 @@ export class ImagesAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to delete image by id.",
+        "A problem was encountered during the request to fetch the images.",
         422
       );
     }
@@ -89,20 +87,21 @@ export class ImagesAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to fetch image by id.",
+        "A problem was encountered during the request to fetch image.",
         422
       );
     }
   }
 
   /**
-   * Get a list of images
+   * Delete an image by id
+   * @param id - The ID of the image
    * @param oauth - The OAuth token data
-   * @returns A list of images
+   * @returns A delete operation response
    */
-  async list(oauth: TokenData | null = null) {
+  async delete(id: number, oauth: TokenData | null = null) {
     try {
-      const url = `${this.config.apiBasePath}/api/v1/images`;
+      const url = `${this.config.apiBasePath}/api/v1/images/${id}`;
       const config: any = {};
 
       if (oauth) {
@@ -111,7 +110,7 @@ export class ImagesAPI extends BaseAPI {
         };
       }
 
-      const response = await this.axiosInstance.get(url, config);
+      const response = await this.axiosInstance.delete(url, config);
 
       if (response.data?.error) {
         throw new APIError(
@@ -120,6 +119,7 @@ export class ImagesAPI extends BaseAPI {
           response.data.errors
         );
       }
+
       return response.data;
     } catch (error: any) {
       if (error.response?.data) {
@@ -131,14 +131,14 @@ export class ImagesAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to fetch list of images.",
+        "A problem was encountered during the request to delete the image.",
         422
       );
     }
   }
 
   /**
-   * Delete an image by id
+   * Delete images by id
    * @param imageIds - The IDs of the image in array format
    * @param oauth - The OAuth token data
    * @returns A delete operation response
@@ -179,7 +179,7 @@ export class ImagesAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to delete image by id.",
+        "A problem was encountered during the request to delete the images.",
         422
       );
     }
