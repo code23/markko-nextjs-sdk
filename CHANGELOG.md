@@ -5,34 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0-beta.XX] - 2025-03-07
+## [1.0.0-beta.XX] - 2025-03-14
 
 ### Added
 
 - Products API endpoints:
-  - count products
-  - create a product
-  - update a product by ID
+  - Count products
+  - Create a product
+  - Update a product by ID
   - Delete a product by ID
   - Delete all products
   - List of product variants
   - List of product options
-  - Save Product Variants
-  - Save product up-sells
-  - Save Product Cross sells
-  - Approve product by Id
-  - Approve all products
-  - Reject Product by Id
-  - Reject all products
-  - Enable product cross sells
-  - Enable product up-sells
-  - disable product up-sells
-  - disable product cross sells
-  - Sync data to goggle marketplace
-  - delete product cross sells
-  - delete product up-sells
-  - Reorder product up-sells
-  - Reorder product cross sells
 
 ## [1.0.0-beta.11] - 2025-03-05
 
