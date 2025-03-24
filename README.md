@@ -567,6 +567,14 @@ Delete multiple images by ids.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
+#### `register(payload: Record<string, any>, oauth: TokenData | null = null)`
+
+Register an image.
+
+- `payload`: The image payload containing the S3 image response and the model data
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Messages
 
 #### `getAllChannels(params = {}, oauth = null)`

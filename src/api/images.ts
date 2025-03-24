@@ -184,4 +184,49 @@ export class ImagesAPI extends BaseAPI {
       );
     }
   }
+
+  /**
+   * Register an image
+   * @param payload - The image payload containing the S3 image response and the model data
+   * @param oauth - The OAuth token data
+   * @returns A register operation response
+   */
+  async register(payload: Record<string, any>, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/images/register`;
+      const config: any = {};
+      const image = {
+        uuid: payload.response.uuid,
+        key: payload.response.key,
+        bucket: payload.response.bucket,
+        image: payload.image,
+        modelId: payload.modelId,
+        model: payload.model,
+        visibility: payload.visibility,
+      };
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, image, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      throw new APIError(
+        "A problem was encountered during the request to register the image.",
+        422
+      );
+    }
+  }
 }
