@@ -196,9 +196,9 @@ export class ImagesAPI extends BaseAPI {
       const url = `${this.config.apiBasePath}/api/v1/images/register`;
       const config: any = {};
       const image = {
-        uuid: payload.response.uuid,
-        key: payload.response.key,
-        bucket: payload.response.bucket,
+        uuid: payload.uuid,
+        key: payload.key,
+        bucket: payload.bucket,
         image: payload.image,
         modelId: payload.modelId,
         model: payload.model,
