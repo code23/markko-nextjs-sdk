@@ -534,6 +534,55 @@ Cancels an event.
 - `oauth`: The OAuth token data
 - Returns: A promise with the saved event data.
 
+### Files
+
+#### `list(oauth = null)`
+
+Get list of files.
+
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `get(id: number, oauth = null)`
+
+Get file by id.
+
+- `id`: Id selector for fetching a file
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `delete(id: number, oauth = null)`
+
+Delete file by id.
+
+- `id`: Id selector for deleting a file
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `download(id: number, oauth = null)`
+
+Download file by id.
+
+- `id`: Id selector for downloading a file
+- `oauth`: The OAuth token data
+- Returns: A url to download the file
+
+#### `update(payload: Record<string, any>, oauth = null)`
+
+Update a file.
+
+- `payload`: The file payload containing the file id or model id and the model data
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `register(payload: Record<string, any>, oauth: TokenData | null = null)`
+
+Register a file.
+
+- `payload`: The file payload containing the S3 file response and the model data
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Images
 
 #### `list(oauth = null)`

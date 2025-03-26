@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-beta.16] - 2025-03-26
+
+### Added
+
+- Files API endpoints:
+  - Get list of files
+  - Get file by id
+  - Delete file by id
+  - Download file by id
+  - Update file
+  - Register file
+
 ## [1.0.0-beta.15] - 2025-03-25
 
 ### Fixed
@@ -25,8 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Products API endpoints:
   - Count products
   - Create a product
-  - Update a product by ID
-  - Delete a product by ID
+  - Update a product by id
+  - Delete a product by id
   - Delete all products
   - List of product variants
   - List of product options
@@ -67,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Update gift options
   - Remove product from cart
   - Retrieve cart details
-  - Retrieve cart by Id
+  - Retrieve cart by id
   - Share cart via code
   - Update cart product quantity
 
@@ -159,7 +171,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Specification Groups API endpoints:
   - Get a list of specification groups
-  - Get a specific specification group by ID
+  - Get a specific specification group by id
 
 ## [1.0.0-alpha.34]-2025-02-07
 
@@ -243,7 +255,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - List products
   - List products with filters
   - Get product by vendor and product slug
-  - Get product by ID
+  - Get product by id
   - Get product by slug
   - Get latest products
   - Get product variant lookup
@@ -355,7 +367,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - List blog posts
   - List blog categories
   - Get posts by category
-  - Get single post by ID
+  - Get single post by id
   - Get post by slug
   - Get category by slug with posts
 
