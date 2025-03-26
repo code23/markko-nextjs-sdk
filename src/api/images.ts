@@ -223,6 +223,14 @@ export class ImagesAPI extends BaseAPI {
 
       return response.data;
     } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
       throw new APIError(
         "A problem was encountered during the request to register the image.",
         422
