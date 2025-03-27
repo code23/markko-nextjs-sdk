@@ -1092,6 +1092,15 @@ Registers a new vendor with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
+#### `update(id: number, data: Record<string, any>, oauth: TokenData | null = null)`
+
+Updates a vendor by its ID.
+
+- `id`: The ID of the vendor to update
+- `data`: The vendor data to be updated
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 #### `delete(id: number, oauth: TokenData | null = null)`
 
 Deletes a vendor by its ID.

@@ -374,6 +374,55 @@ export class VendorsAPI extends BaseAPI {
   }
 
   /**
+   * Update a vendor
+   * @param id - The ID of the vendor
+   * @param data - The vendor data to be updated
+   * @param oauth - The OAuth token data
+   * @returns A single vendor
+   */
+  async update(
+    id: number,
+    data: Record<string, any>,
+    oauth: TokenData | null = null
+  ) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, data, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to update a vendor.",
+        422
+      );
+    }
+  }
+
+  /**
    * Delete a vendor
    * @param id - The ID of the vendor
    * @param oauth - The OAuth token data
