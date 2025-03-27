@@ -1092,6 +1092,14 @@ Registers a new vendor with the provided data.
 - Returns: Promise<boolean> - Returns true if successful
 - Throws: APIError if the request fails or returns an error
 
+#### `delete(id: number, oauth: TokenData | null = null)`
+
+Deletes a vendor by its ID.
+
+- `id`: The ID of the vendor to delete
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
