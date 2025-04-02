@@ -1,5 +1,5 @@
 import { BaseAPI } from "./base";
-import { AuthService } from "../services/auth";
+import { AuthService, TokenData } from "../services/auth";
 import { APIError } from "../types";
 
 export class AuthAPI extends BaseAPI {
@@ -45,6 +45,49 @@ export class AuthAPI extends BaseAPI {
 
       throw new APIError(
         "A problem was encountered during the request to login a user.",
+        422
+      );
+    }
+  }
+
+  /**
+   * Logs out the current user.
+   * @param oauth - The OAuth token data
+   * @returns Promise with the API response
+   */
+  async logout(oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/auth/logout`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, {}, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the logout request.",
         422
       );
     }

@@ -165,6 +165,13 @@ Logs in a user.
 - `data`: Object containing the login data
 - Returns: Promise with the API response
 
+#### `logout(oauth: TokenData | null = null)`
+
+Logs out the current user.
+
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 #### `resetPasswordLinkRequest(email: string)`
 
 Request a password reset link for a user.
