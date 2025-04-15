@@ -148,7 +148,7 @@ export class AddressesAPI extends BaseAPI {
   async lookup(search: string, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/postcode/lookup`;
-      const config: any = { params: { search } };
+      const config: any = { params: { postcode: search } };
 
       if (oauth) {
         config.headers = {
