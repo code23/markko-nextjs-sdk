@@ -140,6 +140,49 @@ export class AddressesAPI extends BaseAPI {
   }
 
   /**
+   * Address lookup
+   * @param search - The search term to search for
+   * @param oauth - The OAuth token data
+   * @returns A list of addresses matching the search term
+   */
+  async lookup(search: string, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/postcode/lookup`;
+      const config: any = { params: { search } };
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+      throw new APIError(
+        "A problem was encountered during the address lookup",
+        422
+      );
+    }
+  }
+
+  /**
    * Get a list of nearby models by postcode
    * @param postcode - The postcode to search for
    * @param model - The model to search for

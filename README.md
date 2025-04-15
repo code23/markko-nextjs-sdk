@@ -108,6 +108,14 @@ Looks up addresses by postcode.
 - `oauth`: The OAuth token data
 - Returns: Promise with a list of matching addresses
 
+#### `lookup(search: string)`
+
+Looks up addresses by search term.
+
+- `search`: The search term to search for
+- `oauth`: The OAuth token data
+- Returns: Promise with a list of matching addresses
+
 #### `getNearbyModel(postcode: string, model: string, radius = 10, limit = 10, relationships = null)`
 
 Gets a list of nearby models by postcode.
