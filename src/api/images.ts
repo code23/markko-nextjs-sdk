@@ -9,13 +9,14 @@ export class ImagesAPI extends BaseAPI {
 
   /**
    * Get a list of images
+   * @param params - The query parameters to filter the images
    * @param oauth - The OAuth token data
    * @returns A list of images
    */
-  async list(oauth: TokenData | null = null) {
+  async list(params = {}, oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/images`;
-      const config: any = {};
+      const config: any = { params };
 
       if (oauth) {
         config.headers = {
@@ -32,6 +33,7 @@ export class ImagesAPI extends BaseAPI {
           response.data.errors
         );
       }
+
       return response.data;
     } catch (error: any) {
       if (error.response?.data) {

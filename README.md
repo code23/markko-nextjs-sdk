@@ -600,10 +600,11 @@ Register a file.
 
 ### Images
 
-#### `list(oauth = null)`
+#### `list(params = {}, oauth = null)`
 
 Get list of images.
 
+- `params`: Optional query parameters to filter the list of images
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 

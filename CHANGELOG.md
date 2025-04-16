@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-beta.22] - 2025-04-16
+
+### Fixed
+
+- Fixed filtering in the `list` method in the Images API
+
 ## [1.0.0-beta.21] - 2025-04-15
 
 ### Fixed
