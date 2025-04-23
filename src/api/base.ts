@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 import { MarkkoConfig } from '../types';
 import { AuthService } from '../services/auth';
-import qs from 'qs';
 
 export class BaseAPI {
   protected config: MarkkoConfig;
@@ -16,8 +15,7 @@ export class BaseAPI {
     const axiosConfig: any = {
       headers: {
         'X-MPE-Origin': this.config.origin
-      },
-      paramsSerializer: (params: any) => qs.stringify(params, { arrayFormat: 'brackets' })
+      }
     };
 
     // Only disable SSL verification in development
