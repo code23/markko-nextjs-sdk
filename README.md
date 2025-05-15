@@ -448,6 +448,41 @@ Check if a charity (store) name is available.
 - `oauth`: The OAuth token data
 - Returns: Promise with a boolean indicating if the name is unique
 
+### Commissions
+
+#### `list(params = {}, oauth = null)`
+
+Fetches a list of commission groups.
+
+- `params`: Optional object containing query parameters
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `create(data: Record<string, any>, oauth = null)`
+
+Create a new commission group.
+
+- `data`: Object containing the commission group data
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `update(id: number, data: Record<string, any>, oauth = null)`
+
+Update a commission group.
+
+- `id`: The ID of the commission group to update
+- `data`: Object containing the commission group data
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `delete(id: number, oauth = null)`
+
+Delete a commission group.
+
+- `id`: The ID of the commission group to delete
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ### Contacts
 
 #### `submit(data: Record<string, any>, oauth: TokenData | null = null)`
