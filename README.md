@@ -1160,6 +1160,15 @@ Deletes a vendor by its ID.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
+#### `updateReturns(id: number, data: Record<string, any>, oauth: TokenData | null = null)`
+
+Update a vendor's returns.
+
+- `id`: The ID of the vendor to update
+- `data`: The vendor data to be updated
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
 ## Authentication
 
 The SDK automatically handles OAuth2 authentication using client credentials. It will:
