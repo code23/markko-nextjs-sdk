@@ -19,6 +19,7 @@ import { OrdersAPI } from "./api/orders";
 import { ProductsAPI } from "./api/products";
 import { ReferenceValuesAPI } from "./api/reference-values";
 import { ReviewsAPI } from "./api/reviews";
+import { ShippingsAPI } from "./api/shippings";
 import { SpecificationsAPI } from "./api/specifications";
 import { SpecificationGroupsAPI } from "./api/specification-groups";
 import { TagsAPI } from "./api/tags";
@@ -46,6 +47,7 @@ export class MarkkoSDK {
   public products: ProductsAPI;
   public referenceValues: ReferenceValuesAPI;
   public reviews: ReviewsAPI;
+  public shippings: ShippingsAPI;
   public specifications: SpecificationsAPI;
   public specificationGroups: SpecificationGroupsAPI;
   public tags: TagsAPI;
@@ -73,6 +75,7 @@ export class MarkkoSDK {
     this.products = new ProductsAPI(config, this.authService);
     this.referenceValues = new ReferenceValuesAPI(config, this.authService);
     this.reviews = new ReviewsAPI(config, this.authService);
+    this.shippings = new ShippingsAPI(config, this.authService);
     this.specifications = new SpecificationsAPI(config, this.authService);
     this.specificationGroups = new SpecificationGroupsAPI(
       config,

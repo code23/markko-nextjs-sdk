@@ -935,6 +935,57 @@ Deletes an existing review.
 - `oauth`: The OAuth token data
 - Returns: A promise with the deleted review data.
 
+### Shippings
+
+#### `listCountriesByRegion(oauth = null)`
+
+Get a list of countries grouped by region.
+
+- `oauth`: The OAuth token data
+- Returns: Promise with a list of countries grouped by region
+
+#### `listShippingZones(params = {}, oauth = null)`
+
+Get a list of shipping zones.
+
+- `params`: Optional query parameters to filter the shipping zones
+- `oauth`: The OAuth token data
+- Returns: Promise with a list of shipping zones
+
+#### `getShippingZone(id: number, params = {}, oauth = null)`
+
+Get a shipping zone by ID.
+
+- `id`: The ID of the shipping zone to retrieve
+- `params`: Optional query parameters for additional data
+- `oauth`: The OAuth token data
+- Returns: Promise with the shipping zone data
+
+#### `createShippingService(data: Record<string, any>, oauth = null)`
+
+Create a new shipping service.
+
+- `data`: The shipping service data
+- `oauth`: The OAuth token data
+- Returns: Promise with the created shipping service data
+
+#### `updateShippingService(id: number, data: Record<string, any>, oauth = null)`
+
+Update a shipping service.
+
+- `id`: The ID of the shipping service to update
+- `data`: The updated shipping service data
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated shipping service data
+
+#### `deleteShippingService(id: number, oauth = null)`
+
+Delete a shipping service.
+
+- `id`: The ID of the shipping service to delete
+- `oauth`: The OAuth token data
+- Returns: Promise with the result of the delete operation
+
 ### Specifications
 
 #### Overview
