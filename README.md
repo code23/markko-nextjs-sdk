@@ -1211,9 +1211,9 @@ Deletes a vendor by its ID.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
-#### `updateReturns(id: number, data: Record<string, any>, oauth: TokenData | null = null)`
+#### `updateShippingPolicy(id: number, data: Record<string, any>, oauth: TokenData | null = null)`
 
-Update a vendor's returns.
+Update a vendor's shipping policy.
 
 - `id`: The ID of the vendor to update
 - `data`: The vendor data to be updated

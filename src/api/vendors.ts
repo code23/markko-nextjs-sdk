@@ -467,19 +467,19 @@ export class VendorsAPI extends BaseAPI {
   }
 
   /**
-   * Update a vendor
+   * Update vendor's shipping policy
    * @param id - The ID of the vendor
    * @param data - The vendor data to be updated
    * @param oauth - The OAuth token data
    * @returns A single vendor
    */
-  async updateReturns(
+  async updateShippingPolicy(
     id: number,
     data: Record<string, any>,
     oauth: TokenData | null = null
   ) {
     try {
-      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/returns`;
+      const url = `${this.config.apiBasePath}/api/v1/vendors/${id}/shipping-policy`;
       const config: any = {};
 
       if (oauth) {
@@ -509,7 +509,7 @@ export class VendorsAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to update a vendor returns.",
+        "A problem was encountered during the request to update a vendor shipping policy.",
         422
       );
     }
