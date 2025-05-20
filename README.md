@@ -961,6 +961,31 @@ Get a shipping zone by ID.
 - `oauth`: The OAuth token data
 - Returns: Promise with the shipping zone data
 
+#### `createShippingZone(data: Record<string, any>, oauth = null)`
+
+Create a new shipping zone.
+
+- `data`: The shipping zone data
+- `oauth`: The OAuth token data
+- Returns: Promise with the created shipping zone data
+
+#### `updateShippingZone(id: number, data: Record<string, any>, oauth = null)`
+
+Update a shipping zone.
+
+- `id`: The ID of the shipping zone to update
+- `data`: The updated shipping zone data
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated shipping zone data
+
+#### `deleteShippingZone(id: number, oauth = null)`
+
+Delete a shipping zone.
+
+- `id`: The ID of the shipping zone to delete
+- `oauth`: The OAuth token data
+- Returns: Promise with the result of the delete operation
+
 #### `createShippingService(data: Record<string, any>, oauth = null)`
 
 Create a new shipping service.

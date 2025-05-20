@@ -140,6 +140,139 @@ export class ShippingsAPI extends BaseAPI {
   }
 
   /**
+   * Create a new shipping zone
+   * @param data - The shipping zone data
+   * @param oauth - The OAuth token data
+   * @returns The created shipping zone
+   */
+  async createShippingZone(data: Record<string, any>, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/shipping/zones`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.post(url, data, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to create a shipping zone.",
+        422
+      );
+    }
+  }
+
+  /**
+   * Update a shipping zone
+   * @param id - The ID of the shipping zone to update
+   * @param data - The updated shipping zone data
+   * @param oauth - The OAuth token data
+   * @returns The updated shipping zone
+   */
+  async updateShippingZone(id: number, data: Record<string, any>, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/shipping/zones/${id}`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.patch(url, data, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to update a shipping zone.",
+        422
+      );
+    }
+  }
+
+  /**
+   * Delete a shipping zone
+   * @param id - The ID of the shipping zone to delete
+   * @param oauth - The OAuth token data
+   * @returns The result of the delete operation
+   */
+  async deleteShippingZone(id: number, oauth: TokenData | null = null) {
+    try {
+      const url = `${this.config.apiBasePath}/api/v1/shipping/zones/${id}`;
+      const config: any = {};
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.delete(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to delete the shipping zone.",
+        422
+      );
+    }
+  }
+
+  /**
    * Create a new shipping service
    * @param data - The shipping service data
    * @param oauth - The OAuth token data
@@ -266,7 +399,7 @@ export class ShippingsAPI extends BaseAPI {
       }
 
       throw new APIError(
-        "A problem was encountered during the request to delete a shipping service.",
+        "A problem was encountered during the request to delete the shipping service.",
         422
       );
     }
