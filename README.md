@@ -448,6 +448,40 @@ Check if a charity (store) name is available.
 - `oauth`: The OAuth token data
 - Returns: Promise with a boolean indicating if the name is unique
 
+### Checkouts
+
+#### `details(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Update the checkout details (step 1)
+
+- `data`: The data to update the checkout details
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated cart
+
+#### `shipping(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Update the shipping service (step 2)
+
+- `data`: The data to update the shipping service
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated cart
+
+#### `payment(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Process payment (step 3)
+
+- `data`: The data to process the payment
+- `oauth`: The OAuth token data
+- Returns: Promise with the updated cart
+
+#### `createPaymentIntent(data: Record<string, any>, oauth: TokenData | null = null)`
+
+Create a payment intent
+
+- `data`: The data to create the payment intent
+- `oauth`: The OAuth token data
+- Returns: Promise with the payment intent
+
 ### Commissions
 
 #### `list(params = {}, oauth = null)`

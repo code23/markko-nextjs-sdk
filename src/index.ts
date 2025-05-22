@@ -7,6 +7,7 @@ import { BlogsAPI } from "./api/blogs";
 import { CartsAPI } from "./api/carts";
 import { CategoriesAPI } from "./api/categories";
 import { CharitiesAPI } from "./api/charities";
+import { CheckoutsAPI } from "./api/checkouts";
 import { CommissionsAPI } from "./api/commissions";
 import { ContactsAPI } from "./api/contacts";
 import { CurrenciesAPI } from "./api/currencies";
@@ -35,6 +36,7 @@ export class MarkkoSDK {
   public carts: CartsAPI;
   public categories: CategoriesAPI;
   public charities: CharitiesAPI;
+  public checkouts: CheckoutsAPI;
   public commissions: CommissionsAPI;
   public contacts: ContactsAPI;
   public currencies: CurrenciesAPI;
@@ -63,6 +65,7 @@ export class MarkkoSDK {
     this.carts = new CartsAPI(config, this.authService);
     this.categories = new CategoriesAPI(config, this.authService);
     this.charities = new CharitiesAPI(config, this.authService);
+    this.checkouts = new CheckoutsAPI(config, this.authService);
     this.commissions = new CommissionsAPI(config, this.authService);
     this.contacts = new ContactsAPI(config, this.authService);
     this.currencies = new CurrenciesAPI(config, this.authService);
