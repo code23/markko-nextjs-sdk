@@ -17,6 +17,7 @@ import { FilesAPI } from "./api/files";
 import { ImagesAPI } from "./api/images";
 import { MessagesAPI } from "./api/messages";
 import { OrdersAPI } from "./api/orders";
+import { PaymentMethodsAPI } from "./api/payment-methods";
 import { ProductsAPI } from "./api/products";
 import { ReferenceValuesAPI } from "./api/reference-values";
 import { ReviewsAPI } from "./api/reviews";
@@ -46,6 +47,7 @@ export class MarkkoSDK {
   public images: ImagesAPI;
   public messages: MessagesAPI;
   public orders: OrdersAPI;
+  public paymentMethods: PaymentMethodsAPI;
   public products: ProductsAPI;
   public referenceValues: ReferenceValuesAPI;
   public reviews: ReviewsAPI;
@@ -75,6 +77,7 @@ export class MarkkoSDK {
     this.images = new ImagesAPI(config, this.authService);
     this.messages = new MessagesAPI(config, this.authService);
     this.orders = new OrdersAPI(config, this.authService);
+    this.paymentMethods = new PaymentMethodsAPI(config, this.authService);
     this.products = new ProductsAPI(config, this.authService);
     this.referenceValues = new ReferenceValuesAPI(config, this.authService);
     this.reviews = new ReviewsAPI(config, this.authService);

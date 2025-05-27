@@ -804,6 +804,48 @@ Get a list of authenticated user's orders.
 - `oauth`: The OAuth token data
 - Returns: Promise with the API response
 
+### Payment Methods
+
+#### `getStripeApiKey(oauth = null)`
+
+Get the Stripe API key.
+
+- `oauth`: The OAuth token data
+
+#### `getSetupIntent(data: Record<string, any>, oauth = null)`
+
+Get the setup intent.
+
+- `data`: The data to get the setup intent.
+- `oauth`: The OAuth token data
+
+#### `list(oauth = null)`
+
+List the payment methods for the customer.
+
+- `oauth`: The OAuth token data
+
+#### `add(data: Record<string, any>, oauth = null)`
+
+Add a payment method to the customer.
+
+- `data`: The data to add the payment method.
+- `oauth`: The OAuth token data
+
+#### `delete(data: Record<string, any>, oauth = null)`
+
+Delete a payment method from the customer.
+
+- `data`: The data to delete the payment method. Must contain the 'payment_method' key.
+- `oauth`: The OAuth token data
+
+#### `setDefault(data: Record<string, any>, oauth = null)`
+
+Set the default payment method for the customer.
+
+- `data`: The data to set the default payment method.
+- `oauth`: The OAuth token data
+
 ### Products
 
 #### `list(params = {}, oauth = null)`
