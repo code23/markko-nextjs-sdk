@@ -132,7 +132,6 @@ export class CartsAPI extends BaseAPI {
    * @returns The updated cart data after applying the promotion
    * @throws APIError if the request fails or returns an error
    */
-
   async applyPromotion(
     id: number,
     groupId: string,
@@ -188,7 +187,6 @@ export class CartsAPI extends BaseAPI {
    * @returns The response data after deleting the cart
    * @throws APIError if the request fails or returns an error
    */
-
   async delete(oauth: TokenData | null = null) {
     try {
       const url = `${this.config.apiBasePath}/api/v1/cart`;
@@ -201,6 +199,7 @@ export class CartsAPI extends BaseAPI {
       }
 
       const response = await this.axiosInstance.delete(url, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -250,6 +249,7 @@ export class CartsAPI extends BaseAPI {
       }
 
       const response = await this.axiosInstance.patch(url, requestBody, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -281,7 +281,6 @@ export class CartsAPI extends BaseAPI {
    * @returns A list of promotions available on the platform
    * @throws APIError if the request fails or returns an error
    */
-
   async getPromotions(
     params: Record<string, any> = {},
     oauth: TokenData | null = null
@@ -297,7 +296,6 @@ export class CartsAPI extends BaseAPI {
       };
 
       const url = `${this.config.apiBasePath}/api/v1/promotions`;
-
       const config: any = { params: { ...defaultParams, ...params } };
 
       if (oauth) {
@@ -305,7 +303,9 @@ export class CartsAPI extends BaseAPI {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
+
       const response = await this.axiosInstance.get(url, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -358,6 +358,7 @@ export class CartsAPI extends BaseAPI {
       }
 
       const response = await this.axiosInstance.get(url, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -391,7 +392,6 @@ export class CartsAPI extends BaseAPI {
    * @returns The updated cart details after applying the gift options.
    * @throws APIError if the request fails or returns an error.
    */
-
   async updateGiftOptions(
     groupId: string,
     isGift: string,
@@ -415,7 +415,9 @@ export class CartsAPI extends BaseAPI {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
+
       const response = await this.axiosInstance.patch(url, requestBody, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -448,19 +450,12 @@ export class CartsAPI extends BaseAPI {
    * @returns The updated cart details after removing the product.
    * @throws APIError if the request fails or returns an error.
    */
-
   async remove(
     productId: number,
     params: Record<string, any> = {},
     oauth: TokenData | null = null
   ) {
     try {
-      const defaultParams = {
-        variant_id: null,
-        with: null,
-      };
-      const requestBody = { ...defaultParams, ...params };
-
       const url = `${this.config.apiBasePath}/api/v1/cart/remove/${productId}`;
       const config: any = {};
 
@@ -469,7 +464,9 @@ export class CartsAPI extends BaseAPI {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
-      const response = await this.axiosInstance.patch(url, requestBody, config);
+
+      const response = await this.axiosInstance.patch(url, params, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -513,6 +510,7 @@ export class CartsAPI extends BaseAPI {
       }
 
       const response = await this.axiosInstance.get(url, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -559,6 +557,7 @@ export class CartsAPI extends BaseAPI {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
+
       const response = await this.axiosInstance.get(url, config);
 
       if (response.data?.error) {
@@ -602,6 +601,7 @@ export class CartsAPI extends BaseAPI {
       }
 
       const response = await this.axiosInstance.patch(url, {}, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
@@ -655,7 +655,9 @@ export class CartsAPI extends BaseAPI {
           "X-OAuth-Token": JSON.stringify(oauth),
         };
       }
+
       const response = await this.axiosInstance.patch(url, requestBody, config);
+
       if (response.data?.error) {
         throw new APIError(
           response.data.message,
