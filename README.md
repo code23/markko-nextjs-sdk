@@ -798,6 +798,14 @@ Get a single Order by order number.
 
 #### `list(params = {}, oauth = null)`
 
+Get a list of orders.
+
+- `params`: Optional object containing parameters to filter the response
+- `oauth`: The OAuth token data
+- Returns: Promise with the API response
+
+#### `listByCustomer(params = {}, oauth = null)`
+
 Get a list of authenticated user's orders.
 
 - `params`: Optional object containing parameters to filter the response

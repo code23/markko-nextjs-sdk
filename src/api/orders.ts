@@ -143,12 +143,60 @@ export class OrdersAPI extends BaseAPI {
   }
 
   /**
-   * Get a list of authenticated user's orders
+   * Get a list of orders
    * @param params - The query parameters to filter the orders
    * @param oauth - The OAuth token data
    * @returns A list of orders
    */
   async list(params = {}, oauth: TokenData | null = null) {
+    try {
+      const defaultParams = {
+        with: "product.images,currency",
+        sort: "created_at,desc",
+        paginate: 10
+      };
+      const url = `${this.config.apiBasePath}/api/v1/orders`;
+      const config: any = { params: { ...defaultParams, ...params } };
+
+      if (oauth) {
+        config.headers = {
+          "X-OAuth-Token": JSON.stringify(oauth),
+        };
+      }
+
+      const response = await this.axiosInstance.get(url, config);
+
+      if (response.data?.error) {
+        throw new APIError(
+          response.data.message,
+          response.data.code,
+          response.data.errors
+        );
+      }
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.data) {
+        throw new APIError(
+          error.response.data.message,
+          error.response.status,
+          error.response.data.errors
+        );
+      }
+
+      throw new APIError(
+        "A problem was encountered during the request to fetch list of orders.",
+        422
+      );
+    }
+  }
+
+  /**
+   * Get a list of authenticated user's orders
+   * @param params - The query parameters to filter the orders
+   * @param oauth - The OAuth token data
+   * @returns A list of orders
+   */
+  async listByCustomer(params = {}, oauth: TokenData | null = null) {
     try {
       const defaultParams = {
         with: "product.images,currency",
